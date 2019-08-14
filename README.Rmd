@@ -1,23 +1,30 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 # signnet
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-The goal of signnet is to
-…
+The goal of signnet is to ...
 
 ## Installation
 
 <!-- You can install the released version of signnet from [CRAN](https://CRAN.R-project.org) with: -->
 
 <!-- ``` r -->
-
 <!-- install.packages("signnet") -->
-
 <!-- ``` -->
 
 And the development version from [GitHub](https://github.com/) with:

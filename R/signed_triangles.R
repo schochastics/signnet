@@ -1,0 +1,37 @@
+#' @title count signed triangles
+#' @description Counts the number of all possible signed triangles (+++),(++-), (+--) and (---)
+#'
+#' @param g signed network.
+#' @return counts for all 4 signed triangle types
+#' @author David Schoch
+#' @examples
+#' library(igraph)
+#' g <- graph.full(4)
+#' E(g)$sign <- c(-1,1,1,-1,-1,1)
+#' signed_triangles(g)
+#' @export
+signed_triangles <- function(g){
+  if(!"sign"%in%igraph::edge_attr_names(g)){
+    stop("network does not have a sign edge attribute")
+  }
+  eattrV <- igraph::get.edge.attribute(g,"sign")
+  if(!all(eattrV%in%c(-1,1))){
+    stop("sign may only contain -1 and 1")
+  }
+  tmat <- t(matrix(igraph::triangles(g),nrow=3))
+
+  emat <- t(apply(tmat,1,function(x) c(igraph::get.edge.ids(g,x[1:2]),
+                                       igraph::get.edge.ids(g,x[2:3]),
+                                       igraph::get.edge.ids(g,x[c(3,1)]))))
+
+
+  emat[,1] <- eattrV[emat[,1]]
+  emat[,2] <- eattrV[emat[,2]]
+  emat[,3] <- eattrV[emat[,3]]
+  emat <- t(apply(emat,1,sort))
+  emat_df <- as.data.frame(emat)
+  res <- by(emat_df,list(emat_df[["V1"]],emat_df[["V2"]],emat_df[["V3"]]),
+            function(x) c(E1 = mean(x$V1),E2 = mean(x$V2),E3 = mean(x$V3),
+                          count = nrow(x)))
+  do.call(rbind,res)
+}

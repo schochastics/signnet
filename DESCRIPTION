@@ -1,0 +1,19 @@
+Package: signnet
+Title: Methods for Signed Network Analysis
+Version: 0.1.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Schoch",
+           role = c("aut", "cre"),
+           email = "david.schoch@manchester.ac.uk")
+Description: The package is designed for Signed Network Analysis. It includes i.a. methods to assess the balancedness of a signed network.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    igraph,
+    Rcpp
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+LinkingTo: 
+    Rcpp
