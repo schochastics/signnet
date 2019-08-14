@@ -14,12 +14,19 @@ signed_triangles <- function(g){
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
+  if(igraph::is.directed(g)){
+    stop("g must be undirected")
+  }
   eattrV <- igraph::get.edge.attribute(g,"sign")
   if(!all(eattrV%in%c(-1,1))){
     stop("sign may only contain -1 and 1")
   }
-  tmat <- t(matrix(igraph::triangles(g),nrow=3))
 
+  tmat <- t(matrix(igraph::triangles(g),nrow=3))
+  if(nrow(tmat)==0){
+    warning("g does not contain any triangles")
+    return(c("+++" = 0,"++-" = 0,"+--" = 0,"---" = 0))
+  }
   emat <- t(apply(tmat,1,function(x) c(igraph::get.edge.ids(g,x[1:2]),
                                        igraph::get.edge.ids(g,x[2:3]),
                                        igraph::get.edge.ids(g,x[c(3,1)]))))
@@ -33,5 +40,17 @@ signed_triangles <- function(g){
   res <- by(emat_df,list(emat_df[["V1"]],emat_df[["V2"]],emat_df[["V3"]]),
             function(x) c(E1 = mean(x$V1),E2 = mean(x$V2),E3 = mean(x$V3),
                           count = nrow(x)))
-  do.call(rbind,res)
+  res <- do.call(rbind,res)
+
+  tri_counts <- c("+++" = 0,"++-" = 0,"+--" = 0,"---" = 0)
+
+  tmp_counts <- res[,4]
+  if(nrow(res)==1){
+    names(tmp_counts) <- paste0(c("+","-")[(rev(res[1:3])==-1)+1],collapse="")
+  } else{
+    names(tmp_counts) <- apply(res[,1:3],1,function(x) paste0(c("+","-")[(rev(x)==-1)+1],collapse=""))
+  }
+
+  tri_counts[match(names(tmp_counts),names(tri_counts))] <- tmp_counts
+  tri_counts
 }

@@ -6,7 +6,7 @@ Authors@R:
            family = "Schoch",
            role = c("aut", "cre"),
            email = "david.schoch@manchester.ac.uk")
-Description: The package is designed for Signed Network Analysis. It includes i.a. methods to assess the balancedness of a signed network.
+Description: The package is designed for Signed Network Analysis. It includes i.a. methods to assess the structural balance theory.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,5 +15,6 @@ Imports:
     Rcpp
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-LinkingTo: 
-    Rcpp
+Suggests: 
+    testthat (>= 2.1.0),
+    covr
