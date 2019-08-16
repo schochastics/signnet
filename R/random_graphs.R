@@ -31,3 +31,52 @@ sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter)
   igraph::V(g)$grp <- as.character(rep(1:islands.n,each=islands.size))
   g
 }
+
+#' @title circular signed graph
+#' @description  circular graph with positive and negative edges.
+#'
+#' @param n number of nodes
+#' @param r radius
+#' @param pos distance fraction between positive edges
+#' @param neg distance fraction between negative edges
+#' @return igraph graph
+#' @author David Schoch
+#' @examples
+#' library(igraph)
+#' g <- graph_circular_signed(n = 50)
+#' @export
+#
+graph_circular_signed <- function(n,r = 1,pos = 0.1,neg = 0.1){
+  pts <- circleFun(r=r,npoints=n)
+
+  D <- arcDistMat(as.matrix(pts),r)
+
+  thr <- (2*pi*r)*pos
+  anti <- arc_dist(c(0,r),c(0,-r),r)*(1-neg)
+  P <- (D<=thr & D!=0)+0
+  N <- (D>=anti & D!=0)+0
+
+  A <- P-N
+  g <- igraph::graph_from_adjacency_matrix(A,mode="undirected",weighted = T)
+  igraph::E(g)$sign <- ifelse(igraph::E(g)$weight==1,1,-1)
+  g <- igraph::delete_edge_attr(g,"weight")
+  igraph::V(g)$x <- pts$x
+  igraph::V(g)$y <- pts$y
+  g
+}
+
+#helper
+circleFun <- function(center = c(0,0),r = 1, npoints = 20){
+  pts_seq <- seq(0,2*pi,length.out = npoints*100)
+  pts_samp <- sample(pts_seq,npoints)
+
+  xx <- center[1] + r * cos(pts_samp)
+  yy <- center[2] + r * sin(pts_samp)
+  return(data.frame(x = xx, y = yy))
+}
+
+arc_dist <- function(x,y,r){
+  c <- sqrt((x[1]-y[1])^2+(x[2]-y[2])^2)
+  theta <- acos((2*r^2-c^2)/(2*r^2))
+  2*pi*r*theta/(2*pi)
+}
