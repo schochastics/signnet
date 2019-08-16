@@ -8,7 +8,7 @@
 #' @author David Schoch
 #' @examples
 #' library(igraph)
-#' g <- sample_islands_signed(3, 10, 5/10, 1)
+#' g <- sample_islands_signed(3, 10, 0.5, 1)
 #' @export
 sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter){
   el <- matrix(0,0,2)

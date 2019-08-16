@@ -2,10 +2,26 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 arcDist <- function(x, y, r) {
-    .Call('_signnet_arcDist', PACKAGE = 'signnet', x, y, r)
+    .Call(`_signnet_arcDist`, x, y, r)
 }
 
 arcDistMat <- function(X, r) {
-    .Call('_signnet_arcDistMat', PACKAGE = 'signnet', X, r)
+    .Call(`_signnet_arcDistMat`, X, r)
+}
+
+blockCriterion <- function(A, clu, alpha) {
+    .Call(`_signnet_blockCriterion`, A, clu, alpha)
+}
+
+critUpdate <- function(A, v, from, to, clu, alpha) {
+    .Call(`_signnet_critUpdate`, A, v, from, to, clu, alpha)
+}
+
+optimBlocks <- function(A, clu, k, alpha) {
+    .Call(`_signnet_optimBlocks`, A, clu, k, alpha)
+}
+
+optimBlocks1 <- function(A, clu, k, alpha) {
+    .Call(`_signnet_optimBlocks1`, A, clu, k, alpha)
 }
 
