@@ -4,7 +4,7 @@
 \alias{signed_blockmodel}
 \title{Blockmodelling for signed networks}
 \usage{
-signed_blockmodel(g, k, alpha = 0.5)
+signed_blockmodel(g, k, alpha = 0.5, annealing = FALSE)
 }
 \arguments{
 \item{g}{signed graph}
@@ -12,6 +12,8 @@ signed_blockmodel(g, k, alpha = 0.5)
 \item{k}{number of clusters}
 
 \item{alpha}{see details}
+
+\item{annealing}{logical. if TRUE, use simulated annealing (Default: FALSE)}
 }
 \value{
 numeric vector of block assignments and the associated criterion value
@@ -23,6 +25,20 @@ Finds blocks of nodes with intra-positive and inter-negative edges
 The function minimizes P(C)=\eqn{\alpha}P+(1-\eqn{\alpha})N,
 where P is the total number of negative ties within plus-sets and P be the total number of
 positive ties between plus-sets. So far only the structural balance model is implemented.
+}
+\examples{
+library(igraph)
+
+g <- sample_islands_signed(10,10,1,20)
+clu <- signed_blockmodel(g,k = 10,alpha = 0.5)
+table(clu$membership)
+clu$criterion
+
+# Using simulated annealing (less change of getting trapped in local optima)
+data("tribes")
+clu <- signed_blockmodel(tribes,k = 3,alpha=0.5,annealing = TRUE)
+table(clu$membership)
+clu$criterion
 }
 \references{
 Doreian, Patrick and Andrej Mrvar (2009). Partitioning signed social networks. \emph{Social Networks} 31(1) 1-11

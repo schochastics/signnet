@@ -25,3 +25,7 @@ optimBlocks1 <- function(A, clu, k, alpha) {
     .Call(`_signnet_optimBlocks1`, A, clu, k, alpha)
 }
 
+optimBlocksSim <- function(A, clu, k, alpha) {
+    .Call(`_signnet_optimBlocksSim`, A, clu, k, alpha)
+}
+
