@@ -12,7 +12,8 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     igraph,
-    Rcpp
+    Rcpp,
+    Matrix
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
