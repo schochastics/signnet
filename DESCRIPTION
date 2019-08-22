@@ -7,6 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "david.schoch@manchester.ac.uk")
 Description: The package is designed for Signed Network Analysis. It includes i.a. methods to assess the structural balance theory.
+Depends: R (>= 3.2.0)
+URL: https://github.com/schochastics/signnet
+BugReports: https://github.com/schochastics/signnet/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
