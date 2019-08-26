@@ -11,6 +11,18 @@
 #' g <- sample_islands_signed(3, 10, 0.5, 1)
 #' @export
 sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter){
+  if(islands.n<=1){
+    stop("islands.n should be greater than one")
+  }
+  if(islands.size<=1){
+    stop("islands.size should be greater than one")
+  }
+  if(islands.pin<0|islands.pin>1){
+    stop("islands.pin should be between zero and one")
+  }
+  if(n.inter<=0){
+    stop("n.inter should be greater than zero")
+  }
   el <- matrix(0,0,2)
   for(i in 1:islands.n){
     tmp <- t(utils::combn(((i-1)*islands.size+1): (i*islands.size),2))
@@ -47,6 +59,9 @@ sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter)
 #' @export
 #
 graph_circular_signed <- function(n,r = 1,pos = 0.1,neg = 0.1){
+  if(missing(n)){
+    stop('argument "n" is missing, with no default')
+  }
   pts <- circleFun(r=r,npoints=n)
 
   D <- arcDistMat(as.matrix(pts),r)
