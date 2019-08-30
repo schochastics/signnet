@@ -3,13 +3,17 @@
 \docType{data}
 \name{tribes}
 \alias{tribes}
-\title{Florentine family marriage network}
-\format{An igraph graph containing positive/negative ties among New Guinean highland tribes.}
+\title{Signed network of New Guinean highland tribes.}
+\format{An igraph object}
+\source{
+http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/gama.dat
+}
 \usage{
 tribes
 }
 \description{
-The data was downloaded from http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/gama.dat
+Signed social network of tribes of the Gahuku–Gama alliance structure of the Eastern Central Highlands of New Guinea, from Kenneth Read.
+The network contains sixteen tribes connected by friendship ("rova") and enmity ("hina").
 }
 \references{
 Read, K. E. (1954) Cultures of the central highlands, New Guinea. \emph{Southwestern Journal of Anthropology}, 1–43.
