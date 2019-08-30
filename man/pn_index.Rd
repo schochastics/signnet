@@ -2,17 +2,17 @@
 % Please edit documentation in R/centrality_indices.R
 \name{pn_index}
 \alias{pn_index}
-\title{PN centrality Index}
+\title{PN Centrality Index}
 \usage{
 pn_index(g, mode = c("all", "in", "out"))
 }
 \arguments{
-\item{g}{signed network as igraph object}
+\item{g}{igraph object. Must have a sign edge attribute.}
 
-\item{mode}{Character string, “out” for out-pn, “in” for in-pn or “all” for undirected networks.}
+\item{mode}{character string, “out” for out-pn, “in” for in-pn or “all” for undirected networks.}
 }
 \value{
-centrality scores as numeric vector
+centrality scores as numeric vector.
 }
 \description{
 centrality index for signed networks by Everett and Borgatti

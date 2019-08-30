@@ -7,7 +7,7 @@
 laplacian_matrix_signed(g, norm = FALSE, sparse = FALSE)
 }
 \arguments{
-\item{g}{input graph. Must have a sign edge attribute}
+\item{g}{igraph object. Must have a sign edge attribute.}
 
 \item{norm}{Whether to calculate the normalized Laplacian. See definitions below.}
 
