@@ -1,4 +1,4 @@
-#' Signed network of New Guinean highland tribes.
+#' Signed network of New Guinean highland tribes
 #' @description Signed social network of tribes of the Gahuku–Gama alliance structure of the Eastern Central Highlands of New Guinea, from Kenneth Read.
 #' The network contains sixteen tribes connected by friendship ("rova") and enmity ("hina").
 #' @format An igraph object
