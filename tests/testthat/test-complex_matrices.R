@@ -16,13 +16,13 @@ test_that("error no attribute works", {
 
 test_that("error wrong attribute works", {
   g <- igraph::graph.full(3,directed=FALSE)
-  E(g)$type <- "F"
+  igraph::E(g)$type <- "F"
   expect_error(as_complex_adj(g,"type"))
 })
 
 test_that("complex adj works", {
   g <- igraph::graph.full(3,directed=FALSE)
-  E(g)$type <- "N"
+  igraph::E(g)$type <- "N"
   A_true <- structure(c(0+0i, 0-1i, 0-1i, 0+1i, 0+0i, 0-1i, 0+1i, 0+1i, 0+0i
   ), .Dim = c(3L, 3L))
   A <- as_complex_adj(g,"type")

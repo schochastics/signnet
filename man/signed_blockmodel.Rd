@@ -24,7 +24,8 @@ Finds blocks of nodes with intra-positive and inter-negative edges
 \details{
 The function minimizes P(C)=\eqn{\alpha}P+(1-\eqn{\alpha})N,
 where P is the total number of negative ties within plus-sets and P be the total number of
-positive ties between plus-sets. So far only the structural balance model is implemented.
+positive ties between plus-sets. This function implementes the structural balance model. For the generalized
+version see \link{signed_blockmodel_general}.
 }
 \examples{
 library(igraph)

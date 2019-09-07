@@ -29,3 +29,15 @@ optimBlocksSim <- function(A, clu, k, alpha) {
     .Call(`_signnet_optimBlocksSim`, A, clu, k, alpha)
 }
 
+blockCriterionS <- function(A, clu, alpha, sgrp) {
+    .Call(`_signnet_blockCriterionS`, A, clu, alpha, sgrp)
+}
+
+critUpdateS <- function(A, v, from, to, clu, alpha, sgrp) {
+    .Call(`_signnet_critUpdateS`, A, v, from, to, clu, alpha, sgrp)
+}
+
+optimBlocksSimS <- function(A, clu, sgrp, alpha) {
+    .Call(`_signnet_optimBlocksSimS`, A, clu, sgrp, alpha)
+}
+

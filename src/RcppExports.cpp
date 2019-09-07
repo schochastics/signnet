@@ -102,6 +102,51 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// blockCriterionS
+double blockCriterionS(arma::sp_mat A, IntegerVector clu, double alpha, IntegerMatrix sgrp);
+RcppExport SEXP _signnet_blockCriterionS(SEXP ASEXP, SEXP cluSEXP, SEXP alphaSEXP, SEXP sgrpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
+    rcpp_result_gen = Rcpp::wrap(blockCriterionS(A, clu, alpha, sgrp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// critUpdateS
+double critUpdateS(arma::sp_mat A, int v, int from, int to, IntegerVector clu, double alpha, IntegerMatrix sgrp);
+RcppExport SEXP _signnet_critUpdateS(SEXP ASEXP, SEXP vSEXP, SEXP fromSEXP, SEXP toSEXP, SEXP cluSEXP, SEXP alphaSEXP, SEXP sgrpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< int >::type v(vSEXP);
+    Rcpp::traits::input_parameter< int >::type from(fromSEXP);
+    Rcpp::traits::input_parameter< int >::type to(toSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
+    rcpp_result_gen = Rcpp::wrap(critUpdateS(A, v, from, to, clu, alpha, sgrp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// optimBlocksSimS
+List optimBlocksSimS(arma::sp_mat A, IntegerVector clu, IntegerMatrix sgrp, double alpha);
+RcppExport SEXP _signnet_optimBlocksSimS(SEXP ASEXP, SEXP cluSEXP, SEXP sgrpSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(optimBlocksSimS(A, clu, sgrp, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_signnet_arcDist", (DL_FUNC) &_signnet_arcDist, 3},
@@ -111,6 +156,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_signnet_optimBlocks", (DL_FUNC) &_signnet_optimBlocks, 4},
     {"_signnet_optimBlocks1", (DL_FUNC) &_signnet_optimBlocks1, 4},
     {"_signnet_optimBlocksSim", (DL_FUNC) &_signnet_optimBlocksSim, 4},
+    {"_signnet_blockCriterionS", (DL_FUNC) &_signnet_blockCriterionS, 4},
+    {"_signnet_critUpdateS", (DL_FUNC) &_signnet_critUpdateS, 7},
+    {"_signnet_optimBlocksSimS", (DL_FUNC) &_signnet_optimBlocksSimS, 4},
     {NULL, NULL, 0}
 };
 
