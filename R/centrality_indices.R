@@ -63,7 +63,7 @@ degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","rati
   }
   type <- match.arg(type,c("pos","neg","ratio","net"))
 
-  A <- get.adjacency(g,type="both",attr = "sign",...)
+  A <- igraph::as_adj(g,type="both",attr = "sign",...)
   P <- (A>0)+0
   N <- (A<0)+0
 

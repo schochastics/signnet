@@ -4,18 +4,20 @@
 \alias{laplacian_angle}
 \title{Angle between Eigenvectors}
 \usage{
-laplacian_angle(g, ...)
+laplacian_angle(g, type = "sign", ...)
 }
 \arguments{
 \item{g}{input graph. Must have a sign edge attribute}
 
-\item{...}{additional parameters for Laplacian matrix}
+\item{type}{string. either "sign" for signed Laplacian or "complex" for complex Laplacian. Defaults to "sign"}
+
+\item{...}{additional parameters for Laplacian matrix such as the attribute containing "P","N" and "A" for the complex Laplacian}
 }
 \value{
 a numeric matrix
 }
 \description{
-Computes the angle between eigenvectors of the signed Laplacian.
+Computes the angle between eigenvectors of the signed or complex Laplacian.
 }
 \details{
 angle between eigenvectors and zero.
