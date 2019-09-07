@@ -1,7 +1,7 @@
 #' @title Blockmodelling for signed networks
 #' @description Finds blocks of nodes with intra-positive and inter-negative edges
-#' @param g signed graph
-#' @param k number of clusters
+#' @param g igraph object. Must have a "sign" edge attribute.
+#' @param k number of blocks
 #' @param alpha see details
 #' @param annealing logical. if TRUE, use simulated annealing (Default: FALSE)
 #' @return numeric vector of block assignments and the associated criterion value
@@ -49,7 +49,7 @@ signed_blockmodel <- function(g,k,alpha = 0.5,annealing = FALSE){
 
 #' @title Generalized blockmodelling for signed networks
 #' @description Finds blocks of nodes with specified inter/intra group ties
-#' @param g signed graph
+#' @param g igraph object. Must have a "sign" edge attribute.
 #' @param blockmat Integer Matrix. Specifies the inter/intra group patterns of ties
 #' @param alpha see details
 #' @return numeric vector of block assignments and the associated criterion value

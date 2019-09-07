@@ -1,7 +1,7 @@
 #' @title PN Centrality Index
 #' @description centrality index for signed networks by Everett and Borgatti
 #'
-#' @param g igraph object. Must have a sign edge attribute.
+#' @param g igraph object. Must have a "sign" edge attribute.
 #' @param mode character string, “out” for out-pn, “in” for in-pn or “all” for undirected networks.
 #' @return centrality scores as numeric vector.
 #' @references Everett, M. and Borgatti, S. (2014) Networks containing negative ties. *Social Networks* 38 111-120
@@ -40,7 +40,7 @@ pn_index <- function(g,mode=c("all","in","out")){
 #' @title Signed Degree
 #' @description several options to calculate the signed degree of vertices
 #'
-#' @param g igraph object. Must have a sign edge attribute.
+#' @param g igraph object. Must have a "sign" edge attribute.
 #' @param mode character string, “out” for out-degree, “in” for in-degree or “all” for undirected networks.
 #' @param type character string, “pos” or “neg” for counting positive or negative neighbors only,
 #' "ratio" for pos/(pos+neg), or "net" for pos-neg.

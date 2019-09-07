@@ -7,9 +7,9 @@
 signed_blockmodel(g, k, alpha = 0.5, annealing = FALSE)
 }
 \arguments{
-\item{g}{signed graph}
+\item{g}{igraph object. Must have a "sign" edge attribute.}
 
-\item{k}{number of clusters}
+\item{k}{number of blocks}
 
 \item{alpha}{see details}
 

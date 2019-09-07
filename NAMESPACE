@@ -3,6 +3,7 @@
 export(as_complex_adj)
 export(balance_score)
 export(degree_signed)
+export(ggblock)
 export(graph_circular_signed)
 export(laplacian_angle)
 export(laplacian_matrix_complex)

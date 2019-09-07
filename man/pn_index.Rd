@@ -7,7 +7,7 @@
 pn_index(g, mode = c("all", "in", "out"))
 }
 \arguments{
-\item{g}{igraph object. Must have a sign edge attribute.}
+\item{g}{igraph object. Must have a "sign" edge attribute.}
 
 \item{mode}{character string, “out” for out-pn, “in” for in-pn or “all” for undirected networks.}
 }

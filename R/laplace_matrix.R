@@ -1,6 +1,6 @@
 #' @title Signed Graph Laplacian
 #' @description The Laplacian of a signed graph.
-#' @param g igraph object. Must have a sign edge attribute.
+#' @param g igraph object. Must have a "sign" edge attribute.
 #' @param norm Whether to calculate the normalized Laplacian. See definitions below.
 #' @param sparse 	Logical scalar, whether to return the result as a sparse matrix. The Matrix package is required for sparse matrices.
 #' @details

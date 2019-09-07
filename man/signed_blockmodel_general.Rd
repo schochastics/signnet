@@ -7,7 +7,7 @@
 signed_blockmodel_general(g, blockmat, alpha = 0.5)
 }
 \arguments{
-\item{g}{signed graph}
+\item{g}{igraph object. Must have a "sign" edge attribute.}
 
 \item{blockmat}{Integer Matrix. Specifies the inter/intra group patterns of ties}
 
