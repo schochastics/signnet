@@ -152,19 +152,20 @@ List optimBlocks1(arma::sp_mat A,IntegerVector clu, int k, double alpha){
 List optimBlocksSim(arma::sp_mat A,IntegerVector clu, int k, double alpha){
 
   double crit = blockCriterion(A,clu,alpha);
-  double crit_min =crit;
+  double crit_min = crit;
   int n = A.n_cols;
   int v;
   int newc;
   double deltaC;
   int max_iter = n*n;
   double temp = 100;
+  int stuck = 0;
   IntegerVector clu_min(n);
 
-  IntegerVector cluSizes(k);
-  for(int i=0; i<n;++i){
-    cluSizes[clu[i]]+=1;
-  }
+  // IntegerVector cluSizes(k);
+  // for(int i=0; i<n;++i){
+  //   cluSizes[clu[i]]+=1;
+  // }
 
   while(temp>0.01){
     for(int q=0;q<max_iter;++q){
@@ -175,10 +176,10 @@ List optimBlocksSim(arma::sp_mat A,IntegerVector clu, int k, double alpha){
       }
       deltaC = critUpdate(A, v, clu[v], newc,clu,alpha);
       if(deltaC<0){
-        cluSizes[clu[v]]-=1;
-        cluSizes[newc]+=1;
+        // cluSizes[clu[v]]-=1;
+        // cluSizes[newc]+=1;
         clu[v]=newc;
-        // stuck=0;
+        stuck=0;
         crit+=deltaC;
         if(crit<crit_min){
           crit_min = crit;
@@ -189,11 +190,14 @@ List optimBlocksSim(arma::sp_mat A,IntegerVector clu, int k, double alpha){
         if(R::runif(0,1)<=p){
           crit = crit+deltaC;
           clu[v]=newc;
-          // stuck = 0;
+          stuck+= 1;
         } else {
-          // stuck+=1;
+          stuck+=1;
         }
       }
+    }
+    if(stuck>=n*n){
+      break;
     }
     temp = 0.99*temp;
   }

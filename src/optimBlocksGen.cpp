@@ -122,7 +122,7 @@ List optimBlocksSimS(arma::sp_mat A,IntegerVector clu, IntegerMatrix sgrp, doubl
     cluSizes[clu[i]]+=1;
   }
 
-  while(temp>0.01){
+  while(temp>0.1){
     for(int q=0;q<max_iter;++q){
       v = floor(R::runif(0,1)*n);
       newc = floor(R::runif(0,1)*k);
@@ -151,6 +151,7 @@ List optimBlocksSimS(arma::sp_mat A,IntegerVector clu, IntegerMatrix sgrp, doubl
         }
       }
     }
+
     temp = 0.99*temp;
   }
 
