@@ -31,7 +31,7 @@ ggblock <- function(g,blocks = NULL,cols = NULL,show_blocks = FALSE,show_labels 
   if(show_blocks){
     bsizes <- unname(table(blocks))
     bsizes <- cumsum(bsizes)+0.5
-    rsizes <- igraph::vcount(g)-bsizes[-length(bsizes)]
+    rsizes <- igraph::vcount(g)-bsizes[-length(bsizes)]+1
     csizes <- bsizes[-length(bsizes)]
   }
   if(!"name"%in%igraph::vertex_attr_names(g)){
@@ -53,7 +53,8 @@ ggblock <- function(g,blocks = NULL,cols = NULL,show_blocks = FALSE,show_labels 
     p <- p + ggplot2::geom_vline(xintercept = csizes)+ggplot2::geom_hline(yintercept = rsizes)
   }
   if(show_labels){
-    p <- p + ggplot2::theme(axis.text = ggplot2::element_text())
+    p <- p + ggplot2::scale_x_discrete(position = "top") +
+      ggplot2::theme(axis.text.y = ggplot2::element_text())
   }
   p
 }
