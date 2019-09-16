@@ -19,7 +19,7 @@
 #' E(g)$sign <- c(-1,1,1,-1,-1,1)
 #'
 #' balance_score(g, method = "triangles")
-#' balance_score(g, method = "eigen")
+#' balance_score(g, method = "walk")
 #' @export
 balance_score <- function(g,method = "triangles"){
   match.arg(method,c("triangles","walk"))

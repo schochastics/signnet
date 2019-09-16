@@ -31,7 +31,7 @@ g <- graph.full(4)
 E(g)$sign <- c(-1,1,1,-1,-1,1)
 
 balance_score(g, method = "triangles")
-balance_score(g, method = "eigen")
+balance_score(g, method = "walk")
 }
 \references{
 Estrada, E. (2019). Rethinking structural balance in signed social networks. \emph{Discrete Applied Mathematics}.

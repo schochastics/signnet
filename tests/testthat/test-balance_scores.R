@@ -4,10 +4,10 @@ test_that("triangle balance index works", {
   expect_equal(balance_score(g,method="triangles"), 1)
 })
 
-test_that("eigen balance index works", {
+test_that("walk balance index works", {
   g <- igraph::graph.full(5)
   igraph::E(g)$sign <- 1
-  expect_equal(balance_score(g,method="eigen"), 1)
+  expect_equal(balance_score(g,method="walk"), 1)
 })
 
 test_that("directed check works", {
