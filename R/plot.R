@@ -58,3 +58,57 @@ ggblock <- function(g,blocks = NULL,cols = NULL,show_blocks = FALSE,show_labels 
   }
   p
 }
+
+#' @title Plot a signed or complex network
+#' @param g igraph object. Must have a "sign" edge attribute or an attribute containing "P", "N", "A"
+#' @param type character string. either "signed" or "complex"
+#' @param attr character string. edge attribute that containing "P", "N", "A" if type="complex"
+#' @param edge_cols colors used for negative and positive (and ambivalent) ties
+#' @details This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function isthus mostly meant to give a quick overview of the network
+#' @return ggplot2 object
+#' @author David Schoch
+#' @export
+ggsigned <- function(g,type="signed",attr=NULL,edge_cols = NULL){
+  if(!requireNamespace("ggraph", quietly = TRUE)){
+    stop("The package 'ggraph' is needed for this function.")
+  }
+  type <- match.arg(type,c("signed","complex"))
+  if(is.null(edge_cols) & type=="signed"){
+    edge_cols <- c(`-1`="firebrick",`1`="steelblue")
+  }
+  if(is.null(edge_cols) & type=="complex"){
+    edge_cols <- c(`N`="firebrick",`P`="steelblue",`A`="darkorchid3")
+  }
+  if(!is.null(edge_cols) & type=="signed"){
+   if(length(edge_cols)!=2){
+     stop(paste0(length(edge_cols)," colors provided but 2 are needed"))
+   }
+  }
+  if(!is.null(edge_cols) & type=="complex"){
+    if(length(edge_cols)!=3){
+      stop(paste0(length(edge_cols)," colors provided but 3 are needed"))
+    }
+  }
+  if(is.null(attr) & type=="complex"){
+    stop('"attr" must be specified for type="complex"')
+  }
+  if(type=="signed"){
+  igraph::E(g)$weight <- ifelse(igraph::E(g)$sign==1,3,1)
+  ggraph::ggraph(g,"stress",weights=igraph::E(g)$weight)+
+      ggraph::geom_edge_link0(ggplot2::aes_(col=~as.factor(sign)))+
+      ggraph::geom_node_point(shape=21,fill="grey25",size=5)+
+      ggraph::scale_edge_color_manual(values=edge_cols)+
+      ggraph::theme_graph()+
+      ggplot2::theme(legend.position="none")
+
+  } else{
+    igraph::E(g)$type <- igraph::get.edge.attribute(g,attr)
+    igraph::E(g)$weight <- ifelse(igraph::E(g)$type=="P",3,ifelse(igraph::E(g)$type=="A",2,1))
+    ggraph::ggraph(g,"stress",weights=igraph::E(g)$weight)+
+      ggraph::geom_edge_link0(ggplot2::aes_(col=~as.factor(type)))+
+      ggraph::geom_node_point(shape=21,fill="grey25",size=5)+
+      ggraph::scale_edge_color_manual(values=edge_cols)+
+      ggraph::theme_graph()+
+      ggplot2::theme(legend.position="none")
+  }
+}

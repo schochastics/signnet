@@ -21,7 +21,7 @@ laplacian_matrix_signed <- function(g,norm = FALSE,sparse = FALSE){
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
-  A <- igraph::get.adjacency(g,"both",attr = "sign", sparse = sparse)
+  A <- as_adj_signed(g,sparse = sparse)
   I <- diag(1,nrow(A))
   D <- diag(rowSums(abs(A)))
   if(norm){
