@@ -64,11 +64,12 @@ ggblock <- function(g,blocks = NULL,cols = NULL,show_blocks = FALSE,show_labels 
 #' @param type character string. either "signed" or "complex"
 #' @param attr character string. edge attribute that containing "P", "N", "A" if type="complex"
 #' @param edge_cols colors used for negative and positive (and ambivalent) ties
+#' @param weights logical. If TRUE, weights are computed based on sign. Defaults to FALSE
 #' @details This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function isthus mostly meant to give a quick overview of the network
 #' @return ggplot2 object
 #' @author David Schoch
 #' @export
-ggsigned <- function(g,type="signed",attr=NULL,edge_cols = NULL){
+ggsigned <- function(g,type="signed",attr=NULL,edge_cols = NULL,weights = FALSE){
   if(!requireNamespace("ggraph", quietly = TRUE)){
     stop("The package 'ggraph' is needed for this function.")
   }
@@ -93,17 +94,25 @@ ggsigned <- function(g,type="signed",attr=NULL,edge_cols = NULL){
     stop('"attr" must be specified for type="complex"')
   }
   if(type=="signed"){
-  igraph::E(g)$weight <- ifelse(igraph::E(g)$sign==1,3,1)
-  ggraph::ggraph(g,"stress",weights=igraph::E(g)$weight)+
-      ggraph::geom_edge_link0(ggplot2::aes_(col=~as.factor(sign)))+
-      ggraph::geom_node_point(shape=21,fill="grey25",size=5)+
-      ggraph::scale_edge_color_manual(values=edge_cols)+
-      ggraph::theme_graph()+
-      ggplot2::theme(legend.position="none")
+    if(weights){
+      igraph::E(g)$weight <- ifelse(igraph::E(g)$sign==1,3,1)
+    } else{
+      igraph::E(g)$weight <- 1
+    }
+    ggraph::ggraph(g,"stress",weights=igraph::E(g)$weight)+
+        ggraph::geom_edge_link0(ggplot2::aes_(col=~as.factor(sign)))+
+        ggraph::geom_node_point(shape=21,fill="grey25",size=5)+
+        ggraph::scale_edge_color_manual(values=edge_cols)+
+        ggraph::theme_graph()+
+        ggplot2::theme(legend.position="none")
 
   } else{
-    igraph::E(g)$type <- igraph::get.edge.attribute(g,attr)
-    igraph::E(g)$weight <- ifelse(igraph::E(g)$type=="P",3,ifelse(igraph::E(g)$type=="A",2,1))
+    if(weights){
+      igraph::E(g)$type <- igraph::get.edge.attribute(g,attr)
+      igraph::E(g)$weight <- ifelse(igraph::E(g)$type=="P",3,ifelse(igraph::E(g)$type=="A",2,1))
+    } else{
+      igraph::E(g)$weight <- 1
+    }
     ggraph::ggraph(g,"stress",weights=igraph::E(g)$weight)+
       ggraph::geom_edge_link0(ggplot2::aes_(col=~as.factor(type)))+
       ggraph::geom_node_point(shape=21,fill="grey25",size=5)+

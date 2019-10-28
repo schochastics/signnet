@@ -4,7 +4,8 @@
 \alias{ggsigned}
 \title{Plot a signed or complex network}
 \usage{
-ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL)
+ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL,
+  weights = FALSE)
 }
 \arguments{
 \item{g}{igraph object. Must have a "sign" edge attribute or an attribute containing "P", "N", "A"}
@@ -14,6 +15,8 @@ ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL)
 \item{attr}{character string. edge attribute that containing "P", "N", "A" if type="complex"}
 
 \item{edge_cols}{colors used for negative and positive (and ambivalent) ties}
+
+\item{weights}{logical. If TRUE, weights are computed based on sign. Defaults to FALSE}
 }
 \value{
 ggplot2 object

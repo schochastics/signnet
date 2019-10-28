@@ -2,8 +2,12 @@
 
 export(as_adj_complex)
 export(as_adj_signed)
+export(as_complex_edges)
 export(as_incidence_complex)
+export(as_signed_proj)
+export(as_unsigned_2mode)
 export(balance_score)
+export(complex_walks)
 export(degree_signed)
 export(ggblock)
 export(ggsigned)

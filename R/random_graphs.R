@@ -41,6 +41,7 @@ sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter)
   g <- igraph::graph_from_edgelist(el[,1:2],directed=F)
   igraph::E(g)$sign <- el[,3]
   igraph::V(g)$grp <- as.character(rep(1:islands.n,each=islands.size))
+  g <- igraph::delete.edges(g,which(igraph::is.multiple(g)))
   g
 }
 

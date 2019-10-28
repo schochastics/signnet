@@ -126,3 +126,174 @@ as_incidence_complex <- function(g,attr){
   }
   S
 }
+
+#' @title Convert Signed Network to Complex
+#' @param g igraph object. Must have a "sign" edge attribute.
+#' @param attr new edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @return igraph object
+#' @author David Schoch
+#' @examples
+#' g <- sample_islands_signed(2,10,1,10)
+#' as_complex_edges(g)
+#' @export
+as_complex_edges <- function(g,attr = "type"){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if(!"sign"%in%igraph::edge_attr_names(g)){
+    stop("network does not have a sign edge attribute")
+  }
+  esign <- igraph::get.edge.attribute(g,"sign")
+  ecompl <- ifelse(esign==1,"P","N")
+  g <- igraph::set_edge_attr(g,name = attr,value = ecompl)
+  g
+}
+
+#' @title Count Walks in complex signed network
+#' @param g igraph object.
+#' @param attr edge attribute that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param k integer. length of walks
+#' @return igraph object
+#' @author David Schoch
+#' @examples
+#' g <- sample_islands_signed(2,10,1,10)
+#' g <- as_complex_edges(g,attr="type")
+#' complex_walks(g,attr="type",k = 3)
+#' @export
+complex_walks <- function(g,attr,k){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if(missing(attr)){
+    stop('argument "attr" is missing, with no default')
+  }
+  if(!attr%in%igraph::edge_attr_names(g)){
+    stop(paste0('There is no edge attribute ','"',attr,'"'))
+  }
+  eattr <- igraph::get.edge.attribute(g,attr)
+  if(!all(eattr%in%c("P","N","A"))){
+    stop('attr may only contain "P","N" and "A" ')
+  }
+  A <- as_adj_complex(g,attr)
+  B <- A
+  for(i in 2:k){
+    B <- cxmatmul(B,A)
+  }
+  return(B)
+}
+
+#' @title convert signed two-mode network to unsigned
+#' @param g igraph object. Two-mode network, must have a "sign" edge attribute.
+#' @param primary logical. Which mode to transform
+#' @return igraph object
+#' @author David Schoch
+#' @seealso [as_signed_proj]
+#' @examples
+#' library(igraph)
+#'
+#' # create a simple signed two mode network
+#' el <- matrix(c(1,"a",1,"b",1,"c",2,"a",2,"b"),ncol = 2,byrow = TRUE)
+#' g <- graph_from_edgelist(el,directed = FALSE)
+#' E(g)$sign <- c(1,1,-1,1,-1)
+#' V(g)$type <- c(FALSE,TRUE,TRUE,TRUE,FALSE)
+#'
+#' # convert to unsigned two-mode network and project
+#' l <- as_unsigned_2mode(g,primary = TRUE)
+#' p <- bipartite_projection(l,which="true")
+#'
+#' # turn the unsigned projection back to a signed network
+#' as_signed_proj(p)
+#' @export
+
+as_unsigned_2mode <- function(g,primary = TRUE){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if(!"sign"%in%igraph::edge_attr_names(g)){
+    stop("network does not have a sign edge attribute")
+  }
+
+  if(!"type"%in%igraph::vertex_attr_names(g)){
+    stop("not a two-mode network.")
+  }
+  if(!"name"%in%igraph::vertex_attr_names(g)){
+    igraph::V(g)$name <- as.character(1:igraph::vcount(g))
+  }
+  vnames <- igraph::V(g)$name
+  mode1 <- vnames[which(igraph::V(g)$type)]
+  mode2 <- vnames[which(!igraph::V(g)$type)]
+  el <- igraph::as_data_frame(g,"edges")
+  el[["sign"]] <- ifelse(el[["sign"]]==1,"-pos","-neg")
+  from <- el[["from"]]
+  to <- el[["to"]]
+  signs <- el[["sign"]]
+
+  if(primary){
+    new_nodes <- paste0(rep(mode1,each=2),rep(c("-pos","-neg"),length(mode1)))
+    vert <- data.frame(name=c(new_nodes,mode2),
+                       type=c(rep(TRUE,length(new_nodes)),rep(FALSE,length(mode2))))
+    from[from%in%mode1] <- paste0(from[from%in%mode1],signs[from%in%mode1])
+    to[to%in%mode1] <- paste0(to[to%in%mode1],signs[to%in%mode1])
+  } else{
+    new_nodes <- paste0(rep(mode2,each=2),rep(c("-pos","-neg"),length(mode1)))
+    vert <- data.frame(name=c(new_nodes,mode1),
+                       type=c(rep(TRUE,length(new_nodes)),rep(FALSE,length(mode1))))
+    from[from%in%mode2] <- paste0(from[from%in%mode2],signs[from%in%mode2])
+    to[to%in%mode1] <- paste0(to[to%in%mode2],signs[to%in%mode2])
+  }
+
+  el <- data.frame(from,to)
+
+  igraph::graph_from_data_frame(el,igraph::is.directed(g),vert)
+}
+
+#' @title convert unsigned projection to signed
+#' @param g igraph object
+#' @return igraph object
+#' @author David Schoch
+#' @seealso [as_unsigned_2mode]
+#' @examples
+#' library(igraph)
+#'
+#' # create a simple signed two mode network
+#' el <- matrix(c(1,"a",1,"b",1,"c",2,"a",2,"b"),ncol = 2,byrow = TRUE)
+#' g <- graph_from_edgelist(el,directed = FALSE)
+#' E(g)$sign <- c(1,1,-1,1,-1)
+#' V(g)$type <- c(FALSE,TRUE,TRUE,TRUE,FALSE)
+#'
+#' # convert to unsigned two-mode network and project
+#' l <- as_unsigned_2mode(g,primary = TRUE)
+#' p <- bipartite_projection(l,which="true")
+#'
+#' # turn the unsigned projection back to a signed network
+#' as_signed_proj(p)
+#' @export
+as_signed_proj <- function(g){
+  el <- igraph::as_data_frame(g,"edges")
+  m1 <- regexpr("pos|neg",el[["from"]])
+  m2 <- regexpr("pos|neg",el[["to"]])
+  el[["type1"]] <- regmatches(el[["from"]],m1)
+  el[["type2"]] <- regmatches(el[["to"]],m2)
+  el[["type"]] <- "N"
+  el[["type"]][el[["type1"]]==el[["type2"]]] <- "P"
+  el[["from"]] <- gsub("\\-.*","",el[["from"]])
+  el[["to"]] <- gsub("\\-.*","",el[["to"]])
+
+  el <- el[,c("from","to","type")]
+
+  el_new <- as.data.frame(t(apply(el[,1:2],1,sort)),stringsAsFactors = FALSE)
+  el_new[["type"]] <- el[["type"]]
+  el_new <- el_new[!duplicated(el_new),]
+  names(el_new)[1:2] <- c("from","to")
+
+  el_aggr <- stats::aggregate(cbind(count = type) ~ from+to, data = el_new,
+                       FUN = function(x){c(NROW(x),c("N","P")[x[1]])})
+  el_aggr <- do.call(data.frame,el_aggr)
+  names(el_aggr)[c(3,4)] <- c("count","type")
+  el_aggr[["from"]] <- as.character(el_aggr[["from"]])
+  el_aggr[["to"]]   <- as.character(el_aggr[["to"]])
+  el_aggr[["type"]] <- as.character(el_aggr[["type"]])
+  el_aggr[["count"]] <- as.numeric(as.character(el_aggr[["count"]]))
+  el_aggr[["type"]][el_aggr[["count"]]>1] <- "A"
+  igraph::graph_from_data_frame(el_aggr[,c("from","to","type")],directed=FALSE)
+}

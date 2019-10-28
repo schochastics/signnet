@@ -9,6 +9,10 @@ arcDistMat <- function(X, r) {
     .Call(`_signnet_arcDistMat`, X, r)
 }
 
+cxmatmul <- function(A, B) {
+    .Call(`_signnet_cxmatmul`, A, B)
+}
+
 blockCriterion <- function(A, clu, alpha) {
     .Call(`_signnet_blockCriterion`, A, clu, alpha)
 }

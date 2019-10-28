@@ -31,6 +31,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cxmatmul
+arma::cx_mat cxmatmul(arma::cx_mat A, arma::cx_mat B);
+RcppExport SEXP _signnet_cxmatmul(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cx_mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::cx_mat >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(cxmatmul(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 // blockCriterion
 double blockCriterion(arma::sp_mat A, IntegerVector clu, double alpha);
 RcppExport SEXP _signnet_blockCriterion(SEXP ASEXP, SEXP cluSEXP, SEXP alphaSEXP) {
@@ -151,6 +163,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_signnet_arcDist", (DL_FUNC) &_signnet_arcDist, 3},
     {"_signnet_arcDistMat", (DL_FUNC) &_signnet_arcDistMat, 2},
+    {"_signnet_cxmatmul", (DL_FUNC) &_signnet_cxmatmul, 2},
     {"_signnet_blockCriterion", (DL_FUNC) &_signnet_blockCriterion, 3},
     {"_signnet_critUpdate", (DL_FUNC) &_signnet_critUpdate, 6},
     {"_signnet_optimBlocks", (DL_FUNC) &_signnet_optimBlocks, 4},
