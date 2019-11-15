@@ -69,26 +69,26 @@ degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","rati
 
   if(mode=="all"){
     res <- switch(type,
-                  pos   = rowSums(P),
-                  neg   = rowSums(N),
-                  ratio = rowSums(P)/(rowSums(P)+rowSums(N)),
-                  net   = rowSums(P)-rowSums(N)
+                  pos   = Matrix::rowSums(P),
+                  neg   = Matrix::rowSums(N),
+                  ratio = Matrix::rowSums(P)/(Matrix::rowSums(P)+Matrix::rowSums(N)),
+                  net   = Matrix::rowSums(P)-Matrix::rowSums(N)
     )
     res
   } else if(mode=="out"){
     res <- switch(type,
-                  pos   = rowSums(P),
-                  neg   = rowSums(N),
-                  ratio = rowSums(P)/(rowSums(P)+rowSums(N)),
-                  net   = rowSums(P)-rowSums(N)
+                  pos   = Matrix::rowSums(P),
+                  neg   = Matrix::rowSums(N),
+                  ratio = Matrix::rowSums(P)/(Matrix::rowSums(P)+Matrix::rowSums(N)),
+                  net   = Matrix::rowSums(P)-Matrix::rowSums(N)
     )
     res
   } else if(mode=="in"){
     res <- switch(type,
-                  pos   = colSums(P),
-                  neg   = colSums(N),
-                  ratio = colSums(P)/(colSums(P)+colSums(N)),
-                  net   = colSums(P)-colSums(N)
+                  pos   = Matrix::colSums(P),
+                  neg   = Matrix::colSums(N),
+                  ratio = Matrix::colSums(P)/(Matrix::colSums(P)+Matrix::colSums(N)),
+                  net   = Matrix::colSums(P)-Matrix::colSums(N)
     )
     res
   }
