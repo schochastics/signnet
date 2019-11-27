@@ -5,7 +5,7 @@
 #' @param method string indicating the method to be used. See details for options
 #' @details The method parameter can be one of
 #' \describe{
-#'   \item{triangles}{Fraction of balanced triangles. Maximal (=1) if all triangles are balanced.}
+#'   \item{triangles}{Fraction of triangles that are balanced triangles. Maximal (=1) if all triangles are balanced.}
 #'   \item{walk}{\eqn{\sum exp(\lambda_i) / \sum exp(\mu_i)}} where \eqn{\lambda_i} are the eigenvalues of the
 #'   signed adjacency matrix and \eqn{\mu_i} of the unsigned adjacency matrix. Maximal (=1) if all walks are balanced.
 #' }
@@ -34,10 +34,10 @@ balance_score <- function(g,method = "triangles"){
     stop("sign may only contain -1 and 1")
   }
   if(method == "triangles"){
-    tria_count <- signed_triangles(g)
+    tria_count <- count_signed_triangles(g)
     return(unname((tria_count["+++"] + tria_count["+--"])/sum(tria_count)))
   } else if(method == "walk"){
-    A <- igraph::get.adjacency(g,attr="sign")
+    A <- as_adj_signed(g)
     EigenS <- eigen(A)$values
     EigenU <- eigen(abs(A))$values
     sum(exp(EigenS))/sum(exp(EigenU))

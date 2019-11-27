@@ -20,7 +20,7 @@ Implements several indices to assess the balancedness of a network.
 \details{
 The method parameter can be one of
 \describe{
-\item{triangles}{Fraction of balanced triangles. Maximal (=1) if all triangles are balanced.}
+\item{triangles}{Fraction of triangles that are balanced triangles. Maximal (=1) if all triangles are balanced.}
 \item{walk}{\eqn{\sum exp(\lambda_i) / \sum exp(\mu_i)}} where \eqn{\lambda_i} are the eigenvalues of the
 signed adjacency matrix and \eqn{\mu_i} of the unsigned adjacency matrix. Maximal (=1) if all walks are balanced.
 }
