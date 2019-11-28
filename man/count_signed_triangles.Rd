@@ -7,7 +7,7 @@
 count_signed_triangles(g)
 }
 \arguments{
-\item{g}{signed network.}
+\item{g}{igraph object with signed edge attribute}
 }
 \value{
 counts for all 4 signed triangle types

@@ -7,7 +7,7 @@
 signed_triangles(g)
 }
 \arguments{
-\item{g}{signed network.}
+\item{g}{igraph object with signed edge attribute}
 }
 \value{
 matrix of vertex ids and the number of positive ties per triangle
