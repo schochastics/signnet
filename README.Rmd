@@ -44,7 +44,7 @@ all ties are positive ("the friend of a friend is a friend") or only one tie is 
 
 <img src="man/figures/balance_triples.png"/>
 
-A network is balanced if i.a., it can be partitioned into two vertex subsets, such that intra-group edges are all positive and inter-group edges are all negative. Determining this is easy, but measuring a *degree of balancedness* (i.e. how close is a network to be balanced?) is not. Tee package, so far, implements three methods to calculate balance scores. All are defined such that a value of one indicates perfect balance and zero perfect unbalance. Though for intermediate networks, results may vary significantly. Check [this paper](https://doi.org/10.1093/comnet/cnx044) by Samin Aref for more details.
+A network is balanced if i.a., it can be partitioned into two vertex subsets, such that intra-group edges are all positive and inter-group edges are all negative. Determining this is easy, but measuring a *degree of balancedness* (i.e. how close is a network to be balanced?) is not. The package, so far, implements three methods to calculate balance scores. All are defined such that a value of one indicates perfect balance and zero perfect unbalance. Though for intermediate networks, results may vary significantly. Check [this paper](https://doi.org/10.1093/comnet/cnx044) by Samin Aref (and his other work) for more details.
 
 ```{r balance_example,message=FALSE}
 library(igraph)

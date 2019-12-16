@@ -50,12 +50,12 @@ A network is balanced if i.a., it can be partitioned into two vertex
 subsets, such that intra-group edges are all positive and inter-group
 edges are all negative. Determining this is easy, but measuring a
 *degree of balancedness* (i.e. how close is a network to be balanced?)
-is not. Tee package, so far, implements three methods to calculate
+is not. The package, so far, implements three methods to calculate
 balance scores. All are defined such that a value of one indicates
 perfect balance and zero perfect unbalance. Though for intermediate
 networks, results may vary significantly. Check [this
-paper](https://doi.org/10.1093/comnet/cnx044) by Samin Aref for more
-details.
+paper](https://doi.org/10.1093/comnet/cnx044) by Samin Aref (and his
+other work) for more details.
 
 ``` r
 library(igraph)
@@ -81,7 +81,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 1 1 2 2 3 2 2 2 3 3 2 2 3 3 1 1
+#>  [1] 2 2 1 1 3 1 1 1 3 3 1 1 3 3 2 2
 #> 
 #> $criterion
 #> [1] 2
