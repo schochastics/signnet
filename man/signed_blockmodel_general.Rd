@@ -20,8 +20,8 @@ numeric vector of block assignments and the associated criterion value
 Finds blocks of nodes with specified inter/intra group ties
 }
 \details{
-The function minimizes P(C)=\eqn{\alpha}P+(1-\eqn{\alpha})N,
-where P is the total number of negative ties within plus-sets and P be the total number of
+The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
+where N is the total number of negative ties within plus-sets and P be the total number of
 positive ties between plus-sets. This function implementes the generalized model. For the structural balance
 version see \link{signed_blockmodel}.
 }
