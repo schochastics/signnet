@@ -25,7 +25,7 @@
 #' balance_score(g, method = "walk")
 #' @export
 balance_score <- function(g,method = "triangles"){
-  match.arg(method,c("triangles","walk","frustration"))
+  method <- match.arg(method,c("triangles","walk","frustration"))
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
