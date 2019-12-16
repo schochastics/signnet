@@ -62,13 +62,13 @@ signed_blockmodel <- function(g,k,alpha = 0.5,annealing = FALSE){
 #' Doreian, Patrick and Andrej Mrvar (2009). Partitioning signed social networks. *Social Networks* 31(1) 1-11
 #' @examples
 #' library(igraph)
-#'  #create a signed network with three groups and different inter/intra group ties
+#' # create a signed network with three groups and different inter/intra group ties
 #' g1 <- g2 <- g3 <- graph.full(5)
-
+#'
 #' V(g1)$name <- as.character(1:5)
 #' V(g2)$name <- as.character(6:10)
 #' V(g3)$name <- as.character(11:15)
-
+#'
 #' g <- Reduce("%u%",list(g1,g2,g3))
 #' E(g)$sign <- 1
 #' E(g)$sign[1:10] <- -1
