@@ -37,7 +37,7 @@ balance_score <- function(g,method = "triangles"){
     stop("sign may only contain -1 and 1")
   }
   if(method == "triangles"){
-    tria_count <- signed_triangles(g)
+    tria_count <- count_signed_triangles(g)
     return(unname((tria_count["+++"] + tria_count["+--"])/sum(tria_count)))
   } else if(method == "walk"){
     A <- as_adj_signed(g,sparse = TRUE)
