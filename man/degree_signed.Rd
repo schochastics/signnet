@@ -5,7 +5,7 @@
 \title{Signed Degree}
 \usage{
 degree_signed(g, mode = c("all", "in", "out"), type = c("pos", "neg",
-  "ratio", "net"), ...)
+  "ratio", "net"))
 }
 \arguments{
 \item{g}{igraph object. Must have a "sign" edge attribute.}
@@ -14,8 +14,6 @@ degree_signed(g, mode = c("all", "in", "out"), type = c("pos", "neg",
 
 \item{type}{character string, “pos” or “neg” for counting positive or negative neighbors only,
 "ratio" for pos/(pos+neg), or "net" for pos-neg.}
-
-\item{...}{additional parameters.}
 }
 \value{
 centrality scores as numeric vector.

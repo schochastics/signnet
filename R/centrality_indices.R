@@ -21,7 +21,7 @@ pn_index <- function(g,mode=c("all","in","out")){
     stop('"all" only works with undirected networks.')
   }
 
-  A <- igraph::get.adjacency(g,type = "both",attr = "sign")
+  A <- as_adj_signed(g,sparse = TRUE)
   n <- nrow(A)
 
   P <- (A>0)+0
@@ -44,13 +44,12 @@ pn_index <- function(g,mode=c("all","in","out")){
 #' @param mode character string, “out” for out-degree, “in” for in-degree or “all” for undirected networks.
 #' @param type character string, “pos” or “neg” for counting positive or negative neighbors only,
 #' "ratio" for pos/(pos+neg), or "net" for pos-neg.
-#' @param ... additional parameters.
 #' @return centrality scores as numeric vector.
 #' @author David Schoch
 #' @importFrom Matrix t
 #' @export
 
-degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","ratio","net"),...){
+degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","ratio","net")){
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
@@ -63,7 +62,7 @@ degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","rati
   }
   type <- match.arg(type,c("pos","neg","ratio","net"))
 
-  A <- igraph::as_adj(g,type="both",attr = "sign",...)
+  A <- as_adj_signed(g)
   P <- (A>0)+0
   N <- (A<0)+0
 
