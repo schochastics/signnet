@@ -20,8 +20,8 @@ Counts the number of all possible signed triangles (+++),(++-), (+--) and (---)
 \examples{
 library(igraph)
 g <- graph.full(4)
-E(g)$sign <- c("P","N","A","A","P","N")
-count_complex_triangles(g)
+E(g)$type <- c("P","N","A","A","P","N")
+count_complex_triangles(g,attr = "type")
 }
 \seealso{
 \link{signed_triangles}
