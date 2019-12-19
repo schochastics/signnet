@@ -20,9 +20,10 @@ Implements several indices to assess the balancedness of a network.
 \details{
 The method parameter can be one of
 \describe{
-\item{triangles}{Fraction of triangles that are balanced triangles. Maximal (=1) if all triangles are balanced.}
-\item{walk}{\eqn{\sum exp(\lambda_i) / \sum exp(\mu_i)}} where \eqn{\lambda_i} are the eigenvalues of the
+\item{\emph{triangles}}{Fraction of balanced triangles. Maximal (=1) if all triangles are balanced.}
+\item{\emph{walk}}{\eqn{\sum exp(\lambda_i) / \sum exp(\mu_i)}} where \eqn{\lambda_i} are the eigenvalues of the
 signed adjacency matrix and \eqn{\mu_i} of the unsigned adjacency matrix. Maximal (=1) if all walks are balanced.
+\item{\emph{frustration}}{The frustration index assumes that the network can be partitioned into two groups, where intra group edges are positive and inter group edges are negative. The index is defined as the sum of intra group negative and inter group positive edges. Note that the problem is NP complete and only an upper bound is returned (based on simulated annealing). Exact methods can be found in the work of Aref. The index is normalized such that it is maximal (=1) if the network is balanced.}
 }
 }
 \examples{
@@ -35,6 +36,8 @@ balance_score(g, method = "walk")
 }
 \references{
 Estrada, E. (2019). Rethinking structural balance in signed social networks. \emph{Discrete Applied Mathematics}.
+
+Samin Aref, Mark C Wilson (2018). Measuring partial balance in signed networks. \emph{Journal of Complex Networks}, 6(4): 566–595, https://doi.org/10.1093/comnet/cnx044
 }
 \author{
 David Schoch

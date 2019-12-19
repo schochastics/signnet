@@ -20,18 +20,20 @@ numeric vector of block assignments and the associated criterion value
 Finds blocks of nodes with specified inter/intra group ties
 }
 \details{
-The function minimizes P(C)=\eqn{\alpha}P+(1-\eqn{\alpha})N,
-where P is the total number of negative ties within plus-sets and P be the total number of
+The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
+where N is the total number of negative ties within plus-sets and P be the total number of
 positive ties between plus-sets. This function implementes the generalized model. For the structural balance
 version see \link{signed_blockmodel}.
 }
 \examples{
 library(igraph)
- #create a signed network with three groups and different inter/intra group ties
+# create a signed network with three groups and different inter/intra group ties
 g1 <- g2 <- g3 <- graph.full(5)
+
 V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)
 V(g3)$name <- as.character(11:15)
+
 g <- Reduce("\%u\%",list(g1,g2,g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
