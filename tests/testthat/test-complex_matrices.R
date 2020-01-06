@@ -65,10 +65,11 @@ test_that("complex laplacian: complex laplacian norm works", {
 
 test_that("complex incidence: incidence works", {
   g <- igraph::graph.full(3,directed=FALSE)
-  igraph::E(g)$type <- "P"
+  igraph::E(g)$type <- c("P","N","A")
 
-  S <- as_incidence_complex(g,"type")
-  S_true <- structure(c(1+0i, -1+0i, 0+0i, 1+0i, 0+0i, -1+0i, 0+0i, 1+0i, -1+0i), .Dim = c(3L, 3L))
+  S <- round(as_incidence_complex(g,"type"),4)
+  S_true <- structure(c(1+0i, -1+0i, 0+0i, 0.7071+0.7071i, 0+0i, -0.7071+0.7071i,
+                        0+0i, 0.7769+0.3218i, -0.7769+0.3218i), .Dim = c(3L, 3L))
   expect_equal(S,S_true)
 })
 
@@ -138,4 +139,12 @@ test_that("as_signed_proj works",{
   el <- igraph::as_data_frame(p1,"edges")
   el_true <- structure(list(from = "1", to = "2", type = "A"), class = "data.frame", row.names = 1L)
   expect_equal(el, el_true)
+})
+
+test_that("complex walks works",{
+  g <- igraph::graph.full(3,directed=FALSE)
+  igraph::E(g)$type <- c("P","P","N")
+  W <- complex_walks(g,"type",3)
+  W_true <- structure(c(0+2i, 3+0i, 3+0i, 3+0i, 0+2i, 0+3i, 3+0i, 0+3i, 0+2i), .Dim = c(3L, 3L))
+  expect_equal(W, W_true)
 })

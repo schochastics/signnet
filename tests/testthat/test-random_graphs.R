@@ -18,3 +18,8 @@ test_that("signed islands works", {
   g <- sample_islands_signed(2,10,1,1)
   expect_equal(igraph::ecount(g),choose(10,2)*2+2)
 })
+
+test_that("circular signed works", {
+  g <- graph_circular_signed(10,pos=1,neg=0)
+  expect_equal(igraph::graph.density(g),1)
+})

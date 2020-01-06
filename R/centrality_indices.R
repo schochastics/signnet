@@ -10,6 +10,9 @@
 #' @export
 
 pn_index <- function(g,mode=c("all","in","out")){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
@@ -50,6 +53,9 @@ pn_index <- function(g,mode=c("all","in","out")){
 #' @export
 
 degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","ratio","net")){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
