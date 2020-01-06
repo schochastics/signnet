@@ -1,3 +1,5 @@
-# signnet 0.1.0.9000
+# signnet 0.5.0
+
+* initial release
 
 

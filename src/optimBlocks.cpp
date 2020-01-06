@@ -62,45 +62,45 @@ double critUpdate(arma::sp_mat A, int v, int from, int to,IntegerVector clu,doub
 
 }
 
-// [[Rcpp::export]]
-List optimBlocks(arma::sp_mat A,IntegerVector clu, int k, double alpha){
-  double crit = blockCriterion(A,clu,alpha);
-  int n = A.n_cols;
-  int maxiter = n*n;
-  int stuck=0;
-  int iter=0;
-  int v;
-  int newc;
-  double deltaC;
-
-  IntegerVector cluSizes(k);
-  for(int i=0; i<n;++i){
-    cluSizes[clu[i]]+=1;
-  }
-
-  while((stuck<2*n) & (iter<maxiter)){
-    v = floor(R::runif(0,1)*n);
-    newc = floor(R::runif(0,1)*k);
-    if(newc==clu[v]){
-      continue;
-    }
-    deltaC = critUpdate(A, v, clu[v], newc,clu,alpha);
-    if((deltaC<=0) & (cluSizes[clu[v]]!=1)){
-      cluSizes[clu[v]]-=1;
-      cluSizes[newc]+=1;
-      clu[v]=newc;
-      stuck=0;
-      crit+=deltaC;
-    } else{
-      stuck+=1;
-    }
-
-    iter+=1;
-  }
-
-  return Rcpp::List::create(Rcpp::Named("membership") = clu,
-                            Rcpp::Named("criterion")=crit);
-}
+// // [[Rcpp::export]]
+// List optimBlocks(arma::sp_mat A,IntegerVector clu, int k, double alpha){
+//   double crit = blockCriterion(A,clu,alpha);
+//   int n = A.n_cols;
+//   int maxiter = n*n;
+//   int stuck=0;
+//   int iter=0;
+//   int v;
+//   int newc;
+//   double deltaC;
+//
+//   IntegerVector cluSizes(k);
+//   for(int i=0; i<n;++i){
+//     cluSizes[clu[i]]+=1;
+//   }
+//
+//   while((stuck<2*n) & (iter<maxiter)){
+//     v = floor(R::runif(0,1)*n);
+//     newc = floor(R::runif(0,1)*k);
+//     if(newc==clu[v]){
+//       continue;
+//     }
+//     deltaC = critUpdate(A, v, clu[v], newc,clu,alpha);
+//     if((deltaC<=0) & (cluSizes[clu[v]]!=1)){
+//       cluSizes[clu[v]]-=1;
+//       cluSizes[newc]+=1;
+//       clu[v]=newc;
+//       stuck=0;
+//       crit+=deltaC;
+//     } else{
+//       stuck+=1;
+//     }
+//
+//     iter+=1;
+//   }
+//
+//   return Rcpp::List::create(Rcpp::Named("membership") = clu,
+//                             Rcpp::Named("criterion")=crit);
+// }
 
 
 // [[Rcpp::export]]

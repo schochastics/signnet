@@ -21,10 +21,6 @@ critUpdate <- function(A, v, from, to, clu, alpha) {
     .Call(`_signnet_critUpdate`, A, v, from, to, clu, alpha)
 }
 
-optimBlocks <- function(A, clu, k, alpha) {
-    .Call(`_signnet_optimBlocks`, A, clu, k, alpha)
-}
-
 optimBlocks1 <- function(A, clu, k, alpha) {
     .Call(`_signnet_optimBlocks1`, A, clu, k, alpha)
 }
