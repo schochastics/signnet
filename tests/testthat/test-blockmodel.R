@@ -4,6 +4,12 @@ test_that("blockmodeling works", {
   expect_equal(max(clu$membership),3)
 })
 
+test_that("blockmodeling no anneal works ", {
+  data("tribes")
+  clu <- signed_blockmodel(tribes,k = 3,alpha=0.5,annealing = FALSE)
+  expect_equal(max(clu$membership),3)
+})
+
 test_that("blockmodeling sign check works", {
   g <- igraph::graph.full(5)
   expect_error(signed_blockmodel(g))
