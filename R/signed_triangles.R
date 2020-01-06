@@ -109,7 +109,7 @@ signed_triangles <- function(g){
 #' library(igraph)
 #' g <- graph.full(4)
 #' E(g)$type <- c("P","N","A","A","P","N")
-#' count_complex_triangles(g,"type")
+#' count_complex_triangles(g,attr = "type")
 #' @export
 count_complex_triangles <- function(g,attr){
   if(missing(attr)){
