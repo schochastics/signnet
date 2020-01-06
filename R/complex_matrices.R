@@ -144,6 +144,11 @@ as_complex_edges <- function(g,attr = "type"){
     stop("network does not have a sign edge attribute")
   }
   esign <- igraph::get.edge.attribute(g,"sign")
+
+  if(!all(esign%in%c(-1,1))){
+    stop("sign may only contain -1 and 1")
+  }
+
   ecompl <- ifelse(esign==1,"P","N")
   g <- igraph::set_edge_attr(g,name = attr,value = ecompl)
   g
@@ -239,7 +244,7 @@ as_unsigned_2mode <- function(g,primary = TRUE){
     vert <- data.frame(name=c(new_nodes,mode1),
                        type=c(rep(TRUE,length(new_nodes)),rep(FALSE,length(mode1))))
     from[from%in%mode2] <- paste0(from[from%in%mode2],signs[from%in%mode2])
-    to[to%in%mode1] <- paste0(to[to%in%mode2],signs[to%in%mode2])
+    to[to%in%mode2] <- paste0(to[to%in%mode2],signs[to%in%mode2])
   }
 
   el <- data.frame(from,to)
