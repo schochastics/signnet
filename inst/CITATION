@@ -1,0 +1,12 @@
+citHeader("To cite signnet in publications use:")
+
+citEntry(entry = "Manual",
+  title        = "signnet: An R package to analyze signed networks",
+  author       = personList(as.person("David Schoch")),
+  year         = "2020",
+  url          = "https://github.com/schochastics/signnet",
+
+  textVersion  =
+  paste("David Schoch (2020).",
+        "signnet: An R package to analyze signed networks")
+)
