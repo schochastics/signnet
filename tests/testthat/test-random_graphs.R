@@ -16,7 +16,7 @@ test_that("signed islands n.inter error works", {
 
 test_that("signed islands works", {
   g <- sample_islands_signed(2,10,1,1)
-  expect_equal(igraph::ecount(g),choose(10,2)*2+2)
+  expect_lte(igraph::ecount(g),choose(10,2)*2+2)
 })
 
 test_that("circular signed works", {
