@@ -18,6 +18,28 @@ as_adj_signed <- function(g,sparse = FALSE){
   igraph::as_adj(g,type = "both",attr = "sign", sparse = sparse)
 }
 
+#' Convert a signed two-mode network to a signed matrix
+#'
+#' This function returns the incidence matrix for a signed two-mode network.
+#'
+#' @param g igraph object (bipartite). Must have a "sign" edge attribute.
+#' @param sparse 	Logical scalar, whether to return the result as a sparse matrix. The Matrix package is required for sparse matrices.
+#' @return signed incidence matrix
+#' @export
+
+as_incidence_signed <- function(g,sparse = FALSE){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if(!"sign"%in%igraph::edge_attr_names(g)){
+    stop("network does not have a sign edge attribute")
+  }
+  if(!"type"%in%igraph::vertex_attr_names(g)){
+    stop("network must have a type vertex attribute")
+  }
+  igraph::as_incidence_matrix(g,attr = "sign", sparse = sparse)
+}
+
 
 #' Convert a signed graph to a complex adjacency matrix
 #'

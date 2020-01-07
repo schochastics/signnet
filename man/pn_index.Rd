@@ -17,6 +17,21 @@ centrality scores as numeric vector.
 \description{
 centrality index for signed networks by Everett and Borgatti
 }
+\examples{
+library(igraph)
+A <- matrix(c(0,  1,  0,  1,  0,  0,  0, -1, -1,  0,
+              1,  0,  1, -1,  1, -1, -1,  0,  0,  0,
+              0,  1,  0,  1, -1,  0,  0,  0, -1,  0,
+              1, -1,  1,  0,  1, -1, -1,  0,  0,  0,
+              0,  1, -1,  1,  0,  1,  0, -1,  0, -1,
+              0, -1,  0, -1,  1,  0,  1,  0,  1, -1,
+              0, -1,  0, -1,  0,  1,  0,  1, -1,  1,
+             -1,  0,  0,  0, -1,  0,  1,  0,  1,  0,
+             -1,  0, -1,  0,  0,  1, -1,  1,  0,  1,
+              0,  0,  0,  0, -1, -1,  1,  0,  1,  0), 10, 10)
+g <- igraph::graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
+pn_index(g)
+}
 \references{
 Everett, M. and Borgatti, S. (2014) Networks containing negative ties. \emph{Social Networks} 38 111-120
 }

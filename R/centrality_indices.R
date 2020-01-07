@@ -7,6 +7,21 @@
 #' @references Everett, M. and Borgatti, S. (2014) Networks containing negative ties. *Social Networks* 38 111-120
 #' @author David Schoch
 #' @importFrom Matrix t
+#' @examples
+#' library(igraph)
+#' A <- matrix(c(0,  1,  0,  1,  0,  0,  0, -1, -1,  0,
+#'               1,  0,  1, -1,  1, -1, -1,  0,  0,  0,
+#'               0,  1,  0,  1, -1,  0,  0,  0, -1,  0,
+#'               1, -1,  1,  0,  1, -1, -1,  0,  0,  0,
+#'               0,  1, -1,  1,  0,  1,  0, -1,  0, -1,
+#'               0, -1,  0, -1,  1,  0,  1,  0,  1, -1,
+#'               0, -1,  0, -1,  0,  1,  0,  1, -1,  1,
+#'              -1,  0,  0,  0, -1,  0,  1,  0,  1,  0,
+#'              -1,  0, -1,  0,  0,  1, -1,  1,  0,  1,
+#'               0,  0,  0,  0, -1, -1,  1,  0,  1,  0), 10, 10)
+
+#'g <- igraph::graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
+#'pn_index(g)
 #' @export
 
 pn_index <- function(g,mode=c("all","in","out")){
@@ -95,6 +110,61 @@ degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","rati
                   ratio = Matrix::colSums(P)/(Matrix::colSums(P)+Matrix::colSums(N)),
                   net   = Matrix::colSums(P)-Matrix::colSums(N)
     )
-    res
+    return(res)
   }
+}
+
+#' @title Signed Eigenvector centrality
+#' @description Calcul
+#' @details Note that, with negative values, the adjacency matrix may not have a dominant eigenvalue.
+#' This means it is not clear which eigenvector should be used. In addition it is possible for the adjacency matrix to have repeated #'eigenvalues and hence multiple linearly independent eigenvectors. In this case certain centralities can be arbitrarily assigned. The function returns an error if this is the case.
+#' @param g igraph object. Must have a "sign" edge attribute.
+#' @param scale Logical scalar, whether to scale the result to have a maximum score of one. If no scaling is used then the result vector is the same as returned by `eigen()`.
+#' @return centrality scores as numeric vector.
+#' @references
+#' Bonacich, P. and Lloyd, P. (2004). "Calculating Status with Negative Relations." *Social Networks* 26 (4): 331–38.
+#'
+#' Everett, M. and Borgatti, S.P. (2014). "Networks Containing Negative Ties." *Social Networks* 38: 111–20.
+#'
+#' @author David Schoch
+#' @examples
+#' library(igraph)
+#' # example for network without dominant eigenvalue (from Everett&Borgatti)
+#'
+#' A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
+#'                1,  0,  1,  0, -1,  0,  0, -1,  0,
+#'                1,  1,  0,  0,  0, -1,  0,  0, -1,
+#'               -1,  0,  0,  0,  1,  1, -1,  0,  0,
+#'                0, -1,  0,  1,  0,  1,  0, -1,  0,
+#'                0,  0, -1,  1,  1,  0,  0,  0, -1,
+#'               -1,  0,  0, -1,  0,  0,  0,  1,  1,
+#'                0, -1,  0,  0, -1,  0,  1,  0,  1,
+#'                0,  0, -1,  0,  0, -1,  1,  1, 0), 9, 9)
+#' g <- graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
+#'
+#' # eigen_centrality_signed(g)
+#'
+#' @export
+
+eigen_centrality_signed <- function(g, scale = TRUE){
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if(!"sign"%in%igraph::edge_attr_names(g)){
+    stop("network does not have a sign edge attribute")
+  }
+  A <- as_adj_signed(g,sparse = TRUE)
+  sA <- eigen(A)
+  evals <- round(sA$values,8)
+  max_evals <- which(abs(evals)==max(abs(evals)))
+
+  if(length(max_evals)!=1){
+    stop("no dominant eigenvalue exists")
+  } else{
+    evcent <- sA$vectors[,max_evals]
+  }
+
+  if(scale) evcent <- evcent/max(evcent)
+
+  return(evcent)
 }

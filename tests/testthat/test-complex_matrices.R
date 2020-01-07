@@ -1,9 +1,33 @@
-test_that("complex: error not graph works", {
-  expect_error(as_adj_complex(g=5))
+test_that("incidence: error not graph works", {
+  expect_error(as_incidence_signed(g=5))
 })
 
-test_that("complex: error directed works", {
-  expect_error(as_adj_complex(igraph::graph.full(3,directed=TRUE)))
+test_that("incidence: error no sign works", {
+  expect_error(as_incidence_signed(igraph::graph.full(3,directed=FALSE)))
+})
+
+test_that("incidence: error no type works", {
+  g <- igraph::graph.full(3,directed=FALSE)
+  igraph::E(g)$sign <- 1
+  expect_error(as_incidence_signed(g))
+})
+
+test_that("signed incidence works", {
+  A_true <- matrix(c(1,1,1,-1,-1,-1,-1,
+                1,1,1,-1,-1,-1,-1,
+                1,1,1,-1,-1,-1,-1,
+                -1,-1,-1,1,1,1,1,
+                -1,-1,-1,1,1,1,1),5,7,byrow = T)
+  rownames(A_true) <- letters[1:5]
+  colnames(A_true) <- 1:7
+  g <- igraph::graph_from_incidence_matrix(A_true,weighted = "sign")
+  A <- as_incidence_signed(g)
+  expect_equal(A,A_true)
+})
+
+
+test_that("complex: error not graph works", {
+  expect_error(as_adj_complex(g=5))
 })
 
 test_that("complex: error directed works", {

@@ -23,7 +23,10 @@ Suggests:
     testthat (>= 2.1.0),
     covr,
     ggplot2,
-    ggraph
+    ggraph,
+    knitr,
+    rmarkdown
 LinkingTo: 
     Rcpp,
     RcppArmadillo
+VignetteBuilder: knitr

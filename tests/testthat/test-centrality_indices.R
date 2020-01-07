@@ -63,3 +63,44 @@ test_that("pn index works",{
   igraph::E(g)$sign <- 1
   expect_equal(pn_index(g,mode="in"),c(2, 2, 2, 2, 2))
 })
+
+test_that("evcent not graph error works",{
+  expect_error(eigen_centrality_signed(g = 5))
+})
+
+test_that("evcent no sign error works",{
+  g <- igraph::graph.full(5)
+  expect_error(eigen_centrality_signed(g))
+})
+
+test_that("evcent not dominant works",{
+  A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
+                 1,  0,  1,  0, -1,  0,  0, -1,  0,
+                 1,  1,  0,  0,  0, -1,  0,  0, -1,
+                -1,  0,  0,  0,  1,  1, -1,  0,  0,
+                 0, -1,  0,  1,  0,  1,  0, -1,  0,
+                 0,  0, -1,  1,  1,  0,  0,  0, -1,
+                -1,  0,  0, -1,  0,  0,  0,  1,  1,
+                 0, -1,  0,  0, -1,  0,  1,  0,  1,
+                 0,  0, -1,  0,  0, -1,  1,  1, 0), 9, 9)
+  g <- igraph::graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
+  expect_error(eigen_centrality_signed(g))
+})
+
+test_that("evcent works",{
+  g <- igraph::graph.full(5)
+  igraph::E(g)$sign <- 1
+  igraph::E(g)$sign[1] <- -1
+  ev <- round(eigen_centrality_signed(g, scale = TRUE),8)
+  ev_true <- c(0.68614066, 0.68614066, 1, 1, 1)
+  expect_equal(ev,ev_true)
+})
+
+test_that("evcent no scale works",{
+  g <- igraph::graph.full(5)
+  igraph::E(g)$sign <- 1
+  igraph::E(g)$sign[1] <- -1
+  ev <- round(eigen_centrality_signed(g, scale = FALSE),8)
+  ev_true <- c(0.34560347, 0.34560347, 0.50369186, 0.50369186, 0.50369186)
+  expect_equal(ev,ev_true)
+})
