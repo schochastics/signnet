@@ -10,6 +10,13 @@ test_that("walk balance index works", {
   expect_equal(balance_score(g,method="walk"), 1)
 })
 
+test_that("frustration balance index works", {
+  g <- igraph::graph.full(5)
+  igraph::E(g)$sign <- 1
+  expect_equal(balance_score(g,method="frustration"), 1)
+})
+
+
 test_that("directed check works", {
   g <- igraph::graph.full(5,directed = T)
   igraph::E(g)$sign <- 1
