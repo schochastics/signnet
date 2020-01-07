@@ -1,5 +1,9 @@
 # signnet 0.5.0
 
-* initial release
+* added vignettes and tests
+
+# signnet 0.1.0
+
+* initial version
 
 

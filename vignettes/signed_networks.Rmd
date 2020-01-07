@@ -1,0 +1,67 @@
+---
+title: "Signed Networks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Signed Networks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message=FALSE,
+  warning=FALSE
+)
+```
+
+This vignette describes signed networks and how they are implemented in the `signnet` package.
+
+```{r setup}
+library(igraph)
+library(signnet)
+```
+
+## What are signed networks?
+
+Traditional SNA usually deals with relations among entities (e.g. people) that are positive, including "friendship", "advice seeking", etc. Most network analytic tools are devised under this premise, be that centrality indices, clustering tools and so forth.
+But of course not all occurring relations are positive. People can be friends but also foes. 
+
+This gives rise to signed networks. These networks are usually composed of both, positive and negative, ties
+measured among a set of entities. Traditional network analytic tools are not applicable to such networks without
+adapting for negative ties.
+
+The `signnet` package brings together methods that have been developed to analyse signed networks. This includes
+
+* Structural balance ([vignette](structural_balance.html))
+* Blockmodeling ([vignette](blockmodeling.html))
+* Centrality ([vignette](centrality.html))
+* Signed two-mode networks ([vignette](signed_2mode.html))
+* Complex matrices ([vignette](complex_matrices.html))
+
+## Data structures for signed networks in `signnet`
+
+The foundation of `signnet` is provided by `igraph`. All functions in the package assume
+that an igraph object is a signed network if it has an edge attribute "sign" with values 1 (positive) or -1 (negative).
+
+```{r example}
+g <- graph.full(5,directed = FALSE,loops = FALSE)
+E(g)$sign <- 1
+g
+```
+
+All methods (should) throw an error if the sign attribute is missing or contains other values than -1 and 1.
+
+Matrices associated with a signed network follow the `igraph` naming scheme.
+The signed adjacency matrix can be obtained with `as_adj_signed()`.
+```{r signed_adj}
+data("tribes")
+as_adj_signed(tribes)[1:5,1:5]
+```
+The signed Laplacian matrix is obtained by `laplacian_matrix_signed()`.
+```{r signed_lap}
+laplacian_matrix_signed(tribes)[1:5,1:5]
+```
+
+

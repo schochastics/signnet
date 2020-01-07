@@ -1,0 +1,118 @@
+---
+title: "Signed Two-Mode Networks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Signed Two-Mode Networks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message=FALSE,
+  warning=FALSE
+)
+```
+
+This vignette describes methods implemented to analyze signed two-mode networks.
+
+```{r setup}
+library(igraph)
+library(signnet)
+```
+
+## Blockmodeling
+
+Most research for signed two-mode networks concerns the use of blockmodeling. 
+The package does not include any functionality for blockmodeling signed two-mode networks yet.
+This will be included in a future version.
+
+## Projections
+
+A common analytic tool for two-mode networks is to project the network onto on relevant mode.
+This is easily done using the adjacency matrix $A$. $AA^T$ yields the row projection and $A^TA$ the column
+projection. The resulting networks will thus be weighted. Several methods exist to turn a weighted projection
+into an unweighted network where only the most significant edges are included. A number of these methods are implemented in the [backbone](https://cran.r-project.org/package=backbone) package.
+
+Projecting signed networks, however, is not as straightforward. Consider the following simple example.
+
+```{r simple s2mode}
+el <- matrix(c(1,"a",1,"b",1,"c",2,"a",2,"b"),ncol = 2,byrow = TRUE)
+g <- graph_from_edgelist(el,directed = FALSE)
+E(g)$sign <- c(1,1,-1,1,-1)
+V(g)$type <- c(FALSE,TRUE,TRUE,TRUE,FALSE)
+```
+
+```{r graph, echo=FALSE,out.width = "50%",fig.align='center'}
+knitr::include_graphics("small_signed2mode.png")
+```
+
+If we use the regular projection rules we obtain
+```{r matmul}
+A <- as_incidence_signed(g)
+R <- A%*%t(A)
+C <- t(A)%*%A
+R
+C
+```
+
+The row projection suggests that there is no relation between 1 and 2, when in fact there is a negative path (via b) and
+a positive path (via a) between them. The same holds for the column projection and the nodes a and b.
+
+The paper of Schoch introduces two projection methods that circumvent this "nullification". The package implements the *duplication* approach since it plays well with existing binarization tools. The first stepp is to turn the signed two-mode network into an unsigned one.
+This is done by duplicating all vertices of the primary mode (i.e. the one to project on). For example, vertex a turns into two
+vertices "a-pos" and "a-neg". The vertices of the secondary mode connect to these new vertices depending on the sign of edge.
+For instance, 1 has a positive edge to a and thus 1 connects to a-pos.
+
+This can be done for the whole network with the function `as_unsigned_2mode()` by specifying the primary mode (either TRUE or FALSE).
+```{r duplicate}
+gu <- as_unsigned_2mode(g,primary = TRUE)
+gu
+```
+
+Now, any binarization toll (e.g. from the `backbone` package) can be applied since the network is an unsigned
+two-mode network. For illustration, we include all edges with a weight greater one (the "universal" approach) since it can be
+done without the `backbone` package.
+
+```{r binarize}
+pu <- bipartite_projection(gu,which = "true")
+pu <- delete_edge_attr(pu,"weight")
+pu
+```
+
+After binarization, the network is turned back to an unsigned network using a *contraction rule*. 
+The contraction rule works as follows. 
+
+If there is an edge (a-pos,b-pos) or (a-neg,b-neg) in the projection
+then there is a positive edge (a,b) in the signed projection. 
+
+If there is an edge (a-pos,b-neg) or (a-neg,b-pos) in the projection
+then there is a negative edge (a,b) in the signed projection.
+
+If there is an edge (a-pos,b-pos) **and** (a-neg,b-pos) (or, e.g., (a-neg,b-neg) **and** (a-pos,b-neg)) in the projection
+then there is an *ambivalent edge* (a,b) in the signed projection.
+
+This is done with the function `as_signed_proj()`.
+```{r contract}
+ps <- as_signed_proj(pu)
+as_data_frame(ps,"edges")
+```
+
+The projection of a signed two-mode network thus may contain three types of edges (positive ("P"), negative ("N") or ambivalent ("A")).
+The concept of ambivalent ties comes from work by Abelson & Rosenberg and Cartwright & Harary.
+
+More technical details can be found in the original paper by Schoch.
+Consult the vignette about [complex matrices](complex_matrices.html) to learn about analyzing signed networks with ambivalent ties.
+
+## References
+
+Doreian, Patrick, Paulette Lloyd, and Andrej Mrvar. 2013. "Partitioning Large Signed Two-Mode Networks: Problems and Prospects." Social Networks, Special Issue on Advances in Two-mode Social Networks, 35 (2): 178–203. 
+
+Schoch, David. 2020. "Projecting Signed Two-Mode Networks" Mathematical Sociology, forthcoming
+
+Abelson, Robert P., and Milton J. Rosenberg. 1958. “Symbolic Psycho-Logic: A Model of Attitudinal Cognition.” Behavioral Science 3 (1): 1–13. 
+
+Cartwright, Dorwin, and Frank Harary. 1970. “Ambivalence and Indifference in Generalizations of Structural Balance.” Behavioral Science 15 (6). 
+
