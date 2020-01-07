@@ -2,7 +2,7 @@
 title: "Structural Balance"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{structural balance}
+  %\VignetteIndexEntry{02 Structural Balance}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

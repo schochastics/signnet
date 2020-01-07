@@ -2,7 +2,7 @@
 title: "Blockmodeling"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{blockmodeling}
+  %\VignetteIndexEntry{03 Blockmodeling}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

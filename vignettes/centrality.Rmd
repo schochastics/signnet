@@ -2,7 +2,7 @@
 title: "Centrality"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Centrality}
+  %\VignetteIndexEntry{04 Centrality}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -2,7 +2,7 @@
 title: "Signed Networks"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Signed Networks}
+  %\VignetteIndexEntry{01 Signed Networks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -63,5 +63,16 @@ The signed Laplacian matrix is obtained by `laplacian_matrix_signed()`.
 ```{r signed_lap}
 laplacian_matrix_signed(tribes)[1:5,1:5]
 ```
+
+## Included datasets
+
+The package includes two well known datasets. 
+
+The "tribes" dataset is a signed social network of tribes of the Gahuku–Gama alliance structure of the Eastern Central Highlands of New Guinea. The network contains sixteen tribes connected by friendship ("rova") and enmity ("hina").
+
+The "cowList" dataset contains a list of 52 signed networks of inter-state relations over time (1946-1999). 
+Two countries are connected by a positive tie if they form an alliance or have a peace treaty. A negative tie
+exists between countries who are at war or in other kinds of conflicts. The dataset is derrived from the 
+[correlates of war](https://correlatesofwar.org/).
 
 

@@ -2,7 +2,7 @@
 title: "Signed Two-Mode Networks"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Signed Two-Mode Networks}
+  %\VignetteIndexEntry{05 Signed Two-Mode Networks}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

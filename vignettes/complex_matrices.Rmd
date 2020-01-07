@@ -2,7 +2,7 @@
 title: "Complex Matrices"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Complex Matrices}
+  %\VignetteIndexEntry{06 Complex Matrices}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
