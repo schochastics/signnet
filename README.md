@@ -5,10 +5,13 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/schochastics/signnet.svg?branch=master)](https://travis-ci.org/schochastics/signnet)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/signnet)](https://cran.r-project.org/package=signnet)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Downloads](https://cranlogs.r-pkg.org/badges/signnet)](https://CRAN.R-project.org/package=signnet)
 [![Codecov test
 coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)](https://codecov.io/gh/schochastics/signnet?branch=master)
 <!-- badges: end -->
@@ -81,7 +84,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 2 2 1 1 3 1 1 1 3 3 1 1 3 3 2 2
+#>  [1] 1 1 3 2 2 3 3 3 2 2 3 3 2 2 1 1
 #> 
 #> $criterion
 #> [1] 2
@@ -138,7 +141,7 @@ blockmat
 clu <- signed_blockmodel_general(g,blockmat,0.5)
 clu
 #> $membership
-#>  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
+#>  [1] 2 2 3 2 2 2 2 2 3 2 3 3 3 1 3
 #> 
 #> $criterion
 #> [1] 0
