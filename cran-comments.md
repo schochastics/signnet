@@ -1,3 +1,15 @@
+# Resubmission of initial submission
+
+>The Description field should not start with the package name, 'This package' or similar.
+
+fixed
+
+>Is there some reference about the method you can add in the Description
+>field in the form Authors (year) <doi:.....>?
+
+The package brings together several methods from many different authors. I would not want to single one out in the DESCRIPTION
+
+
 # Initial submission
 
 ## Test environments
