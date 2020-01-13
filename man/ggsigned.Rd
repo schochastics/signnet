@@ -4,8 +4,7 @@
 \alias{ggsigned}
 \title{Plot a signed or complex network}
 \usage{
-ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL,
-  weights = FALSE)
+ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL, weights = FALSE)
 }
 \arguments{
 \item{g}{igraph object. Must have a "sign" edge attribute or an attribute containing "P", "N", "A"}
@@ -25,7 +24,7 @@ ggplot2 object
 Plot a signed or complex network
 }
 \details{
-This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function isthus mostly meant to give a quick overview of the network
+This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function is thus mostly meant to give a quick overview of the network.
 }
 \author{
 David Schoch

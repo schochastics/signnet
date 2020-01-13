@@ -8,7 +8,7 @@
 #' @author David Schoch
 #' @examples
 #' library(igraph)
-#' g <- sample_islands_signed(3, 10, 0.5, 1)
+#' sample_islands_signed(3, 10, 0.5, 1)
 #' @export
 sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter){
   if(islands.n<=1){
@@ -56,7 +56,7 @@ sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter)
 #' @author David Schoch
 #' @examples
 #' library(igraph)
-#' g <- graph_circular_signed(n = 50)
+#' graph_circular_signed(n = 50)
 #' @export
 #
 graph_circular_signed <- function(n,r = 1,pos = 0.1,neg = 0.1){

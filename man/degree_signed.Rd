@@ -4,8 +4,11 @@
 \alias{degree_signed}
 \title{Signed Degree}
 \usage{
-degree_signed(g, mode = c("all", "in", "out"), type = c("pos", "neg",
-  "ratio", "net"))
+degree_signed(
+  g,
+  mode = c("all", "in", "out"),
+  type = c("pos", "neg", "ratio", "net")
+)
 }
 \arguments{
 \item{g}{igraph object. Must have a "sign" edge attribute.}

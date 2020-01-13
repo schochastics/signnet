@@ -23,7 +23,7 @@ circular graph with positive and negative edges.
 }
 \examples{
 library(igraph)
-g <- graph_circular_signed(n = 50)
+graph_circular_signed(n = 50)
 }
 \author{
 David Schoch

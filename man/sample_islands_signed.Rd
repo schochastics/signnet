@@ -23,7 +23,7 @@ Create a number of Erdos-Renyi random graphs with identical parameters, and conn
 }
 \examples{
 library(igraph)
-g <- sample_islands_signed(3, 10, 0.5, 1)
+sample_islands_signed(3, 10, 0.5, 1)
 }
 \author{
 David Schoch

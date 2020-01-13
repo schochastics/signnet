@@ -65,7 +65,7 @@ ggblock <- function(g,blocks = NULL,cols = NULL,show_blocks = FALSE,show_labels 
 #' @param attr character string. edge attribute that containing "P", "N", "A" if type="complex"
 #' @param edge_cols colors used for negative and positive (and ambivalent) ties
 #' @param weights logical. If TRUE, weights are computed based on sign. Defaults to FALSE
-#' @details This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function isthus mostly meant to give a quick overview of the network
+#' @details This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function is thus mostly meant to give a quick overview of the network.
 #' @return ggplot2 object
 #' @author David Schoch
 #' @export

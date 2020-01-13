@@ -1,4 +1,14 @@
-# Resubmission of initial submission
+# Resubmission 2 of initial submission 
+
+> Shouldn't the year in your license file be updated?
+
+fixed
+
+> Some code lines in examples are commented out.
+
+Example in `eigen_centrality_signed()` was wrapped in `\dontrun{}` (should not be called by users)
+
+# Resubmission 1 of initial submission
 
 >The Description field should not start with the package name, 'This package' or similar.
 

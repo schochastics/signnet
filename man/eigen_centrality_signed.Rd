@@ -15,16 +15,16 @@ eigen_centrality_signed(g, scale = TRUE)
 centrality scores as numeric vector.
 }
 \description{
-Calcul
+returns the eigenvector associated with the dominant eigenvalue from the adjacency matrix.
 }
 \details{
 Note that, with negative values, the adjacency matrix may not have a dominant eigenvalue.
-This means it is not clear which eigenvector should be used. In addition it is possible for the adjacency matrix to have repeated #'eigenvalues and hence multiple linearly independent eigenvectors. In this case certain centralities can be arbitrarily assigned. The function returns an error if this is the case.
+This means it is not clear which eigenvector should be used. In addition it is possible for the adjacency matrix to have repeated eigenvalues and hence multiple linearly independent eigenvectors. In this case certain centralities can be arbitrarily assigned. The function returns an error if this is the case.
 }
 \examples{
 library(igraph)
 # example for network without dominant eigenvalue (from Everett&Borgatti)
-
+\dontrun{
 A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
                1,  0,  1,  0, -1,  0,  0, -1,  0,
                1,  1,  0,  0,  0, -1,  0,  0, -1,
@@ -34,10 +34,11 @@ A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
               -1,  0,  0, -1,  0,  0,  0,  1,  1,
                0, -1,  0,  0, -1,  0,  1,  0,  1,
                0,  0, -1,  0,  0, -1,  1,  1, 0), 9, 9)
+
 g <- graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
 
-# eigen_centrality_signed(g)
-
+eigen_centrality_signed(g)
+}
 }
 \references{
 Bonacich, P. and Lloyd, P. (2004). "Calculating Status with Negative Relations." \emph{Social Networks} 26 (4): 331–38.

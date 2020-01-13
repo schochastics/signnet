@@ -4,8 +4,13 @@
 \alias{ggblock}
 \title{Plot Blockmodel matrix}
 \usage{
-ggblock(g, blocks = NULL, cols = NULL, show_blocks = FALSE,
-  show_labels = FALSE)
+ggblock(
+  g,
+  blocks = NULL,
+  cols = NULL,
+  show_blocks = FALSE,
+  show_labels = FALSE
+)
 }
 \arguments{
 \item{g}{igraph object. Must have a "sign" edge attribute.}
