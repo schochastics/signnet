@@ -129,22 +129,8 @@ degree_signed <- function(g,mode=c("all","in","out"), type = c("pos","neg","rati
 #' @author David Schoch
 #' @examples
 #' library(igraph)
-#' # example for network without dominant eigenvalue (from Everett&Borgatti)
-#' \dontrun{
-#' A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
-#'                1,  0,  1,  0, -1,  0,  0, -1,  0,
-#'                1,  1,  0,  0,  0, -1,  0,  0, -1,
-#'               -1,  0,  0,  0,  1,  1, -1,  0,  0,
-#'                0, -1,  0,  1,  0,  1,  0, -1,  0,
-#'                0,  0, -1,  1,  1,  0,  0,  0, -1,
-#'               -1,  0,  0, -1,  0,  0,  0,  1,  1,
-#'                0, -1,  0,  0, -1,  0,  1,  0,  1,
-#'                0,  0, -1,  0,  0, -1,  1,  1, 0), 9, 9)
-#'
-#' g <- graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
-#'
-#' eigen_centrality_signed(g)
-#' }
+#' data("tribes")
+#' eigen_centrality_signed(tribes)
 #' @export
 
 eigen_centrality_signed <- function(g, scale = TRUE){

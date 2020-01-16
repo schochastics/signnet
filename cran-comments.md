@@ -1,3 +1,14 @@
+# Resubmission 3 of initial submission
+
+> \dontrun{} should only be used if the example really cannot be executed
+
+I explained why I wrapped the call in dontrun. But I switched to an example now which doesn't require dontrun.
+
+> Please add references describing the methods in your package also to the 
+description field of your DESCRIPTION
+
+I added a paper for each topic area.
+
 # Resubmission 2 of initial submission 
 
 > Shouldn't the year in your license file be updated?

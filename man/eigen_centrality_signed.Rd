@@ -23,22 +23,8 @@ This means it is not clear which eigenvector should be used. In addition it is p
 }
 \examples{
 library(igraph)
-# example for network without dominant eigenvalue (from Everett&Borgatti)
-\dontrun{
-A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
-               1,  0,  1,  0, -1,  0,  0, -1,  0,
-               1,  1,  0,  0,  0, -1,  0,  0, -1,
-              -1,  0,  0,  0,  1,  1, -1,  0,  0,
-               0, -1,  0,  1,  0,  1,  0, -1,  0,
-               0,  0, -1,  1,  1,  0,  0,  0, -1,
-              -1,  0,  0, -1,  0,  0,  0,  1,  1,
-               0, -1,  0,  0, -1,  0,  1,  0,  1,
-               0,  0, -1,  0,  0, -1,  1,  1, 0), 9, 9)
-
-g <- graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
-
-eigen_centrality_signed(g)
-}
+data("tribes")
+eigen_centrality_signed(tribes)
 }
 \references{
 Bonacich, P. and Lloyd, P. (2004). "Calculating Status with Negative Relations." \emph{Social Networks} 26 (4): 331–38.
