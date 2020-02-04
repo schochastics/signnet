@@ -4,7 +4,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 double arcDist(NumericVector x,NumericVector y, double r) {
-  double pi = acos(-1);
+  static const double pi = 3.14159265;
   double c = sqrt((x[0]-y[0])*(x[0]-y[0])+(x[1]-y[1])*(x[1]-y[1]));
   double theta = acos((2*r*r-c*c)/(2*r*r));
   return 2*pi*r*theta/(2*pi);

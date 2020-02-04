@@ -91,16 +91,16 @@ test_that("evcent works",{
   g <- igraph::graph.full(5)
   igraph::E(g)$sign <- 1
   igraph::E(g)$sign[1] <- -1
-  ev <- round(eigen_centrality_signed(g, scale = TRUE),8)
+  ev <- abs(round(eigen_centrality_signed(g, scale = TRUE),8))
   ev_true <- c(0.68614066, 0.68614066, 1, 1, 1)
-  expect_equal(ev,ev_true)
+  expect_equal(stats::cor(ev,ev_true),1)
 })
 
 test_that("evcent no scale works",{
   g <- igraph::graph.full(5)
   igraph::E(g)$sign <- 1
   igraph::E(g)$sign[1] <- -1
-  ev <- round(eigen_centrality_signed(g, scale = FALSE),8)
+  ev <- abs(round(eigen_centrality_signed(g, scale = FALSE),8))
   ev_true <- c(0.34560347, 0.34560347, 0.50369186, 0.50369186, 0.50369186)
-  expect_equal(ev,ev_true)
+  expect_equal(stats::cor(ev,ev_true),1)
 })

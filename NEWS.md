@@ -1,3 +1,8 @@
+# signnet 0.5.1
+
+* fixed C++ issue for circular arc graphs
+* fixed failing eigen centrality test
+
 # signnet 0.5.0
 
 * added vignettes and tests

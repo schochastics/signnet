@@ -1,6 +1,6 @@
 Package: signnet
 Title: Methods to Analyse Signed Networks
-Version: 0.5.0
+Version: 0.5.1
 Authors@R: 
     person(given = "David",
            family = "Schoch",

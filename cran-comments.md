@@ -1,3 +1,8 @@
+# Update from 0.5.0 to 0.5.1
+
+This update fixes an issue on solaris (as requested by B. Ripley) :  
+`circArc.cpp:7:22: error: call of overloaded ‘acos(int)’ is ambiguous`
+
 # Resubmission 3 of initial submission
 
 > \dontrun{} should only be used if the example really cannot be executed
