@@ -26,15 +26,15 @@ The package provides methods to analyse signed networks (i.e. networks with both
 
 ## Installation
 
-<!-- You can install the released version of signnet from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version of signnet from CRAN with:
 
-<!-- ``` r -->
-<!-- install.packages("signnet") -->
-<!-- ``` -->
+```{r inst, eval=FALSE}
+install.packages("signnet")
+```
 
-You can install the development version from Github with:
+The development version from is available with:
 
-``` r
+``` {r inst2, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("schochastics/signnet")
 ```

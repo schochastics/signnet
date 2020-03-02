@@ -1,0 +1,35 @@
+title: signnet
+destination: ../pkgdown_sites/signnet
+
+template:
+  params:
+    bootswatch: simplex
+
+navbar:
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: Tutorials
+      menu:
+      -  text: Signed Networks
+         href: articles/signed_networks.html
+      -  text: Structural Balance
+         href: articles/structural_balance.html
+      -  text: Blockmodeling
+         href: articles/blockmodeling.html
+      -  text: Centrality
+         href: articles/centrality.html
+      -  text: Signed Two-Mode Networks
+         href: articles/signed_2mode.html
+      -  text: Complex Matrices
+         href: articles/complex_matrices.html
+  right:
+      - icon: fa-newspaper-o
+        text: "news"
+        href: news/index.html
+      - icon: fa-file-code-o
+        text: "functions"
+        href: reference/index.html
+      - icon: fa-github fa-lg
+        text: "github"
+        href: https://github.com/schochastics/netrankr

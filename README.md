@@ -17,20 +17,17 @@ coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.s
 <!-- badges: end -->
 
 The package provides methods to analyse signed networks (i.e. networks
-with both positive and negative
-ties).
+with both positive and negative ties).
 
 ## Installation
 
-<!-- You can install the released version of signnet from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version of signnet from CRAN with:
 
-<!-- ``` r -->
+``` r
+install.packages("signnet")
+```
 
-<!-- install.packages("signnet") -->
-
-<!-- ``` -->
-
-You can install the development version from Github with:
+The development version from is available with:
 
 ``` r
 # install.packages("devtools")
@@ -84,7 +81,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 1 1 3 2 2 3 3 3 2 2 3 3 2 2 1 1
+#>  [1] 1 1 2 2 3 2 2 2 3 3 2 2 3 3 1 1
 #> 
 #> $criterion
 #> [1] 2
@@ -112,8 +109,7 @@ blockmodeling*. This method removes the restriction of positve
 (negative) inter (intra) group edges. Instead, a blockmatrix is passed
 to the function with the desired block structure. The example below
 illustrates the technique with a network composed of three groups with
-differing inter/intra group edge
-patterns.
+differing inter/intra group edge patterns.
 
 ``` r
 # create a signed network with three groups and different inter/intra group ties
@@ -141,7 +137,7 @@ blockmat
 clu <- signed_blockmodel_general(g,blockmat,0.5)
 clu
 #> $membership
-#>  [1] 2 2 3 2 2 2 2 2 3 2 3 3 3 1 3
+#>  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
 #> 
 #> $criterion
 #> [1] 0
