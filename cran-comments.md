@@ -1,3 +1,8 @@
+# Update from 0.5.1 to 0.5.2
+
+This update fixes an issue with stringsAsFactors in `as_signed_proj()` that occurs in rdevel (as requested by K. Hornik).
+
+
 # Update from 0.5.0 to 0.5.1
 
 This update fixes an issue on solaris (as requested by B. Ripley) :  
