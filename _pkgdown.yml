@@ -32,4 +32,4 @@ navbar:
         href: reference/index.html
       - icon: fa-github fa-lg
         text: "github"
-        href: https://github.com/schochastics/netrankr
+        href: https://github.com/schochastics/signnet
