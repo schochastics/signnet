@@ -71,7 +71,7 @@ laplacian_matrix_complex(ps, attr = "type")
 ```
 
 
-# Functions supporting ambivalent ties
+## Functions supporting ambivalent ties
 
 So far, only the triangle routines support networks with ambivalent ties.
 
