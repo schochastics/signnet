@@ -308,7 +308,7 @@ as_signed_proj <- function(g){
 
   el <- el[,c("from","to","type")]
 
-  el_new <- data.frame(t(apply(el[,1:2],1,sort)))
+  el_new <- data.frame(t(apply(el[,1:2],1,sort)),stringsAsFactors = TRUE)
   el_new[["type"]] <- el[["type"]]
   el_new <- el_new[!duplicated(el_new),]
   names(el_new)[1:2] <- c("from","to")

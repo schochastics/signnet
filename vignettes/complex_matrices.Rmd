@@ -43,7 +43,7 @@ pu <- delete_edge_attr(pu,"weight")
 
 # vertex contraction
 ps <- as_signed_proj(pu)
-as_data_frame(ps,"edges")
+igraph::as_data_frame(ps,"edges")
 ```
 
 Ambivalent ties add a new level of complexity for analytic tasks (especially involving matrices) since it is not clear which
