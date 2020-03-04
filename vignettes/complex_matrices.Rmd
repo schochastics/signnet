@@ -73,10 +73,15 @@ structure(c(0+0i, 0.5-0.5i, 0-1i, 0.5+0.5i, 0+0i, 0-1i, 0+1i,
 
 
 When there is a complex adjacency matrix, then there is also a complex Laplacian matrix. This matrix can be obtained with `laplacian_matrix_complex()`.
-```{r complex_lapl}
+```{r complex_lapl, eval=FALSE}
 laplacian_matrix_complex(ps, attr = "type")
 ```
 
+```{r sneaky_show1,echo=FALSE}
+structure(c(1.70710678118655+0i, -0.5+0.5i, 0+1i, -0.5-0.5i, 
+1.70710678118655+0i, 0+1i, 0-1i, 0-1i, 2+0i), .Dim = c(3L, 3L
+), .Dimnames = list(c("a", "b", "c"), c("a", "b", "c")))
+```
 
 ## Functions supporting ambivalent ties
 
