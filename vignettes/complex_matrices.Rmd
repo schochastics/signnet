@@ -61,9 +61,16 @@ Tuples like these can also be written as a complex number, i.e. $(1,0)$ turns in
 Complex numbers may be scary to some, but they have a kind of intuitive interpretation here. The real part is the positive value of an edge and the imaginary part is the negative part. So we could actually also have something like $0.3+0.7i$ which is an edge that is 30% positive and 70% negative. For now, though, the three values from above suffice.
 
 The function `as_adj_complex()` can be used to return the complex adjacency matrix of a signed network with ambivalent ties.
-```{r complex_adj}
+```{r complex_adj,eval=FALSE}
 as_adj_complex(ps,attr = "type")
 ```
+
+```{r sneaky_show,echo=FALSE}
+structure(c(0+0i, 0.5-0.5i, 0-1i, 0.5+0.5i, 0+0i, 0-1i, 0+1i, 
+0+1i, 0+0i), .Dim = c(3L, 3L), .Dimnames = list(c("a", "b", "c"
+), c("a", "b", "c")))
+```
+
 
 When there is a complex adjacency matrix, then there is also a complex Laplacian matrix. This matrix can be obtained with `laplacian_matrix_complex()`.
 ```{r complex_lapl}
