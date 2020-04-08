@@ -188,21 +188,24 @@ as_complex_edges <- function(g,attr = "type"){
 #' complex_walks(g,attr="type",k = 3)
 #' @export
 complex_walks <- function(g,attr,k){
-  # if (!igraph::is_igraph(g)) {
-  #   stop("Not a graph object")
-  # }
-  # if(missing(attr)){
-  #   stop('argument "attr" is missing, with no default')
-  # }
-  # if(!attr%in%igraph::edge_attr_names(g)){
-  #   stop(paste0('There is no edge attribute ','"',attr,'"'))
-  # }
-  # eattr <- igraph::get.edge.attribute(g,attr)
-  # if(!all(eattr%in%c("P","N","A"))){
-  #   stop('attr may only contain "P","N" and "A" ')
-  # }
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if(missing(attr)){
+    stop('argument "attr" is missing, with no default')
+  }
+  if(!attr%in%igraph::edge_attr_names(g)){
+    stop(paste0('There is no edge attribute ','"',attr,'"'))
+  }
+  if(k==0){
+   return(diag(1+0i,igraph::vcount(g)))
+  }
   A <- as_adj_complex(g,attr)
+  if(k==1){
+    return(A)
+  }
   B <- A
+
   for(i in 2:k){
     B <- cxmatmul(B,A)
   }
