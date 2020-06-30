@@ -4,7 +4,9 @@
 \name{cowList}
 \alias{cowList}
 \title{Signed networks from Correlates of War}
-\format{List of igraph objects}
+\format{
+List of igraph objects
+}
 \source{
 http://mrvar.fdv.uni-lj.si/pajek/SVG/CoW/default.htm
 }

@@ -1,3 +1,7 @@
+# Update from 0.5.2 to 0.5.3
+
+Some bugfixes without user facing changes
+
 # Update from 0.5.1 to 0.5.2
 
 This update fixes an issue with stringsAsFactors in `as_signed_proj()` that occurs in rdevel (as requested by K. Hornik).

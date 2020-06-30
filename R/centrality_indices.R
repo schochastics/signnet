@@ -49,10 +49,10 @@ pn_index <- function(g,mode=c("all","in","out")){
 
   res <- switch(mode,
                 all  = solve(I-1/(2*n-2)*A),
-                `in` = solve(I-1/(4*(n-1)^2)*t(A)%*%A)%*%solve(I+1/(2*n-2)*t(A)),
-                out  = solve(I-1/(4*(n-1)^2)*A%*%t(A))%*%solve(I+1/(2*n-2)*A)
-                )
-  return(rowSums(res))
+                `in` = solve(I-1/(4*(n-1)^2)*Matrix::t(A)%*%A)%*%(I+1/(2*n-2)*Matrix::t(A)),
+                out  = solve(I-1/(4*(n-1)^2)*A%*%Matrix::t(A))%*%(I+1/(2*n-2)*A)
+  )
+  return(Matrix::rowSums(res))
 }
 
 #' @title Signed Degree

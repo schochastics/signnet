@@ -1,6 +1,6 @@
 Package: signnet
 Title: Methods to Analyse Signed Networks
-Version: 0.5.3.9000
+Version: 0.5.3
 Authors@R: 
     person(given = "David",
            family = "Schoch",
@@ -18,7 +18,7 @@ Imports:
     Rcpp,
     Matrix
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests: 
     testthat (>= 2.1.0),
     covr,

@@ -4,7 +4,9 @@
 \name{tribes}
 \alias{tribes}
 \title{Signed network of New Guinean highland tribes}
-\format{An igraph object}
+\format{
+An igraph object
+}
 \source{
 http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/gama.dat
 }

@@ -1,6 +1,7 @@
-# signnet 0.5.3.9000
+# signnet 0.5.3
 
 * fixed issue in `complex_walks()`
+* fixed faulty calculation of directed `pn_index()`
 
 # signnet 0.5.2
 
