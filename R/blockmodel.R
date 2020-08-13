@@ -37,13 +37,21 @@ signed_blockmodel <- function(g,k,alpha = 0.5,annealing = FALSE){
     stop('argument "k" is missing, with no default')
   }
   A <- igraph::get.adjacency(g,"both","sign",sparse = TRUE)
-  init_cluster <- sample(0:(k-1),nrow(A),replace = TRUE)
   if(!annealing){
+    init_cluster <- sample(0:(k-1),nrow(A),replace = TRUE)
     res <- optimBlocks1(A,init_cluster,k,alpha)
+    res$membership <- res$membership+1
   } else{
-    res <- optimBlocksSim(A,init_cluster,k,alpha)
+    init_cluster <- sample(1:k,nrow(A),replace = TRUE)
+    tmp <- stats::optim(par = init_cluster, fn = blockCriterion1, A = A,alpha=alpha,k=k,gr = genclu,method = "SANN",
+                control = list(maxit = 50000, temp = 100, tmax = 500, trace = FALSE,
+                REPORT = 5))
+    tmp <- stats::optim(par = tmp$par, fn = blockCriterion1, A = A,alpha=alpha,k=k,gr = genclu,method = "SANN",
+                 control = list(maxit = 5000, temp = 5, tmax = 500, trace = FALSE,
+                                REPORT = 5))
+
+    res <- list(membership = tmp$par,criterion = tmp$value)
   }
-  res$membership <- res$membership+1
   res
 }
 
@@ -100,4 +108,14 @@ signed_blockmodel_general <- function(g,blockmat,alpha = 0.5){
   res <- optimBlocksSimS(A,init_cluster,blockmat,alpha)
   res$membership <- res$membership+1
   res
+}
+
+
+genclu <- function(blocks,A,alpha,k){
+  v <- sample(1:length(blocks),1)
+  clu <- 1:k
+  clu <- clu[-blocks[v]]
+  knew <- sample(clu,1)
+  blocks[v] <- knew
+  blocks
 }

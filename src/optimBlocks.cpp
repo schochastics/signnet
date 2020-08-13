@@ -62,47 +62,6 @@ double critUpdate(arma::sp_mat A, int v, int from, int to,IntegerVector clu,doub
 
 }
 
-// // [[Rcpp::export]]
-// List optimBlocks(arma::sp_mat A,IntegerVector clu, int k, double alpha){
-//   double crit = blockCriterion(A,clu,alpha);
-//   int n = A.n_cols;
-//   int maxiter = n*n;
-//   int stuck=0;
-//   int iter=0;
-//   int v;
-//   int newc;
-//   double deltaC;
-//
-//   IntegerVector cluSizes(k);
-//   for(int i=0; i<n;++i){
-//     cluSizes[clu[i]]+=1;
-//   }
-//
-//   while((stuck<2*n) & (iter<maxiter)){
-//     v = floor(R::runif(0,1)*n);
-//     newc = floor(R::runif(0,1)*k);
-//     if(newc==clu[v]){
-//       continue;
-//     }
-//     deltaC = critUpdate(A, v, clu[v], newc,clu,alpha);
-//     if((deltaC<=0) & (cluSizes[clu[v]]!=1)){
-//       cluSizes[clu[v]]-=1;
-//       cluSizes[newc]+=1;
-//       clu[v]=newc;
-//       stuck=0;
-//       crit+=deltaC;
-//     } else{
-//       stuck+=1;
-//     }
-//
-//     iter+=1;
-//   }
-//
-//   return Rcpp::List::create(Rcpp::Named("membership") = clu,
-//                             Rcpp::Named("criterion")=crit);
-// }
-
-
 // [[Rcpp::export]]
 List optimBlocks1(arma::sp_mat A,IntegerVector clu, int k, double alpha){
 
@@ -147,60 +106,18 @@ List optimBlocks1(arma::sp_mat A,IntegerVector clu, int k, double alpha){
                             Rcpp::Named("criterion")=crit);
 }
 
-
 // [[Rcpp::export]]
-List optimBlocksSim(arma::sp_mat A,IntegerVector clu, int k, double alpha){
+double blockCriterion1(IntegerVector clu,arma::sp_mat A,double alpha,int k){
+  double P = 0;
+  double N = 0;
 
-  double crit = blockCriterion(A,clu,alpha);
-  double crit_min = crit;
-  int n = A.n_cols;
-  int v;
-  int newc;
-  double deltaC;
-  int max_iter = n*n;
-  double temp = 100;
-  int stuck = 0;
-  IntegerVector clu_min(n);
-
-  // IntegerVector cluSizes(k);
-  // for(int i=0; i<n;++i){
-  //   cluSizes[clu[i]]+=1;
-  // }
-
-  while(temp>0.01){
-    for(int q=0;q<max_iter;++q){
-      v = floor(R::runif(0,1)*n);
-      newc = floor(R::runif(0,1)*k);
-      if(newc==clu[v]){
-        continue;
-      }
-      deltaC = critUpdate(A, v, clu[v], newc,clu,alpha);
-      if(deltaC<0){
-        // cluSizes[clu[v]]-=1;
-        // cluSizes[newc]+=1;
-        clu[v]=newc;
-        stuck=0;
-        crit+=deltaC;
-        if(crit<crit_min){
-          crit_min = crit;
-          clu_min = clu;
-        }
-      } else{
-        double p = exp(-(crit+deltaC-crit_min)/temp);
-        if(R::runif(0,1)<=p){
-          crit = crit+deltaC;
-          clu[v]=newc;
-          stuck+= 1;
-        } else {
-          stuck+=1;
-        }
-      }
+  for (arma::sp_mat::const_iterator i = A.begin(); i != A.end(); ++i) {
+    if((clu[i.row()]==clu[i.col()]) & (*i==-1)){
+      N+=1;
     }
-    if(stuck>=n*n){
-      break;
+    if((clu[i.row()]!=clu[i.col()]) & (*i==1)){
+      P+=1;
     }
-    temp = 0.99*temp;
   }
-  return Rcpp::List::create(Rcpp::Named("membership") = clu_min,
-                            Rcpp::Named("criterion") = crit_min);
+  return alpha*N+(1-alpha)*P;
 }

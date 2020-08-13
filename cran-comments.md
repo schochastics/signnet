@@ -1,3 +1,7 @@
+# Update from 0.5.3 to 0.6.0
+
+added a new dataset and sped up some algorithms. No user facing changes.
+
 # Update from 0.5.2 to 0.5.3
 
 Some bugfixes without user facing changes

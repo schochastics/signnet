@@ -86,17 +86,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// optimBlocksSim
-List optimBlocksSim(arma::sp_mat A, IntegerVector clu, int k, double alpha);
-RcppExport SEXP _signnet_optimBlocksSim(SEXP ASEXP, SEXP cluSEXP, SEXP kSEXP, SEXP alphaSEXP) {
+// blockCriterion1
+double blockCriterion1(IntegerVector clu, arma::sp_mat A, double alpha, int k);
+RcppExport SEXP _signnet_blockCriterion1(SEXP cluSEXP, SEXP ASEXP, SEXP alphaSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(optimBlocksSim(A, clu, k, alpha));
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(blockCriterion1(clu, A, alpha, k));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -153,7 +153,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_signnet_blockCriterion", (DL_FUNC) &_signnet_blockCriterion, 3},
     {"_signnet_critUpdate", (DL_FUNC) &_signnet_critUpdate, 6},
     {"_signnet_optimBlocks1", (DL_FUNC) &_signnet_optimBlocks1, 4},
-    {"_signnet_optimBlocksSim", (DL_FUNC) &_signnet_optimBlocksSim, 4},
+    {"_signnet_blockCriterion1", (DL_FUNC) &_signnet_blockCriterion1, 4},
     {"_signnet_blockCriterionS", (DL_FUNC) &_signnet_blockCriterionS, 4},
     {"_signnet_critUpdateS", (DL_FUNC) &_signnet_critUpdateS, 7},
     {"_signnet_optimBlocksSimS", (DL_FUNC) &_signnet_optimBlocksSimS, 4},
