@@ -1,3 +1,7 @@
+# signnet 0.5.4
+
+* added `avatar` dataset
+
 # signnet 0.5.3
 
 * fixed issue in `complex_walks()`
