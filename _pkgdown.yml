@@ -1,7 +1,16 @@
 title: signnet
 destination: ../pkgdown_sites/signnet
-
+home:
+  title: R package for signed network analysis
+  description: Implements several methods to analyse signed networks
 template:
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "signnet - Signed network analysis in R"
+    twitter:
+      creator: "@schochastics"
+      card: summary_large_image
   params:
     bootswatch: simplex
 
