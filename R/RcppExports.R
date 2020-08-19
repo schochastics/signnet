@@ -41,3 +41,7 @@ optimBlocksSimS <- function(A, clu, sgrp, alpha) {
     .Call(`_signnet_optimBlocksSimS`, A, clu, sgrp, alpha)
 }
 
+triadCensusSign <- function(A, n) {
+    .Call(`_signnet_triadCensusSign`, A, n)
+}
+

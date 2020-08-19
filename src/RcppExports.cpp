@@ -145,6 +145,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// triadCensusSign
+IntegerVector triadCensusSign(NumericMatrix A, int n);
+RcppExport SEXP _signnet_triadCensusSign(SEXP ASEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type A(ASEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(triadCensusSign(A, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_signnet_arcDist", (DL_FUNC) &_signnet_arcDist, 3},
@@ -157,6 +169,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_signnet_blockCriterionS", (DL_FUNC) &_signnet_blockCriterionS, 4},
     {"_signnet_critUpdateS", (DL_FUNC) &_signnet_critUpdateS, 7},
     {"_signnet_optimBlocksSimS", (DL_FUNC) &_signnet_optimBlocksSimS, 4},
+    {"_signnet_triadCensusSign", (DL_FUNC) &_signnet_triadCensusSign, 2},
     {NULL, NULL, 0}
 };
 
