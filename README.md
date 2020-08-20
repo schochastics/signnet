@@ -34,7 +34,7 @@ The development version from is available with:
 devtools::install_github("schochastics/signnet")
 ```
 
-## Structural Balance
+## Structural Balance and Triads
 
 The principles underlying structural balance are based on a theory in
 social psychology dating back to the work of Heider in the 1940s, which
@@ -63,12 +63,16 @@ library(signnet)
 data("tribes")
 
 balance_score(tribes,method = "triangles")
-#> [1] 0.8676471
+#> [1] 0.867647
 balance_score(tribes,method = "walk")
-#> [1] 0.3575761
+#> [1] 0.357576
 balance_score(tribes,method = "frustration")
-#> [1] 0.7586207
+#> [1] 0.758621
 ```
+
+For directed signed networks, `triad_census_signed()` can be used to
+compute the count for all 138 non-isomorphic signed triads.
+<img src="man/figures/signed_triads.png"/>
 
 # Blockmodeling
 
@@ -81,7 +85,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 1 1 2 2 3 2 2 2 3 3 2 2 3 3 1 1
+#>  [1] 3 3 2 2 1 2 2 2 1 1 2 2 1 1 3 3
 #> 
 #> $criterion
 #> [1] 2

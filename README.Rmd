@@ -39,7 +39,7 @@ The development version from is available with:
 devtools::install_github("schochastics/signnet")
 ```
 
-## Structural Balance
+## Structural Balance and Triads
 
 The principles underlying structural balance are based on a theory in social psychology dating back to the work of Heider in the 1940s, which was generalized and extended to graphs by Cartwright and Harary in the 1950s. In its simplest form, it is defined via triangles. A triangle is balanced if
 all ties are positive ("the friend of a friend is a friend") or only one tie is positive ("the enemy of my enemy is my friend"). The remaining configurations are said to be unbalanced.
@@ -57,6 +57,9 @@ balance_score(tribes,method = "triangles")
 balance_score(tribes,method = "walk")
 balance_score(tribes,method = "frustration")
 ```
+
+For directed signed networks, `triad_census_signed()` can be used to compute the count for all 138 non-isomorphic signed triads.
+<img src="man/figures/signed_triads.png"/>
 
 # Blockmodeling
 
