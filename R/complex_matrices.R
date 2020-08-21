@@ -15,7 +15,11 @@ as_adj_signed <- function(g,sparse = FALSE){
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("network does not have a sign edge attribute")
   }
-  igraph::as_adj(g,type = "both",attr = "sign", sparse = sparse)
+  A <- igraph::as_adj(g,type = "both",attr = "sign", sparse = TRUE)
+  if(!sparse){
+    A <- as.matrix(A)
+  }
+  A
 }
 
 #' Convert a signed two-mode network to a signed matrix
