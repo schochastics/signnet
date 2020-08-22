@@ -95,3 +95,16 @@ test_that("wrong complex values check works", {
   igraph::E(g)$type <- "L"
   expect_error(count_complex_triangles(g,attr = "type"))
 })
+
+test_that("signed triad census check works", {
+  g <- igraph::graph.full(5,directed = F)
+  igraph::E(g)$sign <- -1
+  expect_error(triad_census_signed(g))
+})
+
+test_that("signed triad census works", {
+  g <- igraph::graph.full(5,directed = T)
+  igraph::E(g)$sign <- -1
+  census <- triad_census_signed(g)
+  expect_equal(census[["300-NNNNNN"]],10)
+})
