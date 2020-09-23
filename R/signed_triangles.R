@@ -176,6 +176,9 @@ triad_census_signed <- function(g){
   if(!igraph::is_directed(g)){
     stop("g must be a directed graph")
   }
+  if(any(igraph::is.multiple(g))){
+    stop("g must be a simple graph")
+  }
   if(!"sign"%in%igraph::edge_attr_names(g)){
     stop("g does not have a sign edge attribute")
   }
