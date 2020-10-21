@@ -1,4 +1,4 @@
-# signnet 0.6.0.9999
+# signnet 0.7.0
 
 * added `triad_census_signed()`
 

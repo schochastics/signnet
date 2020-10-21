@@ -1,3 +1,11 @@
+# Update from 0.6.0 to 0.7.0
+
+added some new functions
+
+## Test environments
+* ubuntu 20.04, R 4.0.2
+* win-builder (devel and release)
+
 # Update from 0.5.3 to 0.6.0
 
 added a new dataset and sped up some algorithms. No user facing changes.
