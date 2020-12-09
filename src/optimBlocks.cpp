@@ -112,10 +112,10 @@ double blockCriterion1(IntegerVector clu,arma::sp_mat A,double alpha,int k){
   double N = 0;
 
   for (arma::sp_mat::const_iterator i = A.begin(); i != A.end(); ++i) {
-    if((clu[i.row()]==clu[i.col()]) & (*i==-1)){
+    if((clu[i.row()]==clu[i.col()]) && (*i==-1)){
       N+=1;
     }
-    if((clu[i.row()]!=clu[i.col()]) & (*i==1)){
+    if((clu[i.row()]!=clu[i.col()]) && (*i==1)){
       P+=1;
     }
   }

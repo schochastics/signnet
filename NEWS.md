@@ -1,3 +1,7 @@
+# signnet 0.7.1.9999
+
+* fixed #7
+
 # signnet 0.7.0
 
 * added `triad_census_signed()`
