@@ -406,7 +406,7 @@ triad_census_signed <- function(g){
     "300-NPNPNP", "300-PNNPPN", "300-NNNNPP", "300-NNNPNP",
     "300-NNNPPN", "300-NPNPNN", "300-NNNNNP", "300-NNNNNN")
 
-  A <- as_adj_signed(g,sparse = FALSE)#
+  A <- as_adj_signed(g, sparse = TRUE)
   n <- nrow(A)
   adj <- igraph::as_adj_list(igraph::as.undirected(g),"all")
   adj <- lapply(adj,function(x) x-1)
