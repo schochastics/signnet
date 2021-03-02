@@ -158,12 +158,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // triadCensusSign1
-IntegerVector triadCensusSign1(NumericMatrix A, List adj, int n);
+DoubleVector triadCensusSign1(const arma::sp_mat &A, List adj, int n);
 RcppExport SEXP _signnet_triadCensusSign1(SEXP ASEXP, SEXP adjSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type A(ASEXP);
     Rcpp::traits::input_parameter< List >::type adj(adjSEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     rcpp_result_gen = Rcpp::wrap(triadCensusSign1(A, adj, n));
