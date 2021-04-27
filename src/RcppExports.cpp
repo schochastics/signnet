@@ -158,7 +158,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // triadCensusSign1
-DoubleVector triadCensusSign1(const arma::sp_mat &A, List adj, int n);
+DoubleVector triadCensusSign1(const arma::sp_mat& A, List adj, int n);
 RcppExport SEXP _signnet_triadCensusSign1(SEXP ASEXP, SEXP adjSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

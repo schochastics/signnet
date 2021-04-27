@@ -269,7 +269,7 @@ as_unsigned_2mode <- function(g,primary = TRUE){
     from[from%in%mode1] <- paste0(from[from%in%mode1],signs[from%in%mode1])
     to[to%in%mode1] <- paste0(to[to%in%mode1],signs[to%in%mode1])
   } else{
-    new_nodes <- paste0(rep(mode2,each=2),rep(c("-pos","-neg"),length(mode1)))
+    new_nodes <- paste0(rep(mode2,each=2),rep(c("-pos","-neg"),length(mode2)))
     vert <- data.frame(name=c(new_nodes,mode1),
                        type=c(rep(TRUE,length(new_nodes)),rep(FALSE,length(mode1))))
     from[from%in%mode2] <- paste0(from[from%in%mode2],signs[from%in%mode2])
@@ -320,14 +320,11 @@ as_signed_proj <- function(g){
   el_new <- el_new[!duplicated(el_new),]
   names(el_new)[1:2] <- c("from","to")
 
-  el_aggr <- stats::aggregate(cbind(count = type) ~ from+to, data = el_new,
-                       FUN = function(x){c(NROW(x),c("N","P")[x[1]])})
+  el_aggr <- stats::aggregate(type ~ from+to, data = el_new, FUN = function(x) paste0(x,collapse=""))
   el_aggr <- do.call(data.frame,el_aggr)
-  names(el_aggr)[c(3,4)] <- c("count","type")
   el_aggr[["from"]] <- as.character(el_aggr[["from"]])
   el_aggr[["to"]]   <- as.character(el_aggr[["to"]])
   el_aggr[["type"]] <- as.character(el_aggr[["type"]])
-  el_aggr[["count"]] <- as.numeric(as.character(el_aggr[["count"]]))
-  el_aggr[["type"]][el_aggr[["count"]]>1] <- "A"
+  el_aggr[["type"]][!el_aggr[["type"]]%in%c("N","P")] <- "A"
   igraph::graph_from_data_frame(el_aggr[,c("from","to","type")],directed=FALSE)
 }

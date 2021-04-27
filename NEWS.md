@@ -1,6 +1,8 @@
 # signnet 0.7.1.9999
 
 * fixed #7
+* fixed copy paste error in `as_unsigned_2mode()`
+* fixed aggregate error in `as_signed_proj()`
 
 # signnet 0.7.0
 
