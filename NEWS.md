@@ -1,4 +1,4 @@
-# signnet 0.7.1.9999
+# signnet 0.7.1
 
 * fixed #7
 * fixed copy paste error in `as_unsigned_2mode()`
