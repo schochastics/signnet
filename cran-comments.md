@@ -1,3 +1,7 @@
+# Resubmission of 0.7.1
+
+updated link to badge in Readme.md as requested
+
 # Minor update from 0.7.0 to 0.7.1
 
 fixed some bugs in various functions
