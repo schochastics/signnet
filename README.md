@@ -10,7 +10,7 @@ status](https://travis-ci.org/schochastics/signnet.svg?branch=master)](https://t
 [![CRAN
 status](https://www.r-pkg.org/badges/version/signnet)](https://cran.r-project.org/package=signnet)
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+maturing](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Downloads](https://cranlogs.r-pkg.org/badges/signnet)](https://CRAN.R-project.org/package=signnet)
 [![Codecov test
 coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)](https://codecov.io/gh/schochastics/signnet?branch=master)
@@ -85,7 +85,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 3 3 2 2 1 2 2 2 1 1 2 2 1 1 3 3
+#>  [1] 1 1 3 3 2 3 3 3 2 2 3 3 2 2 1 1
 #> 
 #> $criterion
 #> [1] 2
