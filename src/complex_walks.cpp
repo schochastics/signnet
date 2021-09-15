@@ -22,4 +22,3 @@ arma::cx_mat cxmatmul(arma::cx_mat A,arma::cx_mat B) {
   }
   return C;
 }
-
