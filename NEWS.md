@@ -1,3 +1,7 @@
+# signnet 0.8.0
+
+* added `frustration_exact()` to compute the exact number of frustrated edges
+
 # signnet 0.7.1
 
 * fixed #7

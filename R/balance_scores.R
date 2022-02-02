@@ -49,3 +49,70 @@ balance_score <- function(g,method = "triangles"){
     return(1-clu$criterion/(igraph::ecount(g)/2))
   }
 }
+
+#' @title frustration index of a signed network
+#' @description Computes the frustration index of a signed network using linear programming
+#'
+#' @param g signed network
+#' @param ... additional parameters for the ompr solver
+#' @details The frustration index indicates the minimum number of edges whose removal results in a balance
+#' network. The function needs the following packages to be installed: `ompr`, `ompr.roi`,`ROI`, and `ROI.plugin.glpk`.
+#' @return list containing the frustration index and the bipartition of nodes
+#' @author David Schoch
+#' @references
+#'
+#' Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "Computing the line index of balance using linear programming optimisation."
+#' Optimization problems in graph theory. Springer, Cham, 2018. 65-84.
+#'
+#' @export
+
+frustration_exact <- function(g,...){
+  if(!requireNamespace("ompr", quietly = TRUE)){
+    stop("the package 'ompr' is needed for this function to work")
+  }
+  if(!requireNamespace("ompr.roi", quietly = TRUE)){
+    stop("the package 'ompr.roi' is needed for this function to work")
+  }
+  if(!requireNamespace("ROI", quietly = TRUE)){
+    stop("the package 'ROI' is needed for this function to work")
+  }
+  if(!requireNamespace("ROI.plugin.glpk", quietly = TRUE)){
+    stop("the package 'ROI.plugin.glpk' is needed for this function to work")
+  }
+  if(!"sign"%in%igraph::edge_attr_names(g)){
+    stop("network does not have a sign edge attribute")
+  }
+  if(igraph::is.directed(g)){
+    stop("g must be undirected")
+  }
+  eattrV <- igraph::get.edge.attribute(g,"sign")
+  if(!all(eattrV%in%c(-1,1))){
+    stop("sign may only contain -1 and 1")
+  }
+
+  A <- as_adj_signed(g)
+  d <- rowSums(A)
+  n <- igraph::vcount(g)
+  m_neg <- sum(A==-1)/2
+
+  result <- ompr::MIPModel()
+  result <- ompr::add_variable(result, y[i], i = 1:n, type = "binary")
+  result <- ompr::add_variable(result, x[i, j], i = 1:n, j = 1:n,i<j & A[i,j]!=0 ,type = "binary")
+  result <- ompr::set_objective(result, ompr::sum_over(d[i]*y[i],i=1:n) - ompr::sum_over(2*A[i,j]*x[i,j],i=1:n,j=1:n,i<j & A[i,j]!=0)+m_neg,"min")
+  result <- ompr::add_constraint(result, x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)
+  result <- ompr::add_constraint(result, x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1)
+  result <- ompr::solve_model(result, ompr.roi::with_ROI(solver = "glpk", ...))
+  # result <- ompr::MIPModel() |>
+  #   ompr::add_variable(y[i], i = 1:n, type = "binary") |>
+  #   ompr::add_variable(x[i, j], i = 1:n, j = 1:n,i<j & A[i,j]!=0 ,type = "binary") |>
+  #   ompr::set_objective(ompr::sum_over(d[i]*y[i],i=1:n) - ompr::sum_over(2*A[i,j]*x[i,j],i=1:n,j=1:n,i<j & A[i,j]!=0)+m_neg,"min")|>
+  #   ompr::add_constraint(x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)|>
+  #   ompr::add_constraint(x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1) |>
+  #   ompr::solve_model(ompr.roi::with_ROI(solver = "glpk", ...))
+
+  partition <- ompr::get_solution(result, y[i])
+  partition <- partition$value
+  frustration <- result$objective_value
+
+  list(frustration=frustration,partition=partition)
+}

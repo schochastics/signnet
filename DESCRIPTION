@@ -1,6 +1,6 @@
 Package: signnet
 Title: Methods to Analyse Signed Networks
-Version: 0.7.1
+Version: 0.8.0
 Authors@R: 
     person(given = "David",
            family = "Schoch",
@@ -18,14 +18,18 @@ Imports:
     Rcpp,
     Matrix
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 2.1.0),
     covr,
     ggplot2,
     ggraph,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ompr,
+    ompr.roi,
+    ROI.plugin.glpk,
+    ROI
 LinkingTo: 
     Rcpp,
     RcppArmadillo
