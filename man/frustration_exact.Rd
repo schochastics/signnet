@@ -20,10 +20,13 @@ Computes the frustration index of a signed network using linear programming
 \details{
 The frustration index indicates the minimum number of edges whose removal results in a balance
 network. The function needs the following packages to be installed: \code{ompr}, \code{ompr.roi},\code{ROI}, and \code{ROI.plugin.glpk}.
+The function Implements the AND model in Aref et al., 2020
 }
 \references{
 Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "Computing the line index of balance using linear programming optimisation."
 Optimization problems in graph theory. Springer, Cham, 2018. 65-84.
+
+Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "A modeling and computational study of the frustration index in signed networks." Networks 75.1 (2020): 95-110.
 }
 \author{
 David Schoch

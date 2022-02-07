@@ -57,6 +57,7 @@ balance_score <- function(g,method = "triangles"){
 #' @param ... additional parameters for the ompr solver
 #' @details The frustration index indicates the minimum number of edges whose removal results in a balance
 #' network. The function needs the following packages to be installed: `ompr`, `ompr.roi`,`ROI`, and `ROI.plugin.glpk`.
+#' The function Implements the AND model in Aref et al., 2020
 #' @return list containing the frustration index and the bipartition of nodes
 #' @author David Schoch
 #' @references
@@ -64,6 +65,7 @@ balance_score <- function(g,method = "triangles"){
 #' Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "Computing the line index of balance using linear programming optimisation."
 #' Optimization problems in graph theory. Springer, Cham, 2018. 65-84.
 #'
+#' Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "A modeling and computational study of the frustration index in signed networks." Networks 75.1 (2020): 95-110.
 #' @export
 
 frustration_exact <- function(g,...){
@@ -93,22 +95,32 @@ frustration_exact <- function(g,...){
   A <- as_adj_signed(g)
   d <- rowSums(A)
   n <- igraph::vcount(g)
-  m_neg <- sum(A==-1)/2
 
+  #binary linear model
+  # m_neg <- sum(A==-1)/2
+  # result <- ompr::MIPModel()
+  # result <- ompr::add_variable(result, y[i], i = 1:n, type = "binary")
+  # result <- ompr::add_variable(result, x[i, j], i = 1:n, j = 1:n,i<j & A[i,j]!=0 ,type = "binary")
+  # result <- ompr::set_objective(
+  #   result,
+  #   ompr::sum_over(d[i]*y[i],i=1:n) -
+  #     ompr::sum_over(2*A[i,j]*x[i,j],i=1:n,j=1:n,i<j & A[i,j]!=0)+m_neg,"min")
+  # result <- ompr::add_constraint(result, x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)
+  # result <- ompr::add_constraint(result, x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1)
+  # result <- ompr::solve_model(result, ompr.roi::with_ROI(solver = "glpk", ...))
+
+  # AND model
   result <- ompr::MIPModel()
   result <- ompr::add_variable(result, y[i], i = 1:n, type = "binary")
   result <- ompr::add_variable(result, x[i, j], i = 1:n, j = 1:n,i<j & A[i,j]!=0 ,type = "binary")
-  result <- ompr::set_objective(result, ompr::sum_over(d[i]*y[i],i=1:n) - ompr::sum_over(2*A[i,j]*x[i,j],i=1:n,j=1:n,i<j & A[i,j]!=0)+m_neg,"min")
-  result <- ompr::add_constraint(result, x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)
-  result <- ompr::add_constraint(result, x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1)
-  result <- ompr::solve_model(result, ompr.roi::with_ROI(solver = "glpk", ...))
-  # result <- ompr::MIPModel() |>
-  #   ompr::add_variable(y[i], i = 1:n, type = "binary") |>
-  #   ompr::add_variable(x[i, j], i = 1:n, j = 1:n,i<j & A[i,j]!=0 ,type = "binary") |>
-  #   ompr::set_objective(ompr::sum_over(d[i]*y[i],i=1:n) - ompr::sum_over(2*A[i,j]*x[i,j],i=1:n,j=1:n,i<j & A[i,j]!=0)+m_neg,"min")|>
-  #   ompr::add_constraint(x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)|>
-  #   ompr::add_constraint(x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1) |>
-  #   ompr::solve_model(ompr.roi::with_ROI(solver = "glpk", ...))
+  result <- ompr::set_objective(
+    result,
+    ompr::sum_over(y[i]+y[j]-2*x[i,j],i=1:n,j=1:n,i<j & A[i,j]==1) +
+      ompr::sum_over(1-(y[i]+y[j]-2*x[i,j]),i=1:n,j=1:n,i<j & A[i,j]==-1),"min")
+  result <- ompr::add_constraint(result, x[i,j]<=y[i],i=1:n,j=1:n,i<j & A[i,j]==1)
+  result <- ompr::add_constraint(result, x[i,j]<=y[j],i=1:n,j=1:n,i<j & A[i,j]==1)
+  result <- ompr::add_constraint(result, x[i,j]>=y[i] + y[j] - 1,i=1:n,j=1:n,i<j & A[i,j]==-1)
+  result <- ompr::solve_model(result, ompr.roi::with_ROI(solver = "glpk",...))
 
   partition <- ompr::get_solution(result, y[i])
   partition <- partition$value
