@@ -1,6 +1,7 @@
 # signnet 0.8.0
 
 * added `frustration_exact()` to compute the exact number of frustrated edges
+* fixed issue with aggregate on r-devel
 
 # signnet 0.7.1
 
