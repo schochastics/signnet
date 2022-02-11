@@ -1,6 +1,6 @@
 # Update from 0.7.1 to 0.8.0
 
-- added a new function `frustration_index()`, 
+- added a new function `frustration_exact()`, 
 - changed maintainer email address 
 - fixed an error with aggregate() on rdevel.
 
