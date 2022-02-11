@@ -10,7 +10,7 @@
 status](https://www.r-pkg.org/badges/version/signnet)](https://cran.r-project.org/package=signnet)
 [![Downloads](https://cranlogs.r-pkg.org/badges/signnet)](https://CRAN.R-project.org/package=signnet)
 [![Codecov test
-coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)](https://codecov.io/gh/schochastics/signnet?branch=master)
+coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)](https://app.codecov.io/gh/schochastics/signnet?branch=master)
 <!-- badges: end -->
 
 The package provides methods to analyse signed networks (i.e. networks
@@ -82,7 +82,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 1 1 2 2 3 2 2 2 3 3 2 2 3 3 1 1
+#>  [1] 2 2 1 1 3 1 1 1 3 3 1 1 3 3 2 2
 #> 
 #> $criterion
 #> [1] 2
@@ -138,7 +138,7 @@ blockmat
 clu <- signed_blockmodel_general(g,blockmat,0.5)
 clu
 #> $membership
-#>  [1] 3 2 2 2 3 1 1 1 1 1 3 3 1 1 3
+#>  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
 #> 
 #> $criterion
 #> [1] 0

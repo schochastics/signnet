@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/schochastics/signnet/workflows/R-CMD-check/badge.svg)](https://github.com/schochastics/signnet/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/signnet)](https://cran.r-project.org/package=signnet)
 [![Downloads](https://cranlogs.r-pkg.org/badges/signnet)](https://CRAN.R-project.org/package=signnet)
-[![Codecov test coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)](https://codecov.io/gh/schochastics/signnet?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)]( https://app.codecov.io/gh/schochastics/signnet?branch=master)
 <!-- badges: end -->
 
 The package provides methods to analyse signed networks (i.e. networks with both positive and negative ties).
