@@ -412,7 +412,7 @@ triad_census_signed <- function(g){
   adj <- lapply(adj,function(x) x-1)
   triads <- triadCensusSign1(A,adj,n)
   names(triads) <- paste0(tcode,"-",signsign)
-  df <- stats::aggregate(formula = count~type,data = data.frame(type=names(triads),count=triads),FUN = sum)
+  df <- stats::aggregate(count~type,data = data.frame(type=names(triads),count=triads),FUN = sum)
   census <- df[["count"]]
   names(census) <- df[["type"]]
   census <- census[match(names(census),triple_order)]
