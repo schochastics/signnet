@@ -108,7 +108,9 @@ frustration_exact <- function(g,...){
   # result <- ompr::add_constraint(result, x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)
   # result <- ompr::add_constraint(result, x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1)
   # result <- ompr::solve_model(result, ompr.roi::with_ROI(solver = "glpk", ...))
-
+  x <- matrix(0,n,n)
+  y <- rep(0,n)
+  i <- j <- 0
   # AND model
   result <- ompr::MIPModel()
   result <- ompr::add_variable(result, y[i], i = 1:n, type = "binary")
