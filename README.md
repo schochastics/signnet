@@ -82,7 +82,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 2 2 1 1 3 1 1 1 3 3 1 1 3 3 2 2
+#>  [1] 2 2 3 3 1 3 3 3 1 1 3 3 1 1 2 2
 #> 
 #> $criterion
 #> [1] 2
@@ -138,7 +138,7 @@ blockmat
 clu <- signed_blockmodel_general(g,blockmat,0.5)
 clu
 #> $membership
-#>  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
+#>  [1] 2 3 2 2 2 2 2 2 2 2 3 3 3 1 3
 #> 
 #> $criterion
 #> [1] 0
