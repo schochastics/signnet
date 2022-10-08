@@ -9,7 +9,7 @@ double blockCriterionS(arma::sp_mat A,IntegerVector clu,double alpha,IntegerMatr
   double N = 0;
 
   for (arma::sp_mat::const_iterator i = A.begin(); i != A.end(); ++i) {
-    if((clu[i.row()]==clu[i.col()]) & (*i!=sgrp(clu[i.row()],clu[i.col()]))){
+    if((clu[i.row()]==clu[i.col()]) && (*i!=sgrp(clu[i.row()],clu[i.col()]))){
       if(sgrp(clu[i.row()],clu[i.col()])==1){
         P+=1;
       } else{
@@ -17,7 +17,7 @@ double blockCriterionS(arma::sp_mat A,IntegerVector clu,double alpha,IntegerMatr
       }
 
     }
-    if((clu[i.row()]!=clu[i.col()]) & (*i!=sgrp(clu[i.row()],clu[i.col()]))){
+    if((clu[i.row()]!=clu[i.col()]) && (*i!=sgrp(clu[i.row()],clu[i.col()]))){
       if(sgrp(clu[i.row()],clu[i.col()])==1){
         P+=1;
       } else{

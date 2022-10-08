@@ -9,10 +9,10 @@ double blockCriterion(arma::sp_mat A,IntegerVector clu,double alpha){
   double N = 0;
 
   for (arma::sp_mat::const_iterator i = A.begin(); i != A.end(); ++i) {
-    if((clu[i.row()]==clu[i.col()]) & (*i==-1)){
+    if((clu[i.row()]==clu[i.col()]) && (*i==-1)){
       N+=1;
     }
-    if((clu[i.row()]!=clu[i.col()]) & (*i==1)){
+    if((clu[i.row()]!=clu[i.col()]) && (*i==1)){
       P+=1;
     }
   }
@@ -27,16 +27,16 @@ double critUpdate(arma::sp_mat A, int v, int from, int to,IntegerVector clu,doub
   arma::sp_mat::const_col_iterator end = A.end_col(v);
   for(arma::sp_mat::const_col_iterator j = start; j != end; ++j){
 
-    if((clu[j.row()]==from) & (A(j.row(),v)==-1)){
+    if((clu[j.row()]==from) && (A(j.row(),v)==-1)){
       N-=1;
     }
-    if((clu[j.row()]==to) & (A(j.row(),v)==-1)){
+    if((clu[j.row()]==to) && (A(j.row(),v)==-1)){
       N+=1;
     }
-    if((clu[j.row()]==to) & (A(j.row(),v)==1)){
+    if((clu[j.row()]==to) && (A(j.row(),v)==1)){
       P-=1;
     }
-    if((clu[j.row()]==from) & (A(j.row(),v)==1)){
+    if((clu[j.row()]==from) && (A(j.row(),v)==1)){
       P+=1;
     }
   }
@@ -45,16 +45,16 @@ double critUpdate(arma::sp_mat A, int v, int from, int to,IntegerVector clu,doub
   end = A.end_col(v);
   for(arma::sp_mat::const_col_iterator j = start; j != end; ++j){
 
-    if((clu[j.row()]==from) & (A(j.row(),v)==-1)){
+    if((clu[j.row()]==from) && (A(j.row(),v)==-1)){
       N-=1;
     }
-    if((clu[j.row()]==to) & (A(j.row(),v)==-1)){
+    if((clu[j.row()]==to) && (A(j.row(),v)==-1)){
       N+=1;
     }
-    if((clu[j.row()]==to) & (A(j.row(),v)==1)){
+    if((clu[j.row()]==to) && (A(j.row(),v)==1)){
       P-=1;
     }
-    if((clu[j.row()]==from) & (A(j.row(),v)==1)){
+    if((clu[j.row()]==from) && (A(j.row(),v)==1)){
       P+=1;
     }
   }

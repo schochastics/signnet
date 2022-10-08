@@ -16,7 +16,7 @@ IntegerVector triadCensusSign(NumericMatrix A, int n)
     {
       for (int w = 0; w < n; ++w)
       {
-        if ((u < v) & (v < w))
+        if ((u < v) && (v < w))
         {
           code = A(u, v) + 3 * A(u, w) + 9 * A(v, u) + 27 * A(v, w) + 81 * A(w, u) + 243 * A(w, v);
           triads[code] = triads[code] + 1;
@@ -50,7 +50,7 @@ DoubleVector triadCensusSign1(const arma::sp_mat &A, List adj, int n)
         for (int k = 0; k < S.length(); k++)
         {
           int w = S[k];
-          if ((v < w) | ((u < w) & (w < v) & (A(u, w) == 0) & (A(w, u) == 0)))
+          if ((v < w) || ((u < w) && (w < v) && (A(u, w) == 0) && (A(w, u) == 0)))
           {
             code = (A(u, v) + 1) + 3 * (A(u, w) + 1) + 9 * (A(v, u) + 1) + 27 * (A(v, w) + 1) + 81 * (A(w, u) + 1) + 243 * (A(w, v) + 1);
             triads[code] = triads[code] + 1;
