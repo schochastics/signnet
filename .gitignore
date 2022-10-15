@@ -38,3 +38,7 @@ rsconnect/
 inst/doc
 doc
 Meta
+
+CRAN-RELEASE
+CRAN-SUBMISSION
+pkgdown/
