@@ -1,8 +1,6 @@
-# Update from 0.7.1 to 0.8.0
+# Update from 0.8.0 to 0.8.1
 
-- added a new function `frustration_exact()`, 
-- changed maintainer email address 
-- fixed an error with aggregate() on rdevel.
+- fixed errors on CRAN
 
 ## Test environments
 * ubuntu 20.04, R 4.1.2

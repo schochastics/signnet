@@ -1,4 +1,4 @@
-# signnet 0.8.0.9999
+# signnet 0.8.1
 
 * fixed existing check errors
 
