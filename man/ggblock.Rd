@@ -13,7 +13,7 @@ ggblock(
 )
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{blocks}{vector of block membership as obtained, e.g. from \link{signed_blockmodel}}
 
@@ -33,8 +33,8 @@ Plot Blockmodel matrix
 \dontrun{
 library(igraph)
 data("tribes")
-clu <- signed_blockmodel(tribes,k = 3,alpha=0.5,annealing = TRUE)
-ggblock(tribes,clu$membership,show_blocks = TRUE,show_labels = TRUE)
+clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
+ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
 }
 }
 \author{

@@ -11,7 +11,7 @@ degree_signed(
 )
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{mode}{character string, “out” for out-degree, “in” for in-degree or “all” for undirected networks.}
 

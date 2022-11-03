@@ -13,3 +13,7 @@
 ^pkgdown$
 ^\.github$
 ^CRAN-SUBMISSION$
+paper.md
+paper.pdf
+paper.bib
+^CODE_OF_CONDUCT\.md$

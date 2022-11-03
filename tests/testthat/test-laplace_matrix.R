@@ -24,17 +24,17 @@ test_that("laplacian matrix error sign correct", {
   expect_error(laplacian_matrix_signed(g))
 })
 
-
-test_that("laplacian angle sign is correct", {
-  g <- igraph::graph.full(3)
-  igraph::E(g)$sign <- 1
-  ang <- laplacian_angle(g)
-  ang_true <- c(0.95531662, -0.61547971, -0.61547971)
-})
-
-test_that("laplacian angle sign is correct", {
-  g <- igraph::graph.full(3)
-  igraph::E(g)$type <- "P"
-  ang <- laplacian_angle(g,"complex",attr="type")
-  ang_true <- c(0, 0, 3.14159265)
-})
+#
+# test_that("laplacian angle sign is correct", {
+#   g <- igraph::graph.full(3)
+#   igraph::E(g)$sign <- 1
+#   ang <- laplacian_angle(g)
+#   ang_true <- c(0.95531662, -0.61547971, -0.61547971)
+# })
+#
+# test_that("laplacian angle sign is correct", {
+#   g <- igraph::graph.full(3)
+#   igraph::E(g)$type <- "P"
+#   ang <- laplacian_angle(g,"complex",attr="type")
+#   ang_true <- c(0, 0, 3.14159265)
+# })

@@ -7,7 +7,7 @@
 signed_triangles(g)
 }
 \arguments{
-\item{g}{igraph object with signed edge attribute}
+\item{g}{igraph object with a sign edge attribute.}
 }
 \value{
 matrix of vertex ids and the number of positive ties per triangle
@@ -18,7 +18,7 @@ lists all possible signed triangles
 \examples{
 library(igraph)
 g <- graph.full(4)
-E(g)$sign <- c(-1,1,1,-1,-1,1)
+E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 signed_triangles(g)
 }
 \seealso{

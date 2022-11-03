@@ -7,7 +7,7 @@
 eigen_centrality_signed(g, scale = TRUE)
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{scale}{Logical scalar, whether to scale the result to have a maximum score of one. If no scaling is used then the result vector is the same as returned by \code{eigen()}.}
 }

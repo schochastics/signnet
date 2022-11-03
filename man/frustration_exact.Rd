@@ -2,7 +2,7 @@
 % Please edit documentation in R/balance_scores.R
 \name{frustration_exact}
 \alias{frustration_exact}
-\title{frustration index of a signed network}
+\title{Exact frustration index of a signed network}
 \usage{
 frustration_exact(g, ...)
 }
@@ -15,7 +15,7 @@ frustration_exact(g, ...)
 list containing the frustration index and the bipartition of nodes
 }
 \description{
-Computes the frustration index of a signed network using linear programming
+Computes the exact frustration index of a signed network using linear programming
 }
 \details{
 The frustration index indicates the minimum number of edges whose removal results in a balance

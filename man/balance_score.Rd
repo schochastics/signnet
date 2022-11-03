@@ -7,12 +7,12 @@
 balance_score(g, method = "triangles")
 }
 \arguments{
-\item{g}{signed network.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{method}{string indicating the method to be used. See details for options}
 }
 \value{
-balancedness score
+numeric balancedness score between 0 and 1
 }
 \description{
 Implements several indices to assess the balancedness of a network.
@@ -29,7 +29,7 @@ signed adjacency matrix and \eqn{\mu_i} of the unsigned adjacency matrix. Maxima
 \examples{
 library(igraph)
 g <- graph.full(4)
-E(g)$sign <- c(-1,1,1,-1,-1,1)
+E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 
 balance_score(g, method = "triangles")
 balance_score(g, method = "walk")

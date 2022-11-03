@@ -1,3 +1,10 @@
+# signnet 0.8.1.9999
+
+* added code of conduct
+* added contributing guide
+* added `frustration_exact()` to vignette
+* added utility functions `is_signed`,`graph_from_adjacency_matrix_signed`, and `graph_from_edgelist_signed()`
+
 # signnet 0.8.1
 
 * fixed existing check errors

@@ -7,7 +7,7 @@
 count_signed_triangles(g)
 }
 \arguments{
-\item{g}{igraph object with signed edge attribute}
+\item{g}{igraph object with a sign edge attribute.}
 }
 \value{
 counts for all 4 signed triangle types
@@ -18,7 +18,7 @@ Counts the number of all possible signed triangles (+++),(++-), (+--) and (---)
 \examples{
 library(igraph)
 g <- graph.full(4)
-E(g)$sign <- c(-1,1,1,-1,-1,1)
+E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 count_signed_triangles(g)
 }
 \seealso{

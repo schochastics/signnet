@@ -72,7 +72,7 @@ balance_score(g, method = "frustration")
 
 "walk" is based on eigenvalues of the signed and underlying unsigned network. Check the paper by Estrada for details.  
 
-"frustration" assumes that the network can be partitioned into two groups, where intra group edges are positive and inter group edges are negative. The index is defined as the sum of intra group negative and inter group positive edges. Note that the problem is NP complete and only an upper bound is returned (based on simulated annealing). Exact methods can be found in the work of Aref.
+"frustration" assumes that the network can be partitioned into two groups, where intra group edges are positive and inter group edges are negative. The index is defined as the sum of intra group negative and inter group positive edges. Note that the problem is NP complete and only an upper bound is returned (based on simulated annealing). The function `frustration_exact()` implements an integer program to solve the exact optimization problem. More details can be found in the work of Aref.
 
 There disagreement for non-balanced networks can be seen with the included "tribes" dataset.
 ```{r nonperfect}

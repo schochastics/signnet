@@ -7,7 +7,7 @@
 signed_blockmodel_general(g, blockmat, alpha = 0.5)
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{blockmat}{Integer Matrix. Specifies the inter/intra group patterns of ties}
 
@@ -22,7 +22,7 @@ Finds blocks of nodes with specified inter/intra group ties
 \details{
 The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
 where N is the total number of negative ties within plus-sets and P be the total number of
-positive ties between plus-sets. This function implementes the generalized model. For the structural balance
+positive ties between plus-sets. This function implements the generalized model. For the structural balance
 version see \link{signed_blockmodel}.
 }
 \examples{
@@ -34,18 +34,16 @@ V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)
 V(g3)$name <- as.character(11:15)
 
-g <- Reduce("\%u\%",list(g1,g2,g3))
+g <- Reduce("\%u\%", list(g1, g2, g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
-g <- add.edges(g,c(rbind(1:5,6:10)),attr = list(sign=-1))
-g <- add.edges(g,c(rbind(1:5,11:15)),attr = list(sign=-1))
-g <- add.edges(g,c(rbind(11:15,6:10)),attr = list(sign=1))
+g <- add.edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
+g <- add.edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
+g <- add.edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
 
 # specify the link patterns between groups
-blockmat <- matrix(c(1,-1,-1,-1,1,1,-1,1,-1),3,3,byrow = TRUE)
-res <- signed_blockmodel_general(g,blockmat,0.5)
-res$membership
-res$criterion
+blockmat <- matrix(c(1, -1, -1, -1, 1, 1, -1, 1, -1), 3, 3, byrow = TRUE)
+signed_blockmodel_general(g, blockmat, 0.5)
 }
 \references{
 Doreian, Patrick and Andrej Mrvar (2009). Partitioning signed social networks. \emph{Social Networks} 31(1) 1-11

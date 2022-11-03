@@ -7,7 +7,7 @@
 laplacian_matrix_signed(g, norm = FALSE, sparse = FALSE)
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{norm}{Whether to calculate the normalized Laplacian. See definitions below.}
 
@@ -24,9 +24,9 @@ See \link[igraph]{laplacian_matrix} of igraph for more details. In the signed ca
 }
 \examples{
 library(igraph)
-g <- sample_islands_signed(3, 10, 5/10, 1)
+g <- sample_islands_signed(3, 10, 5 / 10, 1)
 laplacian_matrix_signed(g)
-laplacian_matrix_signed(g,norm = TRUE)
+laplacian_matrix_signed(g, norm = TRUE)
 }
 \author{
 David Schoch

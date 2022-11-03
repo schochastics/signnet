@@ -7,7 +7,7 @@
 signed_blockmodel(g, k, alpha = 0.5, annealing = FALSE)
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{k}{number of blocks}
 
@@ -31,14 +31,14 @@ For the generalized version see \link{signed_blockmodel_general}.
 \examples{
 library(igraph)
 
-g <- sample_islands_signed(10,10,1,20)
-clu <- signed_blockmodel(g,k = 10,alpha = 0.5)
+g <- sample_islands_signed(10, 10, 1, 20)
+clu <- signed_blockmodel(g, k = 10, alpha = 0.5)
 table(clu$membership)
 clu$criterion
 
 # Using simulated annealing (less change of getting trapped in local optima)
 data("tribes")
-clu <- signed_blockmodel(tribes,k = 3,alpha=0.5,annealing = TRUE)
+clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 table(clu$membership)
 clu$criterion
 }

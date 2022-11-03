@@ -77,13 +77,13 @@ test_that("evcent not dominant works",{
   A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0,
                  1,  0,  1,  0, -1,  0,  0, -1,  0,
                  1,  1,  0,  0,  0, -1,  0,  0, -1,
-                -1,  0,  0,  0,  1,  1, -1,  0,  0,
+                 -1,  0,  0,  0,  1,  1, -1,  0,  0,
                  0, -1,  0,  1,  0,  1,  0, -1,  0,
                  0,  0, -1,  1,  1,  0,  0,  0, -1,
-                -1,  0,  0, -1,  0,  0,  0,  1,  1,
+                 -1,  0,  0, -1,  0,  0,  0,  1,  1,
                  0, -1,  0,  0, -1,  0,  1,  0,  1,
                  0,  0, -1,  0,  0, -1,  1,  1, 0), 9, 9)
-  g <- igraph::graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
+  g <- graph_from_adjacency_matrix_signed(A,"undirected")
   expect_error(eigen_centrality_signed(g))
 })
 

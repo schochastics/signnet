@@ -7,7 +7,7 @@
 pn_index(g, mode = c("all", "in", "out"))
 }
 \arguments{
-\item{g}{igraph object. Must have a "sign" edge attribute.}
+\item{g}{igraph object with a sign edge attribute.}
 
 \item{mode}{character string, “out” for out-pn, “in” for in-pn or “all” for undirected networks.}
 }
@@ -18,7 +18,6 @@ centrality scores as numeric vector.
 centrality index for signed networks by Everett and Borgatti
 }
 \examples{
-library(igraph)
 A <- matrix(c(0,  1,  0,  1,  0,  0,  0, -1, -1,  0,
               1,  0,  1, -1,  1, -1, -1,  0,  0,  0,
               0,  1,  0,  1, -1,  0,  0,  0, -1,  0,
@@ -29,7 +28,7 @@ A <- matrix(c(0,  1,  0,  1,  0,  0,  0, -1, -1,  0,
              -1,  0,  0,  0, -1,  0,  1,  0,  1,  0,
              -1,  0, -1,  0,  0,  1, -1,  1,  0,  1,
               0,  0,  0,  0, -1, -1,  1,  0,  1,  0), 10, 10)
-g <- igraph::graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
+g <- graph_from_adjacency_matrix_signed(A,"undirected")
 pn_index(g)
 }
 \references{
