@@ -82,7 +82,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 2 2 3 3 1 3 3 3 1 1 3 3 1 1 2 2
+#>  [1] 1 1 3 3 2 3 3 3 2 2 3 3 2 2 1 1
 #> 
 #> $criterion
 #> [1] 2
@@ -138,7 +138,7 @@ blockmat
 clu <- signed_blockmodel_general(g,blockmat,0.5)
 clu
 #> $membership
-#>  [1] 2 3 2 2 2 2 2 2 2 2 3 3 3 1 3
+#>  [1] 2 2 2 3 2 1 1 1 1 1 1 3 3 3 1
 #> 
 #> $criterion
 #> [1] 0
@@ -146,3 +146,10 @@ ggblock(g,clu$membership,show_blocks = TRUE,show_labels = FALSE)
 ```
 
 <img src="man/figures/README-general_example-1.png" width="100%" />
+
+## Code of Conduct
+
+Please note that the netrankr project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
