@@ -23,3 +23,13 @@ test_that("circular signed works", {
   g <- graph_circular_signed(10,pos=1,neg=0)
   expect_equal(igraph::graph.density(g),1)
 })
+
+test_that("sample signed gnp works", {
+  g <- sample_gnp_signed(10,1,1)
+  expect_equal(igraph::graph.density(g),1)
+})
+
+test_that("sample signed b1partite works", {
+  g <- sample_bipartite_signed(10,10,1,1)
+  expect_equal(igraph::ecount(g),100)
+})

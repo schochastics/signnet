@@ -1,7 +1,7 @@
 #' Generate random signed graphs according to the G(n,p) Erdos-Renyi model
 #'
 #' @param n The number of vertices in the graph.
-#' @param p The probability for drawing an edge between two arbitrary vertices (G(n,p) graph).
+#' @param p The probability for drawing an edge between two arbitrary vertices.
 #' @param p_neg The probability of a drawn edge to be a negative tie
 #' @param directed logical, whether the graph will be directed. defaults to FALSE.
 #' @param loops logical, whether to add loop edges, defaults to FALSE.
@@ -19,6 +19,31 @@ sample_gnp_signed <- function(n, p, p_neg, directed = FALSE, loops = FALSE) {
   igraph::E(g)$sign <- sample(c(-1, 1), igraph::ecount(g), replace = TRUE, prob = c(p_neg, 1 - p_neg))
   g
 }
+
+#' Bipartite random signed graphs
+#'
+#' @param n1 	Integer scalar, the number of bottom vertices.
+#' @param n2 	Integer scalar, the number of top vertices.
+#' @param p The probability for drawing an edge between two arbitrary vertices.
+#' @param p_neg The probability of a drawn edge to be a negative tie
+#' @param directed logical, whether the graph will be directed. defaults to FALSE.
+#' @param mode Character scalar, specifies how to direct the edges in directed graphs. If it is ‘out’, then directed edges point from bottom vertices to top vertices. If it is ‘in’, edges point from top vertices to bottom vertices. ‘out’ and ‘in’ do not generate mutual edges. If this argument is ‘all’, then each edge direction is considered independently and mutual edges might be generated. This argument is ignored for undirected graphs.
+#'
+#' @return A signed bipartite igraph graph.
+#' @export
+#'
+#' @examples
+#' sample_bipartite_signed(10,10,0.5,0.5)
+sample_bipartite_signed <- function(n1, n2, p, p_neg, directed = FALSE, mode = c("out", "in", "all")){
+  g <- igraph::sample_bipartite(n1 = n1, n2 = n2, p = p, directed = directed, mode = mode)
+  if (missing(p_neg)) {
+    stop("p_neg missing with no default")
+  }
+  igraph::E(g)$sign <- sample(c(-1, 1), igraph::ecount(g), replace = TRUE, prob = c(p_neg, 1 - p_neg))
+  g
+}
+
+
 
 #' @title A graph with random subgraphs conected by negative edges
 #' @description Create a number of Erdos-Renyi random graphs with identical parameters, and connect them with the specified number of negative ties.

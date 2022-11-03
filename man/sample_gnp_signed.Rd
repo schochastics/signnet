@@ -9,7 +9,7 @@ sample_gnp_signed(n, p, p_neg, directed = FALSE, loops = FALSE)
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
-\item{p}{The probability for drawing an edge between two arbitrary vertices (G(n,p) graph).}
+\item{p}{The probability for drawing an edge between two arbitrary vertices.}
 
 \item{p_neg}{The probability of a drawn edge to be a negative tie}
 

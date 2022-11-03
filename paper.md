@@ -45,12 +45,17 @@ purpose packages for network analysis such as `igraph` [@cn-ispcnr-06] and `sna`
 
 # Implementation details
 The package is modeled with compatibility to `igraph` in mind and follows its naming scheme. 
-All functions in the package assume that an igraph object is a signed network if it has an edge attribute "sign" with values 1 (positive) or -1 (negative). If a function from igraph was adapted for signed networks, it can be called via `<igraph_name>_signed()`. Prominent examples include `as_adj_signed()`,`as_incidence_signed()`,`degree_signed()`, and `triad_census_signed()`.
+All functions in the package assume that an igraph object is a signed network if
+it has an edge attribute "sign" with values 1 (positive) or -1 (negative). If a
+function from igraph was adapted for signed networks, it can be called via
+`<igraph_name>_signed()`. Prominent examples include `as_adj_signed()`,
+`graph_from_adjacency_matrix_signed()`, `degree_signed()`, and
+`triad_census_signed()`.
 
 # Functionalities
 
 This section explains the main methods implemented in the package. 
-For more details for each subsection see the package vignettes. 
+For more details for each subsection see the respective package vignette. 
 
 ```R
 library(signnet)
@@ -99,13 +104,27 @@ total number of negative ties within blocks and $P$ be the total number of
 positive ties between blocks. 
 
 ```R
-signed_blockmodel(tribes,k = 3,alpha = 0.5)
+tribe_blocks <- signed_blockmodel(tribes, k = 3, 
+                                  alpha = 0.5, annealing = TRUE)
+tribe_blocks
 #> $membership
 #> [1] 2 2 1 1 3 1 1 1 3 3 1 1 3 3 2 2
 #> 
 #> $criterion
 #> [1] 2
 ```
+
+The result can be visualized with `ggblock`, as shown in Figure \ref{fig:block_ex}.
+```R
+ggblock(tribes, tribe_blocks$membership, show_blocks = TRUE)
+```
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.5\textwidth]{man/figures/block_example.pdf}
+  \caption{Blocks of the tribes network. Blue squares indicate positive and red
+  squares negative ties.}
+  \label{fig:block_ex}
+\end{figure}
 
 ## Centrality
 There exist hundreds of indices for networks with only positive ties, but for signed
@@ -136,17 +155,16 @@ A <- matrix(c( 0,  1,  0,  1,  0,  0,  0, -1, -1,  0,
               -1,  0, -1,  0,  0,  1, -1,  1,  0,  1,  
                0,  0,  0,  0, -1, -1,  1,  0,  1,  0),10,10)
 
-g <- graph_from_adjacency_matrix(A, "undirected", weighted = "sign")
+g <- graph_from_adjacency_matrix_signed(A, "undirected")
 
-degree_signed(g, type="ratio")
+degree_signed(g, type = "ratio")
 #> [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
 eigen_centrality_signed(g)
-#> [1] -0.6221496  1.0000000 -0.7451885  1.0000000 -0.8999004  0.6428959  
-#> [7] 0.3582816 -0.3747192 -0.2808741 -0.0783457
+#> [1] 0.6221496 1.0000000 0.7451885 1.0000000 0.8999004 0.6428959 0.3582816
+#> [8] 0.3747192 0.2808741 0.0783457
 pn_index(g)
 #> [1] 0.900975 0.861348 0.907700 0.861348 0.841066 0.849656 0.861732 
 #> [8] 0.901591 0.850985 0.907293
-
 ```
 
 # References
