@@ -4,6 +4,7 @@
 * added contributing guide
 * added `frustration_exact()` to vignette
 * added utility functions `is_signed`,`graph_from_adjacency_matrix_signed`, and `graph_from_edgelist_signed()`
+* added random graph models `sample_gnp_signed()`, `sample_bipartite_signed()`
 
 # signnet 0.8.1
 
