@@ -1,4 +1,4 @@
-# signnet 0.8.1.9999
+# signnet 1.0.0
 
 * added code of conduct
 * added contributing guide
