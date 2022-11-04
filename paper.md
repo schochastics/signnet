@@ -21,40 +21,42 @@ authors:
 # Summary
 
 Network analysis usually deals with relations among entities which are positive,
-including "friendship", or "advice seeking". Most analytic tools are constructed
+such as friendship, or advice seeking. Most analytic tools are constructed
 with this assumption, be that centrality indices, or clustering tools. However,
 not all conceivable relationships are positive. People can be friends but also
 enemies. A signed network is a network where both, positive and negative
 relationships may occur. Common network analytic tools are not applicable to
-such networks without adapting for the existence of the negative ties. The R
-package `signnet` package brings together methods that have been developed to
-analyse signed networks. This includes known blockmodeling techniques, centrality
+such networks without adapting for the existence of negative ties. The R
+package `signnet` brings together methods that have been developed to
+analyze signed networks. This includes known blockmodeling techniques, centrality
 indices and tools for two-mode networks, as well as unique analytic techniques
 surrounding structural balance theory. 
 
 # Statement of need
 
-Signed networks are increasingly popular in network science since many empirical
+Signed networks are increasingly popular in empirical network science since many
 phenomena can be modeled with positive and negative ties. Examples include
 studies of polarization [@n-stwspuc1-20], collaborations on Wikipedia
-[@bklv-nacsw-09], and relations on social media [@klb-szmsnne-09]. General
-purpose packages for network analysis such as `igraph` [@cn-ispcnr-06] and `sna`
- [@b-snas-08] implement all commonly used network analytic methods but do not
- offer any functionality for signed networks. The `signnet` package closes this
- gap and makes many tools for signed network available in R. 
+[@bklv-nacsw-09], international relations [@e-rsbssn-19], and relations on
+social media [@klb-szmsnne-09]. General purpose packages for network analysis
+such as `igraph` [@cn-ispcnr-06] and `sna` [@b-snas-08] implement all commonly
+used network analytic methods but do not offer any functionality for signed
+networks. `signnet` closes this gap and makes many tools for signed
+network available in R. The package has already found its place in empirical research
+[@csr-avacpbsn-22;@fmtk-ergmdsnair-22].
 
 # Implementation details
-The package is modeled with compatibility to `igraph` in mind and follows its naming scheme. 
-All functions in the package assume that an igraph object is a signed network if
-it has an edge attribute "sign" with values 1 (positive) or -1 (negative). If a
-function from igraph was adapted for signed networks, it can be called via
-`<igraph_name>_signed()`. Prominent examples include `as_adj_signed()`,
-`graph_from_adjacency_matrix_signed()`, `degree_signed()`, and
-`triad_census_signed()`.
+The package is modeled with `igraph` compatibility in mind and follows its
+function naming scheme. All functions in the package assume that an igraph object is a
+signed network if it has an edge attribute "sign" with values 1 (positive) or -1
+(negative). If a function from igraph was adapted for signed networks, it can be
+called via `<igraph_name>_signed()`. Prominent examples include
+`as_adj_signed()`, `graph_from_adjacency_matrix_signed()`, `degree_signed()`,
+and `triad_census_signed()`.
 
 # Functionalities
 
-This section explains the main methods implemented in the package. 
+This section highlights some of the main methods implemented in the package. 
 For more details for each subsection see the respective package vignette. 
 
 ```R
@@ -171,6 +173,6 @@ introduces two methods to deal with this issue which are implemented in
 `signnet`. The trick is to convert the signed network into an a special
 unsigned one with `as_unsigned_2mode()`, do the projection as usual and the turn
 it back to a signed graph with `as_signed_proj()`. The details can be found in
-the original paper and in a designated vignette.
+the original paper and in two designated vignettes.
 
 # References
