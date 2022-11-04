@@ -14,5 +14,5 @@ test_that("from_edgelist works",{
 test_that("from_edgelist throws error",{
   el <- matrix(c("foo", "bar", "bar", "foobar"), ncol = 2, byrow = TRUE)
   signs <- c(-1, 2)
-  expect_Error(graph_from_edgelist_signed(el, signs))
+  expect_error(graph_from_edgelist_signed(el, signs))
 })
