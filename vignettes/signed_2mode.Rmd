@@ -23,12 +23,6 @@ library(igraph)
 library(signnet)
 ```
 
-## Blockmodeling
-
-Most research for signed two-mode networks concerns the use of blockmodeling. 
-The package does not include any functionality for blockmodeling signed two-mode networks yet.
-This will be included in a future version.
-
 ## Projections
 
 A common analytic tool for two-mode networks is to project the network onto on relevant mode.

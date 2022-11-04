@@ -130,14 +130,6 @@ ggblock(tribes, tribe_blocks$membership, show_blocks = TRUE)
 There exist hundreds of indices for networks with only positive ties, but for signed
 networks they are rather scarce. The `signnet` package implements three indices.
 Versions of degree and eigenvector centrality [@bl-csnr-04], and PN centrality [@eb-ncnt-14].
-
-Degree centrality can be calculated in four different ways with `degree_signed()`, specified by the `type` parameter:
-
-* `type = "pos"` count only positive neighbors
-* `type = "neg"` count only negative neighbors
-* `type = "ratio"` positive neighbors/(positive neighbors+negative neighbors)
-* `type = "net"` positive neighbors-negative neighbors
-
 The PN index is very similar to Katz status for networks with only positive ties
 [@k-nsidsa-53]. The technical details can be found in the paper by Everett &
 Borgatti.
@@ -166,5 +158,19 @@ pn_index(g)
 #> [1] 0.900975 0.861348 0.907700 0.861348 0.841066 0.849656 0.861732 
 #> [8] 0.901591 0.850985 0.907293
 ```
+
+## Signed two-mode networks
+A common analytic tool for two-mode networks is to project the network onto on
+relevant mode. This is easily done using the adjacency matrix $𝐴$. $𝐴𝐴^𝑇$
+yields the row projection and $𝐴^𝑇𝐴$ the column projection. The resulting
+networks will thus be weighted. Several methods exist to turn a weighted
+projection into an unweighted network where only the most significant edges are
+included [@dns-brpebbp-21]. Projecting signed networks is not as
+straightforward, because "nullification" of edges can occur. @s-pstn-21
+introduces two methods to deal with this issue which are implemented in
+`signnet`. The trick is to convert the signed network into an a special
+unsigned one with `as_unsigned_2mode()`, do the projection as usual and the turn
+it back to a signed graph with `as_signed_proj()`. The details can be found in
+the original paper and in a designated vignette.
 
 # References
