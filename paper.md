@@ -61,7 +61,7 @@ This section highlights some of the main methods implemented in the package.
 For more details for each subsection see the respective package vignette. 
 
 ```R
-install.packages("signnet"")
+install.packages("signnet")
 library(signnet)
 data("tribes") # dataset included in signnet
 ```
@@ -83,9 +83,11 @@ balance_score(tribes, method = "triangles")
 ```
 The method based on triangles simply counts the fraction of triangles that are balanced.
 Alternatively, the frustration index can be used, which computes the minimum number of edges 
-whose removal results in a balance network [@aw-bfsn-19]. 
+whose removal results in a balance network [@aw-bfsn-19]. To use the function `frustation_exact()`, 
+`ompr` and its auxiliary packages need to be installed first [@s-omsmilp-22].
 
 ```R
+install.packages(c("ompr", "ompr.roi", "ROI", "ROI.plugin.glpk"))
 frustration_exact(tribes)
 #> $frustration
 #> [1] 7
@@ -97,9 +99,6 @@ frustration_exact(tribes)
 The return value `partition` gives the optimal partition into the two node sets for 
 which the optimal frustration is achieved. The implemented algorithm can deal with fairly large 
 networks, even though the problem is NP hard [@an-dcopsnpc-20].
-
-To use `frustation_exact()`, the package `ompr` and its auxiliary packages need to be installed
-separately [@s-omsmilp-22].
 
 ## Blockmodeling
 In signed blockmodeling, the goal is to determine $k$ blocks of nodes such that
