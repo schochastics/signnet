@@ -42,8 +42,9 @@ social media [@klb-szmsnne-09]. General purpose packages for network analysis
 such as `igraph` [@cn-ispcnr-06] and `sna` [@b-snas-08] implement all commonly
 used network analytic methods but do not offer any functionality for signed
 networks. `signnet` closes this gap and makes many tools for signed
-network available in R. The package has already found its place in empirical research
-[@csr-avacpbsn-22;@fmtk-ergmdsnair-22].
+networks available in R. The package has already found its place in empirical research
+[@csr-avacpbsn-22;@fmtk-ergmdsnair-22] and the R package `backbone` [@n-brpenb-22] uses the data 
+structure suggested by `signnet` for signed backbones of networks.  
 
 # Implementation details
 The package is modeled with `igraph` compatibility in mind and follows its
@@ -60,6 +61,7 @@ This section highlights some of the main methods implemented in the package.
 For more details for each subsection see the respective package vignette. 
 
 ```R
+install.packages("signnet"")
 library(signnet)
 data("tribes") # dataset included in signnet
 ```
@@ -93,8 +95,11 @@ frustration_exact(tribes)
 ```
 
 The return value `partition` gives the optimal partition into the two node sets for 
-which the optimal frustration is achieved. Note that the problem is NP hard and 
-frustration can thus only be calculated for rather small signed networks.
+which the optimal frustration is achieved. The implemented algorithm can deal with fairly large 
+networks, even though the problem is NP hard [@an-dcopsnpc-20].
+
+To use `frustation_exact()`, the package `ompr` and its auxiliary packages need to be installed
+separately [@s-omsmilp-22].
 
 ## Blockmodeling
 In signed blockmodeling, the goal is to determine $k$ blocks of nodes such that
@@ -163,11 +168,11 @@ pn_index(g)
 
 ## Signed two-mode networks
 A common analytic tool for two-mode networks is to project the network onto on
-relevant mode. This is easily done using the adjacency matrix $𝐴$. $𝐴𝐴^𝑇$
-yields the row projection and $𝐴^𝑇𝐴$ the column projection. The resulting
+relevant mode. This is easily done using the adjacency matrix $A$. $AA^T$
+yields the row projection and $A^TA$ the column projection. The resulting
 networks will thus be weighted. Several methods exist to turn a weighted
 projection into an unweighted network where only the most significant edges are
-included [@dns-brpebbp-21]. Projecting signed networks is not as
+included [@n-brpenb-22]. Projecting signed networks is not as
 straightforward, because "nullification" of edges can occur. @s-pstn-21
 introduces two methods to deal with this issue which are implemented in
 `signnet`. The trick is to convert the signed network into an a special
