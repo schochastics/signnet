@@ -68,7 +68,8 @@ balance_score(tribes,method = "frustration")
 ```
 
 For directed signed networks, `triad_census_signed()` can be used to
-compute the count for all 138 non-isomorphic signed triads.
+compute the count for all 138 non-isomorphic signed triads. *(The figure
+below shows all 138 signed triads that can occur in a directed network)*
 <img src="man/figures/signed_triads.png"/>
 
 # Blockmodeling
@@ -82,7 +83,7 @@ are negative.
 clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
 clu
 #> $membership
-#>  [1] 1 1 3 3 2 3 3 3 2 2 3 3 2 2 1 1
+#>  [1] 3 3 2 2 1 2 2 2 1 1 2 2 1 1 3 3
 #> 
 #> $criterion
 #> [1] 2
@@ -138,7 +139,7 @@ blockmat
 clu <- signed_blockmodel_general(g,blockmat,0.5)
 clu
 #> $membership
-#>  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
+#>  [1] 3 2 2 2 2 1 1 1 1 1 3 1 3 1 3
 #> 
 #> $criterion
 #> [1] 0
