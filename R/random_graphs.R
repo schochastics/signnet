@@ -45,7 +45,7 @@ sample_bipartite_signed <- function(n1, n2, p, p_neg, directed = FALSE, mode = c
 
 
 
-#' @title A graph with random subgraphs conected by negative edges
+#' @title A graph with random subgraphs connected by negative edges
 #' @description Create a number of Erdos-Renyi random graphs with identical parameters, and connect them with the specified number of negative ties.
 #' @param islands.n The number of islands in the graph.
 #' @param islands.size The size of the islands in the graph.
@@ -85,7 +85,7 @@ sample_islands_signed <- function(islands.n, islands.size, islands.pin, n.inter)
     tmp <- cbind(from, to, -1)
     el <- rbind(el, tmp)
   }
-  g <- igraph::graph_from_edgelist(el[, 1:2], directed = F)
+  g <- igraph::graph_from_edgelist(el[, 1:2], directed = FALSE)
   igraph::E(g)$sign <- el[, 3]
   igraph::V(g)$grp <- as.character(rep(1:islands.n, each = islands.size))
   g <- igraph::delete.edges(g, which(igraph::is.multiple(g)))
@@ -120,7 +120,7 @@ graph_circular_signed <- function(n, r = 1, pos = 0.1, neg = 0.1) {
   N <- (D >= anti & D != 0) + 0
 
   A <- P - N
-  g <- igraph::graph_from_adjacency_matrix(A, mode = "undirected", weighted = T)
+  g <- igraph::graph_from_adjacency_matrix(A, mode = "undirected", weighted = TRUE)
   igraph::E(g)$sign <- ifelse(igraph::E(g)$weight == 1, 1, -1)
   g <- igraph::delete_edge_attr(g, "weight")
   igraph::V(g)$x <- pts$x

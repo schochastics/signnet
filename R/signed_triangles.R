@@ -103,7 +103,7 @@ signed_triangles <- function(g) {
 #' @description Counts the number of all possible signed triangles (+++),(++-), (+--) and (---)
 #'
 #' @param g igraph object.
-#' @param attr edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param attr edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @return counts for all complex triangle types
 #' @author David Schoch
 #' @seealso [signed_triangles]

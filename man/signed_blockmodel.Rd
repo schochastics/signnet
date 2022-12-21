@@ -2,7 +2,7 @@
 % Please edit documentation in R/blockmodel.R
 \name{signed_blockmodel}
 \alias{signed_blockmodel}
-\title{Blockmodelling for signed networks}
+\title{Blockmodeling for signed networks}
 \usage{
 signed_blockmodel(g, k, alpha = 0.5, annealing = FALSE)
 }
@@ -24,7 +24,7 @@ Finds blocks of nodes with intra-positive and inter-negative edges
 \details{
 The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
 where N is the total number of negative ties within plus-sets and P be the total number of
-positive ties between plus-sets. This function implementes the structural balance model. That is,
+positive ties between plus-sets. This function implements the structural balance model. That is,
 all diagonal blocks are positive and off-diagonal blocks negative.
 For the generalized version see \link{signed_blockmodel_general}.
 }

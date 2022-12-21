@@ -2,7 +2,7 @@
 % Please edit documentation in R/random_graphs.R
 \name{sample_islands_signed}
 \alias{sample_islands_signed}
-\title{A graph with random subgraphs conected by negative edges}
+\title{A graph with random subgraphs connected by negative edges}
 \usage{
 sample_islands_signed(islands.n, islands.size, islands.pin, n.inter)
 }

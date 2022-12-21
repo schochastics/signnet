@@ -2,7 +2,7 @@
 % Please edit documentation in R/blockmodel.R
 \name{signed_blockmodel_general}
 \alias{signed_blockmodel_general}
-\title{Generalized blockmodelling for signed networks}
+\title{Generalized blockmodeling for signed networks}
 \usage{
 signed_blockmodel_general(g, blockmat, alpha = 0.5)
 }

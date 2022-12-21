@@ -1,4 +1,4 @@
-#' @title Blockmodelling for signed networks
+#' @title Blockmodeling for signed networks
 #' @description Finds blocks of nodes with intra-positive and inter-negative edges
 #' @param g igraph object with a sign edge attribute.
 #' @param k number of blocks
@@ -7,7 +7,7 @@
 #' @return numeric vector of block assignments and the associated criterion value
 #' @details The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
 #' where N is the total number of negative ties within plus-sets and P be the total number of
-#' positive ties between plus-sets. This function implementes the structural balance model. That is,
+#' positive ties between plus-sets. This function implements the structural balance model. That is,
 #' all diagonal blocks are positive and off-diagonal blocks negative.
 #' For the generalized version see [signed_blockmodel_general].
 #' @author David Schoch
@@ -64,7 +64,7 @@ signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
 }
 
 
-#' @title Generalized blockmodelling for signed networks
+#' @title Generalized blockmodeling for signed networks
 #' @description Finds blocks of nodes with specified inter/intra group ties
 #' @param g igraph object with a sign edge attribute.
 #' @param blockmat Integer Matrix. Specifies the inter/intra group patterns of ties
@@ -118,7 +118,7 @@ signed_blockmodel_general <- function(g, blockmat, alpha = 0.5) {
 
 
 genclu <- function(blocks, A, alpha, k) {
-  v <- sample(1:length(blocks), 1)
+  v <- sample(seq_along(blocks), 1)
   clu <- 1:k
   clu <- clu[-blocks[v]]
   knew <- sample(clu, 1)

@@ -9,7 +9,7 @@ complex_walks(g, attr, k)
 \arguments{
 \item{g}{igraph object.}
 
-\item{attr}{edge attribute that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.}
+\item{attr}{edge attribute that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.}
 
 \item{k}{integer. length of walks}
 }

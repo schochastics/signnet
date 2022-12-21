@@ -9,7 +9,7 @@ as_complex_edges(g, attr = "type")
 \arguments{
 \item{g}{igraph object. Must have a "sign" edge attribute.}
 
-\item{attr}{new edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.}
+\item{attr}{new edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.}
 }
 \value{
 igraph object

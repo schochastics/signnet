@@ -2,36 +2,41 @@ Package: signnet
 Title: Methods to Analyse Signed Networks
 Version: 1.0.0
 Authors@R: 
-    person(given = "David",
-           family = "Schoch",
-           role = c("aut", "cre"),
-           email = "david@schochastics.net",
+    person("David", "Schoch", , "david@schochastics.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2952-4812"))
-Description: Methods for the analysis of signed networks. This includes several measures for structural balance as introduced by Cartwright and Harary (1956) <doi:10.1037/h0046049>, blockmodeling algorithms from Doreian (2008) <doi:10.1016/j.socnet.2008.03.005>, various centrality indices, and projections of signed two-mode networks introduced by Schoch (2020) <doi:10.1080/0022250X.2019.1711376>.
-Depends: R (>= 3.2.0)
-URL: https://github.com/schochastics/signnet, http://signnet.schochastics.net/
-BugReports: https://github.com/schochastics/signnet/issues
+Description: Methods for the analysis of signed networks. This includes
+    several measures for structural balance as introduced by Cartwright
+    and Harary (1956) <doi:10.1037/h0046049>, blockmodeling algorithms
+    from Doreian (2008) <doi:10.1016/j.socnet.2008.03.005>, various
+    centrality indices, and projections of signed two-mode networks
+    introduced by Schoch (2020) <doi:10.1080/0022250X.2019.1711376>.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
+URL: https://github.com/schochastics/signnet,
+    http://signnet.schochastics.net/
+BugReports: https://github.com/schochastics/signnet/issues
+Depends: 
+    R (>= 3.2.0)
 Imports: 
     igraph,
-    Rcpp,
-    Matrix
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+    Matrix,
+    Rcpp
 Suggests: 
-    testthat (>= 2.1.0),
     covr,
     ggplot2,
     ggraph,
     knitr,
-    rmarkdown,
     ompr,
     ompr.roi,
+    rmarkdown,
+    ROI,
     ROI.plugin.glpk,
-    ROI
+    testthat (>= 2.1.0)
 LinkingTo: 
     Rcpp,
     RcppArmadillo
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1

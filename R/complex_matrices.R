@@ -50,7 +50,7 @@ as_incidence_signed <- function(g,sparse = FALSE){
 #' This function returns the adjacency matrix for a signed graph that contains ambivalent ties
 #'
 #' @param g igraph object
-#' @param attr edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param attr edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @return complex adjacency matrix
 #' @seealso [as_adj_signed]
 #' @export
@@ -84,7 +84,7 @@ as_adj_complex <- function(g,attr){
 #' @title Complex Graph Laplacian
 #' @description The Laplacian of a signed graph containing ambivalent ties.
 #' @param g igraph object.
-#' @param attr edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param attr edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @param norm Whether to calculate the normalized Laplacian. See definitions below.
 #' @details
 #' See \link[igraph]{laplacian_matrix} of igraph for more details. In the complex case, D is a diagonal matrix containing the absolute values of row sums of the complex adjacency matrix.
@@ -115,7 +115,7 @@ laplacian_matrix_complex <- function(g,attr,norm = FALSE){
 #' @title Complex Incidence Matrix
 #' @description The complex incidence matrix of a signed graph containing ambivalent ties.
 #' @param g igraph object.
-#' @param attr edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param attr edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @details
 #' This function is slightly different than \link[igraph]{as_incidence_matrix} since it is defined for bipartite graphs.
 #' The incidence matrix here is defined as a \eqn{S \in C^{n,m}}, where n is the number of vertices and m the number of edges. Edges (i,j) are oriented such that i<j and entries are defined as
@@ -155,7 +155,7 @@ as_incidence_complex <- function(g,attr){
 
 #' @title Convert Signed Network to Complex
 #' @param g igraph object. Must have a "sign" edge attribute.
-#' @param attr new edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param attr new edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @return igraph object
 #' @author David Schoch
 #' @examples
@@ -182,7 +182,7 @@ as_complex_edges <- function(g,attr = "type"){
 
 #' @title Count Walks in complex signed network
 #' @param g igraph object.
-#' @param attr edge attribute that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.
+#' @param attr edge attribute that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @param k integer. length of walks
 #' @return igraph object
 #' @author David Schoch

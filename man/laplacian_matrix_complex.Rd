@@ -9,7 +9,7 @@ laplacian_matrix_complex(g, attr, norm = FALSE)
 \arguments{
 \item{g}{igraph object.}
 
-\item{attr}{edge attribute name that encodes positve ("P"), negative ("N") and ambivalent ("A") ties.}
+\item{attr}{edge attribute name that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.}
 
 \item{norm}{Whether to calculate the normalized Laplacian. See definitions below.}
 }
