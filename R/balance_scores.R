@@ -93,18 +93,6 @@ frustration_exact <- function(g, ...) {
   d <- rowSums(A)
   n <- igraph::vcount(g)
 
-  # binary linear model
-  # m_neg <- sum(A==-1)/2
-  # result <- ompr::MIPModel()
-  # result <- ompr::add_variable(result, y[i], i = 1:n, type = "binary")
-  # result <- ompr::add_variable(result, x[i, j], i = 1:n, j = 1:n,i<j & A[i,j]!=0 ,type = "binary")
-  # result <- ompr::set_objective(
-  #   result,
-  #   ompr::sum_over(d[i]*y[i],i=1:n) -
-  #     ompr::sum_over(2*A[i,j]*x[i,j],i=1:n,j=1:n,i<j & A[i,j]!=0)+m_neg,"min")
-  # result <- ompr::add_constraint(result, x[i,j]<=(y[i]+y[j])/2,i=1:n,j=1:n,i<j & A[i,j]==1)
-  # result <- ompr::add_constraint(result, x[i,j]>= y[i]+y[j]-1,i=1:n,j=1:n,i<j & A[i,j]==-1)
-  # result <- ompr::solve_model(result, ompr.roi::with_ROI(solver = "glpk", ...))
   x <- matrix(0, n, n)
   y <- rep(0, n)
   i <- j <- 0

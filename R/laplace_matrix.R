@@ -30,32 +30,3 @@ laplacian_matrix_signed <- function(g, norm = FALSE, sparse = FALSE) {
   }
   return(L)
 }
-
-
-#' @title Angle between Eigenvectors
-#' @description Computes the angle between eigenvectors of the signed or complex Laplacian.
-#' @param g igraph object with a sign edge attribute.
-#' @param type string. either "sign" for signed Laplacian or "complex" for complex Laplacian. Defaults to "sign"
-#' @param ... additional parameters for Laplacian matrix such as the attribute containing "P","N" and "A" for the complex Laplacian
-#' @details angle between eigenvectors and zero.
-#' @return a numeric matrix
-#' @author David Schoch
-#' @examples
-#' library(igraph)
-#' g <- sample_islands_signed(3, 10, 5 / 10, 1)
-#' laplacian_angle(g)
-#
-# laplacian_angle <- function(g, type = "sign", ...) {
-#   type <- match.arg(type, c("sign", "complex"))
-#   if (type == "sign") {
-#     L <- laplacian_matrix_signed(g, ...)
-#     sL <- eigen(L)
-#     n <- igraph::vcount(g)
-#     round(atan2(sL$vectors[, n - 1], sL$vectors[, n]), 8)
-#   } else {
-#     L <- laplacian_matrix_complex(g, ...)
-#     sL <- eigen(L)
-#     n <- igraph::vcount(g)
-#     round(atan2(Im(sL$vectors[, n - 1]), Re(sL$vectors[, n - 1])), 8)
-#   }
-# }
