@@ -58,7 +58,8 @@ and `triad_census_signed()`.
 # Functionalities
 
 This section highlights some of the main methods implemented in the package. 
-For more details for each subsection see the respective package vignette. 
+For more details for each subsection see the respective package vignette or 
+consult <http://signnet.schochastics.net/>.
 
 ```R
 install.packages("signnet")
