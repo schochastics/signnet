@@ -48,9 +48,9 @@ structure suggested by `signnet` for signed backbones of networks.
 
 # Implementation details
 The package is modeled with `igraph` compatibility in mind and follows its
-function naming scheme. All functions in the package assume that an igraph object is a
+function naming scheme. All functions in the package assume that an `igraph` object is a
 signed network if it has an edge attribute "sign" with values 1 (positive) or -1
-(negative). If a function from igraph was adapted for signed networks, it can be
+(negative). If a function from `igraph` was adapted for signed networks, it can be
 called via `<igraph_name>_signed()`. Prominent examples include
 `as_adj_signed()`, `graph_from_adjacency_matrix_signed()`, `degree_signed()`,
 and `triad_census_signed()`.
