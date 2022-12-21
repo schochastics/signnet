@@ -105,7 +105,21 @@ clu
 ggblock(g,clu$membership,show_blocks = TRUE,show_labels = FALSE)
 ```
 
-## Code of Conduct
+# How to reach out? 
 
-Please note that the netrankr project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+### Where do I report bugs?
+
+Simply [open an issue](https://github.com/schochastics/signnet/issues/new) on GitHub.
+
+### How do I contribute to the package?
+
+If you have an idea (but no code yet), [open an issue](https://github.com/schochastics/signnet/issues/new) on GitHub. If you want to contribute with a specific feature and have the code ready, fork the repository, add your code, and create a pull request.
+
+### Do you need support?
+
+The easiest way is to [open an issue](https://github.com/schochastics/signnet/issues/new) - this way, your question is also visible to others who may face similar problems.
+
+### Code of Conduct
+
+Please note that the signnet project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
