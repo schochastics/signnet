@@ -116,12 +116,12 @@ signed_blockmodel_general <- function(g, blockmat, alpha = 0.5) {
   res
 }
 
-
+# helper function to create a new solution during simulated annealing
 genclu <- function(blocks, A, alpha, k) {
   v <- sample(seq_along(blocks), 1)
   clu <- 1:k
   clu <- clu[-blocks[v]]
-  knew <- sample(clu, 1)
-  blocks[v] <- knew
+  new <- sample(clu, 1)
+  blocks[v] <- new
   blocks
 }

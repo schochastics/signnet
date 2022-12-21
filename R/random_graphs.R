@@ -128,7 +128,7 @@ graph_circular_signed <- function(n, r = 1, pos = 0.1, neg = 0.1) {
   g
 }
 
-# helper
+# create points on a circle with radius r around center
 circleFun <- function(center = c(0, 0), r = 1, npoints = 20) {
   pts_seq <- seq(0, 2 * pi, length.out = npoints * 100)
   pts_samp <- sample(pts_seq, npoints)
@@ -138,6 +138,7 @@ circleFun <- function(center = c(0, 0), r = 1, npoints = 20) {
   return(data.frame(x = xx, y = yy))
 }
 
+# distance between two points x and y on a circle with radius r
 arc_dist <- function(x, y, r) {
   c <- sqrt((x[1] - y[1])^2 + (x[2] - y[2])^2)
   theta <- acos((2 * r^2 - c^2) / (2 * r^2))
