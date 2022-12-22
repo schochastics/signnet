@@ -1,9 +1,9 @@
-# Update from 0.8.0 to 0.8.1
+# Update from 0.8.1 to 1.0.0
 
-- fixed errors on CRAN
+added some utility functions and random graph models
 
 ## Test environments
-* ubuntu 20.04, R 4.1.2
+* ubuntu 20.04, R 4.2.2
 * win-builder (devel and release)
 
 ## R CMD check results
