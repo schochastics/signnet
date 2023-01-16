@@ -1,3 +1,7 @@
+# signnet 1.0.1
+
+* fixed an error which occurs with teh new version of igraph (https://github.com/igraph/rigraph/pull/633)
+
 # signnet 1.0.0
 
 * added code of conduct
