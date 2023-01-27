@@ -127,7 +127,7 @@ ggblock(tribes, tribe_blocks$membership, show_blocks = TRUE)
 ```
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.5\textwidth]{man/figures/block_example.pdf}
+  \includegraphics[width=0.5\textwidth]{../man/figures/block_example.pdf}
   \caption{Blocks of the tribes network. Blue squares indicate positive and red
   squares negative ties.}
   \label{fig:block_ex}

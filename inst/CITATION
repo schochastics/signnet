@@ -1,12 +1,17 @@
 citHeader("To cite signnet in publications use:")
 
-citEntry(entry = "Manual",
-  title        = "signnet: An R package to analyze signed networks",
-  author       = personList(as.person("David Schoch")),
-  year         = "2020",
-  url          = "https://github.com/schochastics/signnet",
+citEntry(entry = "article",
+  doi = "10.21105/joss.04987",
+  url = "https://doi.org/10.21105/joss.04987",
+  year = "2023",
+  publisher = "The Open Journal",
+  volume = "8",
+  number = "81",
+  pages = "4987",
+  author = "David Schoch",
+  title = "signnet: An R package for analyzing signed networks",
+  journal = "Journal of Open Source Software",
 
   textVersion  =
-  paste("David Schoch (2020).",
-        "signnet: An R package to analyze signed networks")
+  "Schoch, D., (2023). signnet: An R package for analyzing signed networks. Journal of Open Source Software, 8(81), 4987, https://doi.org/10.21105/joss.04987"
 )
