@@ -1,16 +1,12 @@
-# Update from 0.8.1 to 1.0.0
+# Update from 1.0.0 to 1.0.1
 
-added some utility functions and random graph models
+- fixed an error check message that will occur with the new version of igraph  
+- added JOSS paper citation
 
 ## Test environments
-* ubuntu 20.04, R 4.2.2
+* ubuntu 22.04, R 4.2.2
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-checking installed package size ... NOTE
-    installed size is  7.9Mb
-    sub-directories of 1Mb or more:
-      libs   6.3Mb
+0 errors | 0 warnings | 0 notes
