@@ -11,8 +11,7 @@ Description: Methods for the analysis of signed networks. This includes
     centrality indices, and projections of signed two-mode networks
     introduced by Schoch (2020) <doi:10.1080/0022250X.2019.1711376>.
 License: MIT + file LICENSE
-URL: https://github.com/schochastics/signnet,
-    http://signnet.schochastics.net/
+URL: https://github.com/schochastics/signnet, https://schochastics.github.io/signnet/
 BugReports: https://github.com/schochastics/signnet/issues
 Depends: 
     R (>= 3.2.0)

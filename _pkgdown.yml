@@ -1,44 +1,25 @@
-title: signnet
-destination: ../pkgdown_sites/signnet
-home:
-  title: R package for signed network analysis
-  description: Implements several methods to analyse signed networks
+url: https://schochastics.github.io/signnet/
 template:
-  opengraph:
-    image:
-      src: man/figures/logo.png
-      alt: "signnet - Signed network analysis in R"
-    twitter:
-      creator: "@schochastics"
-      card: summary_large_image
-  params:
-    bootswatch: simplex
-
+  bootstrap: 5
+  bslib:
+    bg: '#F9F7F7'
+    fg: '#112D4E'
+    primary: '#3F72AF'
+    text-muted: '#FFFFFF'
+    base_font:
+      google: Roboto
+    heading_font:
+      google: Roboto Slab
+    code_font:
+      google: JetBrains Mono
 navbar:
-  left:
-    - icon: fa-home
-      href: index.html
-    - text: Tutorials
-      menu:
-      -  text: Signed Networks
-         href: articles/signed_networks.html
-      -  text: Structural Balance
-         href: articles/structural_balance.html
-      -  text: Blockmodeling
-         href: articles/blockmodeling.html
-      -  text: Centrality
-         href: articles/centrality.html
-      -  text: Signed Two-Mode Networks
-         href: articles/signed_2mode.html
-      -  text: Complex Matrices
-         href: articles/complex_matrices.html
-  right:
-      - icon: fa-newspaper-o
-        text: "News"
-        href: news/index.html
-      - icon: fa-file-code-o
-        text: "Functions"
-        href: reference/index.html
-      - icon: fa-github fa-lg
-        text: "Github"
-        href: https://github.com/schochastics/signnet
+  bg: none
+  type: light
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - news
+    right: github
+
