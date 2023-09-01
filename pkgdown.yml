@@ -1,0 +1,15 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  blockmodeling: blockmodeling.html
+  centrality: centrality.html
+  complex_matrices: complex_matrices.html
+  signed_2mode: signed_2mode.html
+  signed_networks: signed_networks.html
+  structural_balance: structural_balance.html
+last_built: 2023-09-01T16:44Z
+urls:
+  reference: https://schochastics.github.io/signnet/reference
+  article: https://schochastics.github.io/signnet/articles
+
