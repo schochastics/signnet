@@ -1,6 +1,7 @@
 citHeader("To cite signnet in publications use:")
 
-citEntry(entry = "article",
+bibentry(
+  bibtype = "Article",
   doi = "10.21105/joss.04987",
   url = "https://doi.org/10.21105/joss.04987",
   year = "2023",
