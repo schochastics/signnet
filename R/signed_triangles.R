@@ -94,9 +94,9 @@ signed_triangles <- function(g) {
   semat[, 2] <- eattrV[emat[, 2]]
   semat[, 3] <- eattrV[emat[, 3]]
   cls <- apply(semat, 1, function(v) length(which(v == 1)))
-  emat <- cbind(emat, unname(cls))
-  colnames(emat) <- c("V1", "V2", "V3", "P")
-  emat
+  tmat <- cbind(tmat, unname(cls))
+  colnames(tmat) <- c("V1", "V2", "V3", "P")
+  tmat
 }
 
 #' @title count complex triangles

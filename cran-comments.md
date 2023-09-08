@@ -1,10 +1,10 @@
-# Update from 1.0.0 to 1.0.1
+# Update from 1.0.1 to 1.0.2
 
-- fixed an error check message that will occur with the new version of igraph  
-- added JOSS paper citation
+- fixed a bug that made `signed_triangles()` return wrong vertex ids.
+
 
 ## Test environments
-* ubuntu 22.04, R 4.2.2
+* ubuntu 22.04, R 4.3.1
 * win-builder (devel and release)
 
 ## R CMD check results
