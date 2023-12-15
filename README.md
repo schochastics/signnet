@@ -10,7 +10,7 @@
 status](https://www.r-pkg.org/badges/version/signnet)](https://cran.r-project.org/package=signnet)
 [![Downloads](https://cranlogs.r-pkg.org/badges/signnet)](https://CRAN.R-project.org/package=signnet)
 [![Codecov test
-coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)](https://app.codecov.io/gh/schochastics/signnet?branch=master)
+coverage](https://codecov.io/gh/schochastics/signnet/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schochastics/signnet?branch=main)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7522563.svg)](https://doi.org/10.5281/zenodo.7522563)
 [![JOSS](https://joss.theoj.org/papers/10.21105/joss.04987/status.svg)](https://doi.org/10.21105/joss.04987)
 <!-- badges: end -->
@@ -61,11 +61,11 @@ library(igraph)
 library(signnet)
 data("tribes")
 
-balance_score(tribes,method = "triangles")
+balance_score(tribes, method = "triangles")
 #> [1] 0.867647
-balance_score(tribes,method = "walk")
+balance_score(tribes, method = "walk")
 #> [1] 0.357576
-balance_score(tribes,method = "frustration")
+balance_score(tribes, method = "frustration")
 #> [1] 0.758621
 ```
 
@@ -83,7 +83,7 @@ groups such that intra group edges are positive and inter group edges
 are negative.
 
 ``` r
-clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
+clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 clu
 #> $membership
 #>  [1] 1 1 3 3 2 3 3 3 2 2 3 3 2 2 1 1
@@ -104,7 +104,7 @@ The result of the blockmodel can be visualized with `ggblock` (requires
 `ggplot2`)
 
 ``` r
-ggblock(tribes,clu$membership,show_blocks = TRUE,show_labels = TRUE)
+ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
 ```
 
 <img src="man/figures/README-block_example-1.png" width="100%" />
@@ -124,29 +124,29 @@ V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)
 V(g3)$name <- as.character(11:15)
 
-g <- Reduce("%u%",list(g1,g2,g3))
+g <- Reduce("%u%", list(g1, g2, g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
-g <- add.edges(g,c(rbind(1:5,6:10)),attr = list(sign=-1))
-g <- add.edges(g,c(rbind(1:5,11:15)),attr = list(sign=-1))
-g <- add.edges(g,c(rbind(11:15,6:10)),attr = list(sign=1))
+g <- add.edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
+g <- add.edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
+g <- add.edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
 
 # specify the link patterns between groups
-blockmat <- matrix(c(1,-1,-1,-1,1,1,-1,1,-1),3,3,byrow = TRUE)
+blockmat <- matrix(c(1, -1, -1, -1, 1, 1, -1, 1, -1), 3, 3, byrow = TRUE)
 blockmat
 #>      [,1] [,2] [,3]
 #> [1,]    1   -1   -1
 #> [2,]   -1    1    1
 #> [3,]   -1    1   -1
 
-clu <- signed_blockmodel_general(g,blockmat,0.5)
+clu <- signed_blockmodel_general(g, blockmat, 0.5)
 clu
 #> $membership
 #>  [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3
 #> 
 #> $criterion
 #> [1] 0
-ggblock(g,clu$membership,show_blocks = TRUE,show_labels = FALSE)
+ggblock(g, clu$membership, show_blocks = TRUE, show_labels = FALSE)
 ```
 
 <img src="man/figures/README-general_example-1.png" width="100%" />

@@ -6,10 +6,10 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    out.width = "100%"
 )
 ```
 # signnet <img src="man/figures/logo.png" align="right"/>
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/schochastics/signnet/workflows/R-CMD-check/badge.svg)](https://github.com/schochastics/signnet/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/signnet)](https://cran.r-project.org/package=signnet)
 [![Downloads](https://cranlogs.r-pkg.org/badges/signnet)](https://CRAN.R-project.org/package=signnet)
-[![Codecov test coverage](https://codecov.io/gh/schochastics/signnet/branch/master/graph/badge.svg)]( https://app.codecov.io/gh/schochastics/signnet?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/schochastics/signnet/branch/main/graph/badge.svg)]( https://app.codecov.io/gh/schochastics/signnet?branch=main)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7522563.svg)](https://doi.org/10.5281/zenodo.7522563)
 [![JOSS](https://joss.theoj.org/papers/10.21105/joss.04987/status.svg)](https://doi.org/10.21105/joss.04987)
 <!-- badges: end -->
@@ -54,9 +54,9 @@ library(igraph)
 library(signnet)
 data("tribes")
 
-balance_score(tribes,method = "triangles")
-balance_score(tribes,method = "walk")
-balance_score(tribes,method = "frustration")
+balance_score(tribes, method = "triangles")
+balance_score(tribes, method = "walk")
+balance_score(tribes, method = "frustration")
 ```
 
 For directed signed networks, `triad_census_signed()` can be used to compute the count for all 138 non-isomorphic signed triads.
@@ -69,7 +69,7 @@ The package implements two different blockmodeling algorithms. The classic one t
 network into a specified set of groups such that intra group edges are positive and inter group edges are negative.
 
 ```{r block_code,message=FALSE}
-clu <- signed_blockmodel(tribes,k = 3,alpha = 0.5,annealing = TRUE)
+clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 clu
 ```
 
@@ -79,7 +79,7 @@ The algorithm is not exact and just a heuristic. If `annealing = TRUE`, then sim
 
 The result of the blockmodel can be visualized with `ggblock` (requires `ggplot2`)
 ```{r block_example}
-ggblock(tribes,clu$membership,show_blocks = TRUE,show_labels = TRUE)
+ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
 ```
 
 
@@ -92,20 +92,20 @@ V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)
 V(g3)$name <- as.character(11:15)
 
-g <- Reduce("%u%",list(g1,g2,g3))
+g <- Reduce("%u%", list(g1, g2, g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
-g <- add.edges(g,c(rbind(1:5,6:10)),attr = list(sign=-1))
-g <- add.edges(g,c(rbind(1:5,11:15)),attr = list(sign=-1))
-g <- add.edges(g,c(rbind(11:15,6:10)),attr = list(sign=1))
+g <- add.edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
+g <- add.edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
+g <- add.edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
 
 # specify the link patterns between groups
-blockmat <- matrix(c(1,-1,-1,-1,1,1,-1,1,-1),3,3,byrow = TRUE)
+blockmat <- matrix(c(1, -1, -1, -1, 1, 1, -1, 1, -1), 3, 3, byrow = TRUE)
 blockmat
 
-clu <- signed_blockmodel_general(g,blockmat,0.5)
+clu <- signed_blockmodel_general(g, blockmat, 0.5)
 clu
-ggblock(g,clu$membership,show_blocks = TRUE,show_labels = FALSE)
+ggblock(g, clu$membership, show_blocks = TRUE, show_labels = FALSE)
 ```
 
 # How to reach out? 
