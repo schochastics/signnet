@@ -20,9 +20,9 @@ igraph object
 Count Walks in complex signed network
 }
 \examples{
-g <- sample_islands_signed(2,10,1,10)
-g <- as_complex_edges(g,attr="type")
-complex_walks(g,attr="type",k = 3)
+g <- sample_islands_signed(2, 10, 1, 10)
+g <- as_complex_edges(g, attr = "type")
+complex_walks(g, attr = "type", k = 3)
 }
 \author{
 David Schoch
