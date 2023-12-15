@@ -27,40 +27,38 @@
 #' table(clu$membership)
 #' clu$criterion
 #' @export
-#'
-
 signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
-  if (missing(k)) {
-    stop('argument "k" is missing, with no default')
-  }
-  A <- igraph::get.adjacency(g, "both", "sign", sparse = TRUE)
-  if (!annealing) {
-    init_cluster <- sample(0:(k - 1), nrow(A), replace = TRUE)
-    res <- optimBlocks1(A, init_cluster, k, alpha)
-    res$membership <- res$membership + 1
-  } else {
-    init_cluster <- sample(1:k, nrow(A), replace = TRUE)
-    tmp <- stats::optim(
-      par = init_cluster, fn = blockCriterion1, A = A, alpha = alpha, k = k, gr = genclu, method = "SANN",
-      control = list(
-        maxit = 50000, temp = 100, tmax = 500, trace = FALSE,
-        REPORT = 5
-      )
-    )
-    tmp <- stats::optim(
-      par = tmp$par, fn = blockCriterion1, A = A, alpha = alpha, k = k, gr = genclu, method = "SANN",
-      control = list(
-        maxit = 5000, temp = 5, tmax = 500, trace = FALSE,
-        REPORT = 5
-      )
-    )
+    if (!is_signed(g)) {
+        stop("network is not a signed graph")
+    }
+    if (missing(k)) {
+        stop('argument "k" is missing, with no default')
+    }
+    A <- igraph::get.adjacency(g, "both", "sign", sparse = TRUE)
+    if (!annealing) {
+        init_cluster <- sample(0:(k - 1), nrow(A), replace = TRUE)
+        res <- optimBlocks1(A, init_cluster, k, alpha)
+        res$membership <- res$membership + 1
+    } else {
+        init_cluster <- sample(1:k, nrow(A), replace = TRUE)
+        tmp <- stats::optim(
+            par = init_cluster, fn = blockCriterion1, A = A, alpha = alpha, k = k, gr = genclu, method = "SANN",
+            control = list(
+                maxit = 50000, temp = 100, tmax = 500, trace = FALSE,
+                REPORT = 5
+            )
+        )
+        tmp <- stats::optim(
+            par = tmp$par, fn = blockCriterion1, A = A, alpha = alpha, k = k, gr = genclu, method = "SANN",
+            control = list(
+                maxit = 5000, temp = 5, tmax = 500, trace = FALSE,
+                REPORT = 5
+            )
+        )
 
-    res <- list(membership = tmp$par, criterion = tmp$value)
-  }
-  res
+        res <- list(membership = tmp$par, criterion = tmp$value)
+    }
+    res
 }
 
 
@@ -100,28 +98,28 @@ signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
 #'
 
 signed_blockmodel_general <- function(g, blockmat, alpha = 0.5) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
-  if (missing(blockmat)) {
-    stop('argument "blockmat" is missing, with no default')
-  }
-  if (!all(blockmat %in% c(-1, 1))) {
-    stop('"blockmat" may only contain -1 and 1')
-  }
-  A <- igraph::get.adjacency(g, "both", "sign", sparse = TRUE)
-  init_cluster <- sample(0:(nrow(blockmat) - 1), nrow(A), replace = TRUE)
-  res <- optimBlocksSimS(A, init_cluster, blockmat, alpha)
-  res$membership <- res$membership + 1
-  res
+    if (!is_signed(g)) {
+        stop("network is not a signed graph")
+    }
+    if (missing(blockmat)) {
+        stop('argument "blockmat" is missing, with no default')
+    }
+    if (!all(blockmat %in% c(-1, 1))) {
+        stop('"blockmat" may only contain -1 and 1')
+    }
+    A <- igraph::get.adjacency(g, "both", "sign", sparse = TRUE)
+    init_cluster <- sample(0:(nrow(blockmat) - 1), nrow(A), replace = TRUE)
+    res <- optimBlocksSimS(A, init_cluster, blockmat, alpha)
+    res$membership <- res$membership + 1
+    res
 }
 
 # helper function to create a new solution during simulated annealing
 genclu <- function(blocks, A, alpha, k) {
-  v <- sample(seq_along(blocks), 1)
-  clu <- 1:k
-  clu <- clu[-blocks[v]]
-  new <- sample(clu, 1)
-  blocks[v] <- new
-  blocks
+    v <- sample(seq_along(blocks), 1)
+    clu <- 1:k
+    clu <- clu[-blocks[v]]
+    new <- sample(clu, 1)
+    blocks[v] <- new
+    blocks
 }
