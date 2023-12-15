@@ -100,7 +100,7 @@ ggsigned <- function(g, type = "signed", attr = NULL, edge_cols = NULL, weights 
             igraph::E(g)$weight <- 1
         }
         ggraph::ggraph(g, "stress", weights = igraph::E(g)$weight) +
-            ggraph::geom_edge_link0(ggplot2::aes_(col = ~ as.factor(sign))) +
+            ggraph::geom_edge_link0(ggplot2::aes(col = as.factor(!!ggplot2::sym("sign")))) +
             ggraph::geom_node_point(shape = 21, fill = "grey25", size = 5) +
             ggraph::scale_edge_color_manual(values = edge_cols) +
             ggraph::theme_graph() +
@@ -113,7 +113,7 @@ ggsigned <- function(g, type = "signed", attr = NULL, edge_cols = NULL, weights 
             igraph::E(g)$weight <- 1
         }
         ggraph::ggraph(g, "stress", weights = igraph::E(g)$weight) +
-            ggraph::geom_edge_link0(ggplot2::aes_(col = ~ as.factor(type))) +
+            ggraph::geom_edge_link0(ggplot2::aes(col = as.factor(!!ggplot2::sym("type")))) +
             ggraph::geom_node_point(shape = 21, fill = "grey25", size = 5) +
             ggraph::scale_edge_color_manual(values = edge_cols) +
             ggraph::theme_graph() +
