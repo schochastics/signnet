@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">signnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,13 +122,10 @@ For the generalized version see <a href="signed_blockmodel_general.html">signed_
 <span class="r-in"><span><span class="co"># Using simulated annealing (less change of getting trapped in local optima)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tribes"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">clu</span> <span class="op">&lt;-</span> <span class="fu">signed_blockmodel</span><span class="op">(</span><span class="va">tribes</span>, k <span class="op">=</span> <span class="fl">3</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, annealing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> This graph was created by an old(er) igraph version.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   Call upgrade_graph() on it to use with the current igraph version</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   For now we convert it on the fly...</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">clu</span><span class="op">$</span><span class="va">membership</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 5 7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 7 4 </span>
 <span class="r-in"><span><span class="va">clu</span><span class="op">$</span><span class="va">criterion</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 </code></pre></div>
