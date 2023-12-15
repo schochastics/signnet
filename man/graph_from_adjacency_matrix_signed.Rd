@@ -20,6 +20,6 @@ a signed network as igraph object
 Create signed graphs from adjacency matrices
 }
 \examples{
-A <- matrix(c(0,1,-1,1,0,1,-1,1,0),3,3)
+A <- matrix(c(0, 1, -1, 1, 0, 1, -1, 1, 0), 3, 3)
 graph_from_adjacency_matrix_signed(A)
 }

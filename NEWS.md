@@ -1,3 +1,7 @@
+# signnet 1.0.3
+
+* code refactoring
+
 # signnet 1.0.2
 
 * fixed a bug in `signed_triangles()` that resulted in wrong vertex ids (#20)

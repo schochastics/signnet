@@ -18,7 +18,7 @@ igraph object
 Convert Signed Network to Complex
 }
 \examples{
-g <- sample_islands_signed(2,10,1,10)
+g <- sample_islands_signed(2, 10, 1, 10)
 as_complex_edges(g)
 }
 \author{

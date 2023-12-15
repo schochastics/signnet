@@ -33,5 +33,5 @@ A signed bipartite igraph graph.
 Bipartite random signed graphs
 }
 \examples{
-sample_bipartite_signed(10,10,0.5,0.5)
+sample_bipartite_signed(10, 10, 0.5, 0.5)
 }

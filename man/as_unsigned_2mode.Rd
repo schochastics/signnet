@@ -21,14 +21,14 @@ convert signed two-mode network to unsigned
 library(igraph)
 
 # create a simple signed two mode network
-el <- matrix(c(1,"a",1,"b",1,"c",2,"a",2,"b"),ncol = 2,byrow = TRUE)
-g <- graph_from_edgelist(el,directed = FALSE)
-E(g)$sign <- c(1,1,-1,1,-1)
-V(g)$type <- c(FALSE,TRUE,TRUE,TRUE,FALSE)
+el <- matrix(c(1, "a", 1, "b", 1, "c", 2, "a", 2, "b"), ncol = 2, byrow = TRUE)
+g <- graph_from_edgelist(el, directed = FALSE)
+E(g)$sign <- c(1, 1, -1, 1, -1)
+V(g)$type <- c(FALSE, TRUE, TRUE, TRUE, FALSE)
 
 # convert to unsigned two-mode network and project
-l <- as_unsigned_2mode(g,primary = TRUE)
-p <- bipartite_projection(l,which="true")
+l <- as_unsigned_2mode(g, primary = TRUE)
+p <- bipartite_projection(l, which = "true")
 
 # turn the unsigned projection back to a signed network
 as_signed_proj(p)
