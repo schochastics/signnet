@@ -1,6 +1,8 @@
 # signnet 1.0.3
 
 * code refactoring
+* more tests #17
+* removed deprecated calls to aes_ #23
 
 # signnet 1.0.2
 
