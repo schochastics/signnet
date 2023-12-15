@@ -5,3 +5,10 @@ test_that("ggblock works", {
     expect_true(all(p$data$value %in% c(-1, 1)))
     expect_equal(length(p$layers), 3)
 })
+
+test_that("ggsigned works", {
+    data("tribes")
+    p <- ggsigned(tribes)
+    expect_true(all(p$data$value %in% c(-1, 1)))
+    expect_equal(length(p$layers), 2)
+})
