@@ -69,6 +69,10 @@ frustration_exact <- function(g, ...) {
     if (!is_signed(g)) {
         stop("network is not a signed graph")
     }
+    if (igraph::is.directed(g)) {
+        stop("g must be undirected")
+    }
+
     if (!requireNamespace("ompr", quietly = TRUE)) {
         stop("the package 'ompr' is needed for this function to work")
     }
@@ -80,12 +84,6 @@ frustration_exact <- function(g, ...) {
     }
     if (!requireNamespace("ROI.plugin.glpk", quietly = TRUE)) {
         stop("the package 'ROI.plugin.glpk' is needed for this function to work")
-    }
-    if (!"sign" %in% igraph::edge_attr_names(g)) {
-        stop("network does not have a sign edge attribute")
-    }
-    if (igraph::is.directed(g)) {
-        stop("g must be undirected")
     }
 
     A <- as_adj_signed(g)
