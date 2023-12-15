@@ -43,8 +43,8 @@ ggblock <- function(g, blocks = NULL, cols = NULL, show_blocks = FALSE, show_lab
     df[["to"]] <- factor(df[["to"]], levels = colnames(A)[permI])
     df <- df[df[["value"]] != 0, ]
     df[["value"]] <- as.factor(df[["value"]])
-    p <- ggplot2::ggplot(df, ggplot2::aes_(y = ~from, x = ~to)) +
-        ggplot2::geom_tile(ggplot2::aes_(fill = ~value), col = "white") +
+    p <- ggplot2::ggplot(df, ggplot2::aes(y = !!ggplot2::sym("from"), x = !!ggplot2::sym("to"))) +
+        ggplot2::geom_tile(ggplot2::aes(fill = !!ggplot2::sym("value")), col = "white") +
         ggplot2::scale_fill_manual(values = cols) +
         ggplot2::theme_void() +
         ggplot2::theme(legend.position = "none") +
