@@ -95,48 +95,48 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_islands_signed.html">sample_islands_signed</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_complex_edges.html">as_complex_edges</a></span><span class="op">(</span><span class="va">g</span>, attr <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">complex_walks</span><span class="op">(</span><span class="va">g</span>, attr <span class="op">=</span> <span class="st">"type"</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         [,1]   [,2]   [,3]   [,4]   [,5]   [,6]   [,7]   [,8]   [,9]  [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 84+ 0i 85+ 0i 90+ 0i 92+ 0i 83+ 0i 94+ 0i 90+ 0i 89+ 0i 83+ 0i 79+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 85+ 0i 76+ 0i 83+ 0i 82+ 0i 78+ 0i 88+ 0i 83+ 0i 82+ 0i 81+ 0i 76+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 90+ 0i 83+ 0i 80+ 0i 86+ 0i 81+ 0i 90+ 0i 84+ 0i 89+ 0i 84+ 0i 78+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 92+ 0i 82+ 0i 86+ 0i 84+ 0i 83+ 0i 92+ 0i 86+ 0i 88+ 0i 86+ 0i 80+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 83+ 0i 78+ 0i 81+ 0i 83+ 0i 72+ 0i 86+ 0i 81+ 0i 83+ 0i 79+ 0i 74+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 94+ 0i 88+ 0i 90+ 0i 92+ 0i 86+ 0i 90+ 0i 90+ 0i 92+ 0i 86+ 0i 82+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 90+ 0i 83+ 0i 84+ 0i 86+ 0i 81+ 0i 90+ 0i 80+ 0i 89+ 0i 84+ 0i 78+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 89+ 0i 82+ 0i 89+ 0i 88+ 0i 83+ 0i 92+ 0i 89+ 0i 84+ 0i 83+ 0i 80+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 83+ 0i 81+ 0i 84+ 0i 86+ 0i 79+ 0i 86+ 0i 84+ 0i 83+ 0i 78+ 0i 77+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 79+ 0i 76+ 0i 78+ 0i 80+ 0i 74+ 0i 82+ 0i 78+ 0i 80+ 0i 77+ 0i 72+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]  0+46i  0+31i  0+39i  0+39i  0+31i  0+51i  0+39i  0+39i  0+32i  0+24i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]  0+51i  0+31i  0+38i  0+38i  0+31i  0+46i  0+38i  0+39i  0+32i  0+24i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]  0+51i  0+31i  0+38i  0+38i  0+31i  0+46i  0+38i  0+39i  0+32i  0+24i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]  0+45i  0+31i  0+38i  0+38i  0+35i  0+45i  0+38i  0+38i  0+31i  0+24i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]  0+45i  0+31i  0+39i  0+39i  0+31i  0+46i  0+43i  0+38i  0+31i  0+24i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]  0+60i  0+51i  0+53i  0+59i  0+45i  0+61i  0+53i  0+59i  0+46i  0+38i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]  0+45i  0+31i  0+43i  0+39i  0+31i  0+46i  0+39i  0+38i  0+31i  0+24i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]  0+75i  0+53i  0+60i  0+61i  0+52i  0+75i  0+60i  0+67i  0+59i  0+45i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]  0+38i  0+24i  0+31i  0+31i  0+24i  0+38i  0+31i  0+31i  0+24i  0+17i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]  0+67i  0+53i  0+67i  0+67i  0+52i  0+75i  0+67i  0+61i  0+53i  0+45i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        [,11]  [,12]  [,13]  [,14]  [,15]  [,16]  [,17]   [,18]  [,19]   [,20]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  0+46i  0+51i  0+51i  0+45i  0+45i  0+60i  0+45i   0+75i  0+38i   0+67i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  0+31i  0+31i  0+31i  0+31i  0+31i  0+51i  0+31i   0+53i  0+24i   0+53i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  0+39i  0+38i  0+38i  0+38i  0+39i  0+53i  0+43i   0+60i  0+31i   0+67i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  0+39i  0+38i  0+38i  0+38i  0+39i  0+59i  0+39i   0+61i  0+31i   0+67i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  0+31i  0+31i  0+31i  0+35i  0+31i  0+45i  0+31i   0+52i  0+24i   0+52i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]  0+51i  0+46i  0+46i  0+45i  0+46i  0+61i  0+46i   0+75i  0+38i   0+75i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]  0+39i  0+38i  0+38i  0+38i  0+43i  0+53i  0+39i   0+60i  0+31i   0+67i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  0+39i  0+39i  0+39i  0+38i  0+38i  0+59i  0+38i   0+67i  0+31i   0+61i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  0+32i  0+32i  0+32i  0+31i  0+31i  0+46i  0+31i   0+59i  0+24i   0+53i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  0+24i  0+24i  0+24i  0+24i  0+24i  0+38i  0+24i   0+45i  0+17i   0+45i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,] 76+ 0i 80+ 0i 80+ 0i 78+ 0i 79+ 0i 84+ 0i 79+ 0i  86+ 0i 76+ 0i  86+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,] 80+ 0i 76+ 0i 77+ 0i 78+ 0i 79+ 0i 84+ 0i 79+ 0i  86+ 0i 76+ 0i  89+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,] 80+ 0i 77+ 0i 76+ 0i 78+ 0i 79+ 0i 84+ 0i 79+ 0i  86+ 0i 76+ 0i  89+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,] 78+ 0i 78+ 0i 78+ 0i 72+ 0i 77+ 0i 82+ 0i 77+ 0i  87+ 0i 74+ 0i  87+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,] 79+ 0i 79+ 0i 79+ 0i 77+ 0i 74+ 0i 83+ 0i 78+ 0i  88+ 0i 75+ 0i  85+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,] 84+ 0i 84+ 0i 84+ 0i 82+ 0i 83+ 0i 82+ 0i 83+ 0i  96+ 0i 78+ 0i  96+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,] 79+ 0i 79+ 0i 79+ 0i 77+ 0i 78+ 0i 83+ 0i 74+ 0i  88+ 0i 75+ 0i  85+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,] 86+ 0i 86+ 0i 86+ 0i 87+ 0i 88+ 0i 96+ 0i 88+ 0i  94+ 0i 82+ 0i 104+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,] 76+ 0i 76+ 0i 76+ 0i 74+ 0i 75+ 0i 78+ 0i 75+ 0i  82+ 0i 72+ 0i  82+ 0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20,] 86+ 0i 89+ 0i 89+ 0i 87+ 0i 85+ 0i 96+ 0i 85+ 0i 104+ 0i 82+ 0i  94+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          [,1]   [,2]   [,3]   [,4]   [,5]   [,6]   [,7]   [,8]    [,9]  [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  98+ 0i 97+ 0i 95+ 0i 84+ 0i 89+ 0i 88+ 0i 91+ 0i 84+ 0i 100+ 0i 97+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  97+ 0i 80+ 0i 85+ 0i 78+ 0i 84+ 0i 83+ 0i 80+ 0i 78+ 0i  91+ 0i 91+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  95+ 0i 85+ 0i 82+ 0i 79+ 0i 82+ 0i 84+ 0i 84+ 0i 79+ 0i  92+ 0i 92+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  84+ 0i 78+ 0i 79+ 0i 72+ 0i 77+ 0i 76+ 0i 76+ 0i 73+ 0i  83+ 0i 80+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  89+ 0i 84+ 0i 82+ 0i 77+ 0i 78+ 0i 81+ 0i 81+ 0i 77+ 0i  87+ 0i 87+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]  88+ 0i 83+ 0i 84+ 0i 76+ 0i 81+ 0i 76+ 0i 80+ 0i 76+ 0i  89+ 0i 83+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]  91+ 0i 80+ 0i 84+ 0i 76+ 0i 81+ 0i 80+ 0i 76+ 0i 76+ 0i  86+ 0i 86+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  84+ 0i 78+ 0i 79+ 0i 73+ 0i 77+ 0i 76+ 0i 76+ 0i 72+ 0i  83+ 0i 80+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 100+ 0i 91+ 0i 92+ 0i 83+ 0i 87+ 0i 89+ 0i 86+ 0i 83+ 0i  92+ 0i 96+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  97+ 0i 91+ 0i 92+ 0i 80+ 0i 87+ 0i 83+ 0i 86+ 0i 80+ 0i  96+ 0i 86+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]   0+76i  0+52i  0+53i  0+38i  0+46i  0+51i  0+45i  0+38i   0+62i  0+68i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]   0+45i  0+31i  0+31i  0+17i  0+24i  0+24i  0+24i  0+17i   0+38i  0+38i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   0+77i  0+53i  0+54i  0+38i  0+47i  0+47i  0+46i  0+38i   0+68i  0+68i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]   0+54i  0+38i  0+38i  0+24i  0+31i  0+32i  0+31i  0+24i   0+46i  0+51i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]   0+84i  0+61i  0+67i  0+45i  0+59i  0+53i  0+53i  0+45i   0+76i  0+69i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]   0+45i  0+31i  0+31i  0+17i  0+24i  0+24i  0+24i  0+17i   0+38i  0+38i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]   0+60i  0+51i  0+51i  0+31i  0+39i  0+38i  0+39i  0+31i   0+54i  0+52i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]   0+45i  0+31i  0+31i  0+17i  0+24i  0+24i  0+24i  0+17i   0+38i  0+38i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]   0+68i  0+59i  0+54i  0+38i  0+46i  0+45i  0+51i  0+38i   0+67i  0+60i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]   0+59i  0+38i  0+39i  0+24i  0+32i  0+32i  0+31i  0+24i   0+47i  0+47i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         [,11]  [,12]  [,13]  [,14]   [,15]  [,16]  [,17]  [,18]  [,19]  [,20]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   0+76i  0+45i  0+77i  0+54i   0+84i  0+45i  0+60i  0+45i  0+68i  0+59i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]   0+52i  0+31i  0+53i  0+38i   0+61i  0+31i  0+51i  0+31i  0+59i  0+38i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]   0+53i  0+31i  0+54i  0+38i   0+67i  0+31i  0+51i  0+31i  0+54i  0+39i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]   0+38i  0+17i  0+38i  0+24i   0+45i  0+17i  0+31i  0+17i  0+38i  0+24i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]   0+46i  0+24i  0+47i  0+31i   0+59i  0+24i  0+39i  0+24i  0+46i  0+32i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   0+51i  0+24i  0+47i  0+32i   0+53i  0+24i  0+38i  0+24i  0+45i  0+32i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]   0+45i  0+24i  0+46i  0+31i   0+53i  0+24i  0+39i  0+24i  0+51i  0+31i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]   0+38i  0+17i  0+38i  0+24i   0+45i  0+17i  0+31i  0+17i  0+38i  0+24i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]   0+62i  0+38i  0+68i  0+46i   0+76i  0+38i  0+54i  0+38i  0+67i  0+47i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]   0+68i  0+38i  0+68i  0+51i   0+69i  0+38i  0+52i  0+38i  0+60i  0+47i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]  88+ 0i 81+ 0i 94+ 0i 84+ 0i 100+ 0i 81+ 0i 91+ 0i 81+ 0i 96+ 0i 85+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]  81+ 0i 72+ 0i 83+ 0i 76+ 0i  83+ 0i 73+ 0i 77+ 0i 73+ 0i 79+ 0i 77+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]  94+ 0i 83+ 0i 92+ 0i 86+ 0i  99+ 0i 83+ 0i 93+ 0i 83+ 0i 95+ 0i 87+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]  84+ 0i 76+ 0i 86+ 0i 76+ 0i  90+ 0i 76+ 0i 82+ 0i 76+ 0i 85+ 0i 81+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,] 100+ 0i 83+ 0i 99+ 0i 90+ 0i  96+ 0i 83+ 0i 92+ 0i 83+ 0i 98+ 0i 88+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]  81+ 0i 73+ 0i 83+ 0i 76+ 0i  83+ 0i 72+ 0i 77+ 0i 73+ 0i 79+ 0i 77+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]  91+ 0i 77+ 0i 93+ 0i 82+ 0i  92+ 0i 77+ 0i 78+ 0i 77+ 0i 86+ 0i 83+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]  81+ 0i 73+ 0i 83+ 0i 76+ 0i  83+ 0i 73+ 0i 77+ 0i 72+ 0i 79+ 0i 77+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]  96+ 0i 79+ 0i 95+ 0i 85+ 0i  98+ 0i 79+ 0i 86+ 0i 79+ 0i 84+ 0i 86+ 0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]  85+ 0i 77+ 0i 87+ 0i 81+ 0i  88+ 0i 77+ 0i 83+ 0i 77+ 0i 86+ 0i 78+ 0i</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

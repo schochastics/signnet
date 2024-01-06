@@ -114,10 +114,10 @@ For the generalized version see <a href="signed_blockmodel_general.html">signed_
 <span class="r-in"><span><span class="va">clu</span> <span class="op">&lt;-</span> <span class="fu">signed_blockmodel</span><span class="op">(</span><span class="va">g</span>, k <span class="op">=</span> <span class="fl">10</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">clu</span><span class="op">$</span><span class="va">membership</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1  2  3  4  5  6  7  8  9 10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 10 10 10 10 10 10 10 10 10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1  2  3  4  5  6  7  8 10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 11 11 12 11 10 10 13 11 </span>
 <span class="r-in"><span><span class="va">clu</span><span class="op">$</span><span class="va">criterion</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 49</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using simulated annealing (less change of getting trapped in local optima)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"tribes"</span><span class="op">)</span></span></span>
@@ -125,7 +125,7 @@ For the generalized version see <a href="signed_blockmodel_general.html">signed_
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">clu</span><span class="op">$</span><span class="va">membership</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 2 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 7 4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 5 4 </span>
 <span class="r-in"><span><span class="va">clu</span><span class="op">$</span><span class="va">criterion</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 </code></pre></div>
