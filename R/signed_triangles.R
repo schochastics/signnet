@@ -15,7 +15,7 @@ count_signed_triangles <- function(g) {
     if (!is_signed(g)) {
         stop("network is not a signed graph")
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("g must be undirected")
     }
     eattrV <- igraph::get.edge.attribute(g, "sign")
@@ -71,7 +71,7 @@ signed_triangles <- function(g) {
     if (!is_signed(g)) {
         stop("network is not a signed graph")
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("g must be undirected")
     }
     eattrV <- igraph::get.edge.attribute(g, "sign")
@@ -117,7 +117,7 @@ count_complex_triangles <- function(g, attr) {
     if (missing(attr)) {
         stop('argument "attr" is missing, with no default')
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("g must be undirected")
     }
     eattrV <- igraph::get.edge.attribute(g, attr)

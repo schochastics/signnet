@@ -29,7 +29,7 @@ balance_score <- function(g, method = "triangles") {
     if (!is_signed(g)) {
         stop("network is not a signed graph")
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("g must be undirected")
     }
 
@@ -69,7 +69,7 @@ frustration_exact <- function(g, ...) {
     if (!is_signed(g)) {
         stop("network is not a signed graph")
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("g must be undirected")
     }
 

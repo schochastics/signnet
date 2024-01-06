@@ -59,7 +59,7 @@ as_adj_complex <- function(g, attr) {
     if (!igraph::is_igraph(g)) {
         stop("Not a graph object")
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("directed graphs are not supported")
     }
     if (missing(attr)) {
@@ -97,7 +97,7 @@ laplacian_matrix_complex <- function(g, attr, norm = FALSE) {
     if (!igraph::is_igraph(g)) {
         stop("Not a graph object")
     }
-    if (igraph::is.directed(g)) {
+    if (igraph::is_directed(g)) {
         stop("directed graphs are not supported")
     }
     A <- as_adj_complex(g, attr)
@@ -281,7 +281,7 @@ as_unsigned_2mode <- function(g, primary = TRUE) {
 
     el <- data.frame(from, to)
 
-    igraph::graph_from_data_frame(el, igraph::is.directed(g), vert)
+    igraph::graph_from_data_frame(el, igraph::is_directed(g), vert)
 }
 
 #' @title convert unsigned projection to signed

@@ -31,10 +31,10 @@ pn_index <- function(g, mode = c("all", "in", "out")) {
     }
 
     mode <- match.arg(mode, c("all", "in", "out"))
-    if (!igraph::is.directed(g)) {
+    if (!igraph::is_directed(g)) {
         mode <- "all"
     }
-    if (igraph::is.directed(g) && mode == "all") {
+    if (igraph::is_directed(g) && mode == "all") {
         stop('"all" only works with undirected networks.')
     }
 
@@ -71,10 +71,10 @@ degree_signed <- function(g, mode = c("all", "in", "out"), type = c("pos", "neg"
         stop("network is not a signed graph")
     }
     mode <- match.arg(mode, c("all", "in", "out"))
-    if (!igraph::is.directed(g)) {
+    if (!igraph::is_directed(g)) {
         mode <- "all"
     }
-    if (igraph::is.directed(g) && mode == "all") {
+    if (igraph::is_directed(g) && mode == "all") {
         stop('"all" only works with undirected networks.')
     }
     type <- match.arg(type, c("pos", "neg", "ratio", "net"))
