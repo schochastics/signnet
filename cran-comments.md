@@ -1,6 +1,7 @@
-# Update from 1.0.2 to 1.0.3
+# Update from 1.0.3 to 1.0.4
 
-- code refactoring and cleanup
+- fix an upcoming deprecated function call in igraph concerning adjacency
+  matrices with character values
 
 
 ## Test environments

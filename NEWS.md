@@ -1,3 +1,7 @@
+# signnet 1.0.4
+
+* fix deprecated support of adjacency matrices with character values #26
+
 # signnet 1.0.3
 
 * code refactoring
