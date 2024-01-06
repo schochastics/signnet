@@ -70,12 +70,15 @@ as_adj_complex <- function(g, attr) {
     if (!all(eattr %in% c("P", "N", "A"))) {
         stop('attr may only contain "P","N" and "A" ')
     }
-    A <- igraph::as_adj(g, type = "both", attr, sparse = FALSE)
-    A <- replace(A, A == "P", complex(1, 1, 0))
-    A <- replace(A, A == "N", complex(1, 0, 1))
-    A <- replace(A, A == "A", complex(1, 0.5, 0.5))
-    A <- replace(A, A == "", complex(1, 0, 0))
+    n <- igraph::vcount(g)
+    A <- matrix(0, nrow = n, ncol = n)
     class(A) <- "complex"
+    for (e in igraph::E(g)) {
+        val_char <- igraph::E(g)[e]$type
+        val_com <- ifelse(val_char == "P", complex(1, 1, 0), ifelse(val_char == "N", complex(1, 0, 1), complex(1, 0.5, 0.5)))
+        A[igraph::ends(g, e)[1], igraph::ends(g, e)[2]] <- val_com
+        A[igraph::ends(g, e)[2], igraph::ends(g, e)[1]] <- val_com
+    }
     A[lower.tri(A)] <- Conj(A[lower.tri(A)])
     A
 }
