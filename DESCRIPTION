@@ -1,6 +1,6 @@
 Package: signnet
 Title: Methods to Analyse Signed Networks
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: 
     person("David", "Schoch", , "david@schochastics.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2952-4812"))
