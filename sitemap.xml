@@ -1,150 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://schochastics.github.io/signnet/404.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/blockmodeling.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/complex_matrices.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/signed_2mode.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/signed_networks.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/articles/structural_balance.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_adj_complex.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_adj_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_complex_edges.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_incidence_complex.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_incidence_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_signed_proj.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/as_unsigned_2mode.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/avatar.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/balance_score.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/complex_walks.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/count_complex_triangles.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/count_signed_triangles.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/cowList.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/degree_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/eigen_centrality_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/frustration_exact.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/ggblock.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/ggsigned.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/graph_circular_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/graph_from_adjacency_matrix_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/graph_from_edgelist_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/is_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/laplacian_matrix_complex.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/laplacian_matrix_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/pn_index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/sample_bipartite_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/sample_gnp_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/sample_islands_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/signed_blockmodel.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/signed_blockmodel_general.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/signed_triangles.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/triad_census_signed.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/signnet/reference/tribes.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://schochastics.github.io/signnet/404.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/CONTRIBUTING.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/LICENSE-text.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/LICENSE.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/blockmodeling.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/centrality.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/complex_matrices.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/index.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/signed_2mode.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/signed_networks.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/articles/structural_balance.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/authors.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/index.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/news/index.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_adj_complex.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_adj_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_complex_edges.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_incidence_complex.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_incidence_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_signed_proj.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/as_unsigned_2mode.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/avatar.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/balance_score.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/complex_walks.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/count_complex_triangles.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/count_signed_triangles.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/cowList.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/degree_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/eigen_centrality_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/frustration_exact.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/ggblock.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/ggsigned.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/graph_circular_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/graph_from_adjacency_matrix_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/graph_from_edgelist_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/index.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/is_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/laplacian_matrix_complex.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/laplacian_matrix_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/pn_index.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/sample_bipartite_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/sample_gnp_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/sample_islands_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/signed_blockmodel.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/signed_blockmodel_general.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/signed_triangles.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/triad_census_signed.html</loc></url>
+<url><loc>https://schochastics.github.io/signnet/reference/tribes.html</loc></url>
 </urlset>
+

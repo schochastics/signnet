@@ -1,5 +1,5 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   blockmodeling: blockmodeling.html
@@ -8,8 +8,7 @@ articles:
   signed_2mode: signed_2mode.html
   signed_networks: signed_networks.html
   structural_balance: structural_balance.html
-last_built: 2024-01-06T10:41Z
+last_built: 2024-10-02T18:48Z
 urls:
   reference: https://schochastics.github.io/signnet/reference
   article: https://schochastics.github.io/signnet/articles
-
