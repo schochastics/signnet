@@ -11,8 +11,8 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Blockmodeling">
 </head>
 <body>
@@ -63,7 +63,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Blockmodeling</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/schochastics/signnet/blob/v1.0.4/vignettes/blockmodeling.Rmd" class="external-link"><code>vignettes/blockmodeling.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/schochastics/signnet/blob/main/vignettes/blockmodeling.Rmd" class="external-link"><code>vignettes/blockmodeling.Rmd</code></a></small>
       <div class="d-none name"><code>blockmodeling.Rmd</code></div>
     </div>
 
@@ -143,7 +143,7 @@ intra-group ties. The inter-group edges are negative between group one
 and two, and one and three. Between group two and three, all edges are
 positive.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">g1</span> <span class="op">&lt;-</span> <span class="va">g2</span> <span class="op">&lt;-</span> <span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/make_full_graph.html" class="external-link">graph.full</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">g1</span> <span class="op">&lt;-</span> <span class="va">g2</span> <span class="op">&lt;-</span> <span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph.full.html" class="external-link">graph.full</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g1</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
