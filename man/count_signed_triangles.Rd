@@ -17,7 +17,7 @@ Counts the number of all possible signed triangles (+++),(++-), (+--) and (---)
 }
 \examples{
 library(igraph)
-g <- graph.full(4)
+g <- make_full_graph(4)
 E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 count_signed_triangles(g)
 }

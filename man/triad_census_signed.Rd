@@ -17,7 +17,7 @@ triad census for signed graphs
 }
 \examples{
 library(igraph)
-g <- graph.full(4, directed = TRUE)
+g <- make_full_graph(4, directed = TRUE)
 E(g)$sign <- rep(c(-1, 1, 1, -1, -1, 1), 2)
 triad_census_signed(g)
 }

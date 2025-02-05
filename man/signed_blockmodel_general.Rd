@@ -28,7 +28,7 @@ version see \link{signed_blockmodel}.
 \examples{
 library(igraph)
 # create a signed network with three groups and different inter/intra group ties
-g1 <- g2 <- g3 <- graph.full(5)
+g1 <- g2 <- g3 <- make_full_graph(5)
 
 V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)
@@ -37,9 +37,9 @@ V(g3)$name <- as.character(11:15)
 g <- Reduce("\%u\%", list(g1, g2, g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
-g <- add.edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
-g <- add.edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
-g <- add.edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
+g <- add_edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
+g <- add_edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
+g <- add_edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
 
 # specify the link patterns between groups
 blockmat <- matrix(c(1, -1, -1, -1, 1, 1, -1, 1, -1), 3, 3, byrow = TRUE)

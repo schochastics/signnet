@@ -1,3 +1,7 @@
+# signnet 1.0.5
+
+* fix all deprecated igrapg calls
+
 # signnet 1.0.4
 
 * fix deprecated support of adjacency matrices with character values #26

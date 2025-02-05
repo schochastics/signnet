@@ -9,17 +9,22 @@
 #' @export
 
 as_adj_signed <- function(g, sparse = FALSE) {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (!"sign" %in% igraph::edge_attr_names(g)) {
-        stop("network does not have a sign edge attribute")
-    }
-    A <- igraph::as_adj(g, type = "both", attr = "sign", sparse = TRUE)
-    if (!sparse) {
-        A <- as.matrix(A)
-    }
-    A
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (!"sign" %in% igraph::edge_attr_names(g)) {
+    stop("network does not have a sign edge attribute")
+  }
+  A <- igraph::as_adjacency_matrix(
+    g,
+    type = "both",
+    attr = "sign",
+    sparse = TRUE
+  )
+  if (!sparse) {
+    A <- as.matrix(A)
+  }
+  A
 }
 
 #' Convert a signed two-mode network to a signed matrix
@@ -32,18 +37,17 @@ as_adj_signed <- function(g, sparse = FALSE) {
 #' @export
 
 as_incidence_signed <- function(g, sparse = FALSE) {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (!"sign" %in% igraph::edge_attr_names(g)) {
-        stop("network does not have a sign edge attribute")
-    }
-    if (!"type" %in% igraph::vertex_attr_names(g)) {
-        stop("network must have a type vertex attribute")
-    }
-    igraph::as_incidence_matrix(g, attr = "sign", sparse = sparse)
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (!"sign" %in% igraph::edge_attr_names(g)) {
+    stop("network does not have a sign edge attribute")
+  }
+  if (!"type" %in% igraph::vertex_attr_names(g)) {
+    stop("network must have a type vertex attribute")
+  }
+  igraph::as_biadjacency_matrix(g, attr = "sign", sparse = sparse)
 }
-
 
 #' Convert a signed graph to a complex adjacency matrix
 #'
@@ -56,33 +60,36 @@ as_incidence_signed <- function(g, sparse = FALSE) {
 #' @export
 
 as_adj_complex <- function(g, attr) {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (igraph::is_directed(g)) {
-        stop("directed graphs are not supported")
-    }
-    if (missing(attr)) {
-        stop('argument "attr" is missing, with no default')
-    }
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (igraph::is_directed(g)) {
+    stop("directed graphs are not supported")
+  }
+  if (missing(attr)) {
+    stop('argument "attr" is missing, with no default')
+  }
 
-    eattr <- igraph::get.edge.attribute(g, attr)
-    if (!all(eattr %in% c("P", "N", "A"))) {
-        stop('attr may only contain "P","N" and "A" ')
-    }
-    n <- igraph::vcount(g)
-    A <- matrix(0, nrow = n, ncol = n)
-    class(A) <- "complex"
-    for (e in igraph::E(g)) {
-        val_char <- igraph::E(g)[e]$type
-        val_com <- ifelse(val_char == "P", complex(1, 1, 0), ifelse(val_char == "N", complex(1, 0, 1), complex(1, 0.5, 0.5)))
-        A[igraph::ends(g, e)[1], igraph::ends(g, e)[2]] <- val_com
-        A[igraph::ends(g, e)[2], igraph::ends(g, e)[1]] <- val_com
-    }
-    A[lower.tri(A)] <- Conj(A[lower.tri(A)])
-    A
+  eattr <- igraph::edge_attr(g, attr)
+  if (!all(eattr %in% c("P", "N", "A"))) {
+    stop('attr may only contain "P","N" and "A" ')
+  }
+  n <- igraph::vcount(g)
+  A <- matrix(0, nrow = n, ncol = n)
+  class(A) <- "complex"
+  for (e in igraph::E(g)) {
+    val_char <- igraph::E(g)[e]$type
+    val_com <- ifelse(
+      val_char == "P",
+      complex(1, 1, 0),
+      ifelse(val_char == "N", complex(1, 0, 1), complex(1, 0.5, 0.5))
+    )
+    A[igraph::ends(g, e)[1], igraph::ends(g, e)[2]] <- val_com
+    A[igraph::ends(g, e)[2], igraph::ends(g, e)[1]] <- val_com
+  }
+  A[lower.tri(A)] <- Conj(A[lower.tri(A)])
+  A
 }
-
 
 #' @title Complex Graph Laplacian
 #' @description The Laplacian of a signed graph containing ambivalent ties.
@@ -97,22 +104,22 @@ as_adj_complex <- function(g, attr) {
 #' @export
 
 laplacian_matrix_complex <- function(g, attr, norm = FALSE) {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (igraph::is_directed(g)) {
-        stop("directed graphs are not supported")
-    }
-    A <- as_adj_complex(g, attr)
-    I <- diag(1, nrow(A))
-    D <- diag(rowSums(abs(A)))
-    if (norm) {
-        diag(D) <- diag(D)^(-1 / 2)
-        L <- I - D %*% A %*% D
-    } else {
-        L <- D - A
-    }
-    return(L)
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (igraph::is_directed(g)) {
+    stop("directed graphs are not supported")
+  }
+  A <- as_adj_complex(g, attr)
+  I <- diag(1, nrow(A))
+  D <- diag(rowSums(abs(A)))
+  if (norm) {
+    diag(D) <- diag(D)^(-1 / 2)
+    L <- I - D %*% A %*% D
+  } else {
+    L <- D - A
+  }
+  return(L)
 }
 
 #' @title Complex Incidence Matrix
@@ -130,29 +137,29 @@ laplacian_matrix_complex <- function(g, attr, norm = FALSE) {
 #' @author David Schoch
 #' @export
 as_incidence_complex <- function(g, attr) {
-    A <- as_adj_complex(g, attr)
-    N <- igraph::vcount(g)
-    M <- igraph::ecount(g)
-    S <- matrix(0, N, M)
-    e <- 0
-    for (i in 1:N) {
-        for (j in i:N) {
-            if (A[i, j] != 0) {
-                e <- e + 1
-                if (A[i, j] == complex(1, 1, 0)) {
-                    S[i, e] <- sqrt(A[i, j])
-                    S[j, e] <- -A[j, i] * sqrt(A[i, j])
-                } else if (A[i, j] == complex(1, 0, 1)) {
-                    S[i, e] <- sqrt(A[i, j])
-                    S[j, e] <- -A[j, i] * sqrt(A[i, j])
-                } else {
-                    S[i, e] <- sqrt(A[i, j])
-                    S[j, e] <- -sqrt(A[j, i])
-                }
-            }
+  A <- as_adj_complex(g, attr)
+  N <- igraph::vcount(g)
+  M <- igraph::ecount(g)
+  S <- matrix(0, N, M)
+  e <- 0
+  for (i in 1:N) {
+    for (j in i:N) {
+      if (A[i, j] != 0) {
+        e <- e + 1
+        if (A[i, j] == complex(1, 1, 0)) {
+          S[i, e] <- sqrt(A[i, j])
+          S[j, e] <- -A[j, i] * sqrt(A[i, j])
+        } else if (A[i, j] == complex(1, 0, 1)) {
+          S[i, e] <- sqrt(A[i, j])
+          S[j, e] <- -A[j, i] * sqrt(A[i, j])
+        } else {
+          S[i, e] <- sqrt(A[i, j])
+          S[j, e] <- -sqrt(A[j, i])
         }
+      }
     }
-    S
+  }
+  S
 }
 
 #' @title Convert Signed Network to Complex
@@ -165,21 +172,21 @@ as_incidence_complex <- function(g, attr) {
 #' as_complex_edges(g)
 #' @export
 as_complex_edges <- function(g, attr = "type") {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (!"sign" %in% igraph::edge_attr_names(g)) {
-        stop("network does not have a sign edge attribute")
-    }
-    esign <- igraph::get.edge.attribute(g, "sign")
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (!"sign" %in% igraph::edge_attr_names(g)) {
+    stop("network does not have a sign edge attribute")
+  }
+  esign <- igraph::edge_attr(g, "sign")
 
-    if (!all(esign %in% c(-1, 1))) {
-        stop("sign may only contain -1 and 1")
-    }
+  if (!all(esign %in% c(-1, 1))) {
+    stop("sign may only contain -1 and 1")
+  }
 
-    ecompl <- ifelse(esign == 1, "P", "N")
-    g <- igraph::set_edge_attr(g, name = attr, value = ecompl)
-    g
+  ecompl <- ifelse(esign == 1, "P", "N")
+  g <- igraph::set_edge_attr(g, name = attr, value = ecompl)
+  g
 }
 
 #' @title Count Walks in complex signed network
@@ -194,28 +201,28 @@ as_complex_edges <- function(g, attr = "type") {
 #' complex_walks(g, attr = "type", k = 3)
 #' @export
 complex_walks <- function(g, attr, k) {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (missing(attr)) {
-        stop('argument "attr" is missing, with no default')
-    }
-    if (!attr %in% igraph::edge_attr_names(g)) {
-        stop(paste0("There is no edge attribute ", '"', attr, '"'))
-    }
-    if (k == 0) {
-        return(diag(1 + 0i, igraph::vcount(g)))
-    }
-    A <- as_adj_complex(g, attr)
-    if (k == 1) {
-        return(A)
-    }
-    B <- A
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (missing(attr)) {
+    stop('argument "attr" is missing, with no default')
+  }
+  if (!attr %in% igraph::edge_attr_names(g)) {
+    stop(paste0("There is no edge attribute ", '"', attr, '"'))
+  }
+  if (k == 0) {
+    return(diag(1 + 0i, igraph::vcount(g)))
+  }
+  A <- as_adj_complex(g, attr)
+  if (k == 1) {
+    return(A)
+  }
+  B <- A
 
-    for (i in 2:k) {
-        B <- cxmatmul(B, A)
-    }
-    return(B)
+  for (i in 2:k) {
+    B <- cxmatmul(B, A)
+  }
+  return(B)
 }
 
 #' @title convert signed two-mode network to unsigned
@@ -242,49 +249,61 @@ complex_walks <- function(g, attr, k) {
 #' @export
 
 as_unsigned_2mode <- function(g, primary = TRUE) {
-    if (!igraph::is_igraph(g)) {
-        stop("Not a graph object")
-    }
-    if (!"sign" %in% igraph::edge_attr_names(g)) {
-        stop("network does not have a sign edge attribute")
-    }
+  if (!igraph::is_igraph(g)) {
+    stop("Not a graph object")
+  }
+  if (!"sign" %in% igraph::edge_attr_names(g)) {
+    stop("network does not have a sign edge attribute")
+  }
 
-    if (!"type" %in% igraph::vertex_attr_names(g)) {
-        stop("not a two-mode network.")
-    }
-    if (!"name" %in% igraph::vertex_attr_names(g)) {
-        igraph::V(g)$name <- as.character(1:igraph::vcount(g))
-    }
-    vnames <- igraph::V(g)$name
-    mode1 <- vnames[which(igraph::V(g)$type)]
-    mode2 <- vnames[which(!igraph::V(g)$type)]
-    el <- igraph::as_data_frame(g, "edges")
-    el[["sign"]] <- ifelse(el[["sign"]] == 1, "-pos", "-neg")
-    from <- el[["from"]]
-    to <- el[["to"]]
-    signs <- el[["sign"]]
+  if (!"type" %in% igraph::vertex_attr_names(g)) {
+    stop("not a two-mode network.")
+  }
+  if (!"name" %in% igraph::vertex_attr_names(g)) {
+    igraph::V(g)$name <- as.character(1:igraph::vcount(g))
+  }
+  vnames <- igraph::V(g)$name
+  mode1 <- vnames[which(igraph::V(g)$type)]
+  mode2 <- vnames[which(!igraph::V(g)$type)]
+  el <- igraph::as_data_frame(g, "edges")
+  el[["sign"]] <- ifelse(el[["sign"]] == 1, "-pos", "-neg")
+  from <- el[["from"]]
+  to <- el[["to"]]
+  signs <- el[["sign"]]
 
-    if (primary) {
-        new_nodes <- paste0(rep(mode1, each = 2), rep(c("-pos", "-neg"), length(mode1)))
-        vert <- data.frame(
-            name = c(new_nodes, mode2),
-            type = c(rep(TRUE, length(new_nodes)), rep(FALSE, length(mode2)))
-        )
-        from[from %in% mode1] <- paste0(from[from %in% mode1], signs[from %in% mode1])
-        to[to %in% mode1] <- paste0(to[to %in% mode1], signs[to %in% mode1])
-    } else {
-        new_nodes <- paste0(rep(mode2, each = 2), rep(c("-pos", "-neg"), length(mode2)))
-        vert <- data.frame(
-            name = c(new_nodes, mode1),
-            type = c(rep(TRUE, length(new_nodes)), rep(FALSE, length(mode1)))
-        )
-        from[from %in% mode2] <- paste0(from[from %in% mode2], signs[from %in% mode2])
-        to[to %in% mode2] <- paste0(to[to %in% mode2], signs[to %in% mode2])
-    }
+  if (primary) {
+    new_nodes <- paste0(
+      rep(mode1, each = 2),
+      rep(c("-pos", "-neg"), length(mode1))
+    )
+    vert <- data.frame(
+      name = c(new_nodes, mode2),
+      type = c(rep(TRUE, length(new_nodes)), rep(FALSE, length(mode2)))
+    )
+    from[from %in% mode1] <- paste0(
+      from[from %in% mode1],
+      signs[from %in% mode1]
+    )
+    to[to %in% mode1] <- paste0(to[to %in% mode1], signs[to %in% mode1])
+  } else {
+    new_nodes <- paste0(
+      rep(mode2, each = 2),
+      rep(c("-pos", "-neg"), length(mode2))
+    )
+    vert <- data.frame(
+      name = c(new_nodes, mode1),
+      type = c(rep(TRUE, length(new_nodes)), rep(FALSE, length(mode1)))
+    )
+    from[from %in% mode2] <- paste0(
+      from[from %in% mode2],
+      signs[from %in% mode2]
+    )
+    to[to %in% mode2] <- paste0(to[to %in% mode2], signs[to %in% mode2])
+  }
 
-    el <- data.frame(from, to)
+  el <- data.frame(from, to)
 
-    igraph::graph_from_data_frame(el, igraph::is_directed(g), vert)
+  igraph::graph_from_data_frame(el, igraph::is_directed(g), vert)
 }
 
 #' @title convert unsigned projection to signed
@@ -309,28 +328,35 @@ as_unsigned_2mode <- function(g, primary = TRUE) {
 #' as_signed_proj(p)
 #' @export
 as_signed_proj <- function(g) {
-    el <- igraph::as_data_frame(g, "edges")
-    m1 <- regexpr("pos|neg", el[["from"]])
-    m2 <- regexpr("pos|neg", el[["to"]])
-    el[["type1"]] <- regmatches(el[["from"]], m1)
-    el[["type2"]] <- regmatches(el[["to"]], m2)
-    el[["type"]] <- "N"
-    el[["type"]][el[["type1"]] == el[["type2"]]] <- "P"
-    el[["from"]] <- gsub("\\-.*", "", el[["from"]])
-    el[["to"]] <- gsub("\\-.*", "", el[["to"]])
+  el <- igraph::as_data_frame(g, "edges")
+  m1 <- regexpr("pos|neg", el[["from"]])
+  m2 <- regexpr("pos|neg", el[["to"]])
+  el[["type1"]] <- regmatches(el[["from"]], m1)
+  el[["type2"]] <- regmatches(el[["to"]], m2)
+  el[["type"]] <- "N"
+  el[["type"]][el[["type1"]] == el[["type2"]]] <- "P"
+  el[["from"]] <- gsub("\\-.*", "", el[["from"]])
+  el[["to"]] <- gsub("\\-.*", "", el[["to"]])
 
-    el <- el[, c("from", "to", "type")]
+  el <- el[, c("from", "to", "type")]
 
-    el_new <- data.frame(t(apply(el[, 1:2], 1, sort)), stringsAsFactors = TRUE)
-    el_new[["type"]] <- el[["type"]]
-    el_new <- el_new[!duplicated(el_new), ]
-    names(el_new)[1:2] <- c("from", "to")
+  el_new <- data.frame(t(apply(el[, 1:2], 1, sort)), stringsAsFactors = TRUE)
+  el_new[["type"]] <- el[["type"]]
+  el_new <- el_new[!duplicated(el_new), ]
+  names(el_new)[1:2] <- c("from", "to")
 
-    el_aggr <- stats::aggregate(type ~ from + to, data = el_new, FUN = function(x) paste0(x, collapse = ""))
-    el_aggr <- do.call(data.frame, el_aggr)
-    el_aggr[["from"]] <- as.character(el_aggr[["from"]])
-    el_aggr[["to"]] <- as.character(el_aggr[["to"]])
-    el_aggr[["type"]] <- as.character(el_aggr[["type"]])
-    el_aggr[["type"]][!el_aggr[["type"]] %in% c("N", "P")] <- "A"
-    igraph::graph_from_data_frame(el_aggr[, c("from", "to", "type")], directed = FALSE)
+  el_aggr <- stats::aggregate(
+    type ~ from + to,
+    data = el_new,
+    FUN = function(x) paste0(x, collapse = "")
+  )
+  el_aggr <- do.call(data.frame, el_aggr)
+  el_aggr[["from"]] <- as.character(el_aggr[["from"]])
+  el_aggr[["to"]] <- as.character(el_aggr[["to"]])
+  el_aggr[["type"]] <- as.character(el_aggr[["type"]])
+  el_aggr[["type"]][!el_aggr[["type"]] %in% c("N", "P")] <- "A"
+  igraph::graph_from_data_frame(
+    el_aggr[, c("from", "to", "type")],
+    directed = FALSE
+  )
 }

@@ -26,32 +26,35 @@
 #' @export
 
 pn_index <- function(g, mode = c("all", "in", "out")) {
-    if (!is_signed(g)) {
-        stop("network is not a signed graph")
-    }
+  if (!is_signed(g)) {
+    stop("network is not a signed graph")
+  }
 
-    mode <- match.arg(mode, c("all", "in", "out"))
-    if (!igraph::is_directed(g)) {
-        mode <- "all"
-    }
-    if (igraph::is_directed(g) && mode == "all") {
-        stop('"all" only works with undirected networks.')
-    }
+  mode <- match.arg(mode, c("all", "in", "out"))
+  if (!igraph::is_directed(g)) {
+    mode <- "all"
+  }
+  if (igraph::is_directed(g) && mode == "all") {
+    stop('"all" only works with undirected networks.')
+  }
 
-    A <- as_adj_signed(g, sparse = TRUE)
-    n <- nrow(A)
+  A <- as_adj_signed(g, sparse = TRUE)
+  n <- nrow(A)
 
-    P <- (A > 0) + 0
-    N <- (A < 0) + 0
-    I <- diag(1, n)
-    A <- P - 2 * N
+  P <- (A > 0) + 0
+  N <- (A < 0) + 0
+  I <- diag(1, n)
+  A <- P - 2 * N
 
-    res <- switch(mode,
-        all  = solve(I - 1 / (2 * n - 2) * A),
-        `in` = solve(I - 1 / (4 * (n - 1)^2) * Matrix::t(A) %*% A) %*% (I + 1 / (2 * n - 2) * Matrix::t(A)),
-        out  = solve(I - 1 / (4 * (n - 1)^2) * A %*% Matrix::t(A)) %*% (I + 1 / (2 * n - 2) * A)
-    )
-    return(Matrix::rowSums(res))
+  res <- switch(
+    mode,
+    all = solve(I - 1 / (2 * n - 2) * A),
+    `in` = solve(I - 1 / (4 * (n - 1)^2) * Matrix::t(A) %*% A) %*%
+      (I + 1 / (2 * n - 2) * Matrix::t(A)),
+    out = solve(I - 1 / (4 * (n - 1)^2) * A %*% Matrix::t(A)) %*%
+      (I + 1 / (2 * n - 2) * A)
+  )
+  return(Matrix::rowSums(res))
 }
 
 #' @title Signed Degree
@@ -66,48 +69,55 @@ pn_index <- function(g, mode = c("all", "in", "out")) {
 #' @importFrom Matrix t
 #' @export
 
-degree_signed <- function(g, mode = c("all", "in", "out"), type = c("pos", "neg", "ratio", "net")) {
-    if (!is_signed(g)) {
-        stop("network is not a signed graph")
-    }
-    mode <- match.arg(mode, c("all", "in", "out"))
-    if (!igraph::is_directed(g)) {
-        mode <- "all"
-    }
-    if (igraph::is_directed(g) && mode == "all") {
-        stop('"all" only works with undirected networks.')
-    }
-    type <- match.arg(type, c("pos", "neg", "ratio", "net"))
+degree_signed <- function(
+  g,
+  mode = c("all", "in", "out"),
+  type = c("pos", "neg", "ratio", "net")
+) {
+  if (!is_signed(g)) {
+    stop("network is not a signed graph")
+  }
+  mode <- match.arg(mode, c("all", "in", "out"))
+  if (!igraph::is_directed(g)) {
+    mode <- "all"
+  }
+  if (igraph::is_directed(g) && mode == "all") {
+    stop('"all" only works with undirected networks.')
+  }
+  type <- match.arg(type, c("pos", "neg", "ratio", "net"))
 
-    A <- as_adj_signed(g)
-    P <- (A > 0) + 0
-    N <- (A < 0) + 0
+  A <- as_adj_signed(g)
+  P <- (A > 0) + 0
+  N <- (A < 0) + 0
 
-    if (mode == "all") {
-        res <- switch(type,
-            pos   = Matrix::rowSums(P),
-            neg   = Matrix::rowSums(N),
-            ratio = Matrix::rowSums(P) / (Matrix::rowSums(P) + Matrix::rowSums(N)),
-            net   = Matrix::rowSums(P) - Matrix::rowSums(N)
-        )
-        res
-    } else if (mode == "out") {
-        res <- switch(type,
-            pos   = Matrix::rowSums(P),
-            neg   = Matrix::rowSums(N),
-            ratio = Matrix::rowSums(P) / (Matrix::rowSums(P) + Matrix::rowSums(N)),
-            net   = Matrix::rowSums(P) - Matrix::rowSums(N)
-        )
-        res
-    } else if (mode == "in") {
-        res <- switch(type,
-            pos   = Matrix::colSums(P),
-            neg   = Matrix::colSums(N),
-            ratio = Matrix::colSums(P) / (Matrix::colSums(P) + Matrix::colSums(N)),
-            net   = Matrix::colSums(P) - Matrix::colSums(N)
-        )
-        return(res)
-    }
+  if (mode == "all") {
+    res <- switch(
+      type,
+      pos = Matrix::rowSums(P),
+      neg = Matrix::rowSums(N),
+      ratio = Matrix::rowSums(P) / (Matrix::rowSums(P) + Matrix::rowSums(N)),
+      net = Matrix::rowSums(P) - Matrix::rowSums(N)
+    )
+    res
+  } else if (mode == "out") {
+    res <- switch(
+      type,
+      pos = Matrix::rowSums(P),
+      neg = Matrix::rowSums(N),
+      ratio = Matrix::rowSums(P) / (Matrix::rowSums(P) + Matrix::rowSums(N)),
+      net = Matrix::rowSums(P) - Matrix::rowSums(N)
+    )
+    res
+  } else if (mode == "in") {
+    res <- switch(
+      type,
+      pos = Matrix::colSums(P),
+      neg = Matrix::colSums(N),
+      ratio = Matrix::colSums(P) / (Matrix::colSums(P) + Matrix::colSums(N)),
+      net = Matrix::colSums(P) - Matrix::colSums(N)
+    )
+    return(res)
+  }
 }
 
 #' @title Signed Eigenvector centrality
@@ -130,21 +140,21 @@ degree_signed <- function(g, mode = c("all", "in", "out"), type = c("pos", "neg"
 #' @export
 
 eigen_centrality_signed <- function(g, scale = TRUE) {
-    if (!is_signed(g)) {
-        stop("network is not a signed graph")
-    }
+  if (!is_signed(g)) {
+    stop("network is not a signed graph")
+  }
 
-    sA <- eigen(as_adj_signed(g))
-    evals <- round(sA$values, 8)
-    max_evals <- which(abs(evals) == max(abs(evals)))
+  sA <- eigen(as_adj_signed(g))
+  evals <- round(sA$values, 8)
+  max_evals <- which(abs(evals) == max(abs(evals)))
 
-    if (length(max_evals) != 1) {
-        stop("no dominant eigenvalue exists")
-    } else {
-        evcent <- abs(sA$vectors[, max_evals])
-    }
+  if (length(max_evals) != 1) {
+    stop("no dominant eigenvalue exists")
+  } else {
+    evcent <- abs(sA$vectors[, max_evals])
+  }
 
-    if (scale) evcent <- evcent / max(evcent)
+  if (scale) evcent <- evcent / max(evcent)
 
-    return(evcent)
+  return(evcent)
 }

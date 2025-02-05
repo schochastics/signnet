@@ -17,7 +17,7 @@ lists all possible signed triangles
 }
 \examples{
 library(igraph)
-g <- graph.full(4)
+g <- make_full_graph(4)
 E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 signed_triangles(g)
 }
