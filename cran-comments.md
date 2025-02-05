@@ -1,11 +1,10 @@
-# Update from 1.0.3 to 1.0.4
+# Update from 1.0.4 to 1.0.5
 
-- fix an upcoming deprecated function call in igraph concerning adjacency
-  matrices with character values
+- fix deprecated igraph calls
 
 
 ## Test environments
-* ubuntu 22.04, R 4.3.2
+* ubuntu 22.04, R 4.4.2
 * win-builder (devel and release)
 
 ## R CMD check results
