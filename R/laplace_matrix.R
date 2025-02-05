@@ -15,18 +15,18 @@
 #' @export
 
 laplacian_matrix_signed <- function(g, norm = FALSE, sparse = FALSE) {
-    if (!is_signed(g)) {
-        stop("network is not a signed graph")
-    }
+  if (!is_signed(g)) {
+    stop("network is not a signed graph")
+  }
 
-    A <- as_adj_signed(g, sparse = sparse)
-    I <- diag(1, nrow(A))
-    D <- diag(rowSums(abs(A)))
-    if (norm) {
-        diag(D) <- diag(D)^(-1 / 2)
-        L <- I - D %*% A %*% D
-    } else {
-        L <- D - A
-    }
-    return(L)
+  A <- as_adj_signed(g, sparse = sparse)
+  I <- diag(1, nrow(A))
+  D <- diag(rowSums(abs(A)))
+  if (norm) {
+    diag(D) <- diag(D)^(-1 / 2)
+    L <- I - D %*% A %*% D
+  } else {
+    L <- D - A
+  }
+  return(L)
 }
