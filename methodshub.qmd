@@ -42,10 +42,9 @@ With R installed:
 install.packages("signnet")
 ```
 
-<!-- ## Hardware Requirements (Optional) -->
-<!-- - The hardware requirements may be needed in specific cases when a method is known to require more memory/compute power.  -->
-<!-- - The method need to be executed on a specific architecture (GPUs, Hadoop cluster etc.) -->
+## Hardware Requirements
 
+Signnet runs on any machine that can run R.
 
 ## Input Data 
 
@@ -59,10 +58,6 @@ install.packages("signnet")
 ## Sample Input and Output Data
 
 The package includes two example data sets that can be used to test the methods.
-
-## Hardware Requirements
-
-Signnet runs on any machine that can run R.
 
 ## How to Use
 
