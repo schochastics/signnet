@@ -60,9 +60,17 @@ install.packages("signnet")
 
 The package includes two example data sets that can be used to test the methods.
 
+## Hardware Requirements
+
+Signnet runs on any machine that can run R.
+
 ## How to Use
 
 The package comes with a set of vignettes that can be found [here](https://schochastics.github.io/signnet/).
+
+## Technical Details
+
+Check the official [CRAN page](https://doi.org/10.32614/CRAN.package.signnet) for further information.
 
 ## Contact Details
 
