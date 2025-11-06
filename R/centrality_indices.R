@@ -155,7 +155,7 @@ eigen_centrality_signed <- function(g, scale = TRUE) {
   }
 
   if (scale) {
-    evcent <- evcent / max(evcent)
+    evcent <- evcent / max(abs(evcent))
   }
 
   return(evcent)
