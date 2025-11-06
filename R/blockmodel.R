@@ -34,7 +34,12 @@ signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
   if (missing(k)) {
     stop('argument "k" is missing, with no default')
   }
-  A <- igraph::as_adj(g, type = "both", attr = "sign", sparse = TRUE)
+  A <- igraph::as_adjacency_matrix(
+    g,
+    type = "both",
+    attr = "sign",
+    sparse = TRUE
+  )
   if (!annealing) {
     init_cluster <- sample(0:(k - 1), nrow(A), replace = TRUE)
     res <- optimBlocks1(A, init_cluster, k, alpha)
@@ -124,7 +129,12 @@ signed_blockmodel_general <- function(g, blockmat, alpha = 0.5) {
   if (!all(blockmat %in% c(-1, 1))) {
     stop('"blockmat" may only contain -1 and 1')
   }
-  A <- igraph::as_adj(g, type = "both", attr = "sign", sparse = TRUE)
+  A <- igraph::as_adjacency_matrix(
+    g,
+    type = "both",
+    attr = "sign",
+    sparse = TRUE
+  )
   init_cluster <- sample(0:(nrow(blockmat) - 1), nrow(A), replace = TRUE)
   res <- optimBlocksSimS(A, init_cluster, blockmat, alpha)
   res$membership <- res$membership + 1

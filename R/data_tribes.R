@@ -5,4 +5,3 @@
 #' @source http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/gama.dat
 #' @references Read, K. E. (1954) Cultures of the central highlands, New Guinea. *Southwestern Journal of Anthropology*, 1–43.
 "tribes"
-
