@@ -130,9 +130,9 @@ TRUE or FALSE).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_unsigned_2mode.html">as_unsigned_2mode</a></span><span class="op">(</span><span class="va">g</span>,primary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">gu</span></span>
-<span><span class="co">#&gt; IGRAPH f94bb05 UN-B 8 5 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 1136b42 UN-B 8 5 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), type (v/l)</span></span>
-<span><span class="co">#&gt; + edges from f94bb05 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 1136b42 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] a-pos--1 b-pos--1 c-neg--1 a-pos--2 b-neg--2</span></span></code></pre></div>
 <p>Now, any binarization toll (e.g. from the <code>backbone</code>
 package) can be applied since the network is an unsigned two-mode
@@ -143,9 +143,9 @@ one (the “universal” approach) since it can be done without the
 <code class="sourceCode R"><span><span class="va">pu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/bipartite_projection.html" class="external-link">bipartite_projection</a></span><span class="op">(</span><span class="va">gu</span>,which <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span></span>
 <span><span class="va">pu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/delete_edge_attr.html" class="external-link">delete_edge_attr</a></span><span class="op">(</span><span class="va">pu</span>,<span class="st">"weight"</span><span class="op">)</span></span>
 <span><span class="va">pu</span></span>
-<span><span class="co">#&gt; IGRAPH d14cb17 UN-- 6 4 -- </span></span>
+<span><span class="co">#&gt; IGRAPH e7a4b5b UN-- 6 4 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from d14cb17 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from e7a4b5b (vertex names):</span></span>
 <span><span class="co">#&gt; [1] a-pos--b-pos a-pos--c-neg a-pos--b-neg b-pos--c-neg</span></span></code></pre></div>
 <p>After binarization, the network is turned back to an unsigned network
 using a <em>contraction rule</em>. The contraction rule works as
