@@ -108,9 +108,9 @@ values 1 (positive) or -1 (negative).</p>
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph.full.html" class="external-link">graph.full</a></span><span class="op">(</span><span class="fl">5</span>,directed <span class="op">=</span> <span class="cn">FALSE</span>,loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">sign</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">g</span></span>
-<span><span class="co">#&gt; IGRAPH 6cffac2 U--- 5 10 -- Full graph</span></span>
+<span><span class="co">#&gt; IGRAPH 446ac8c U--- 5 10 -- Full graph</span></span>
 <span><span class="co">#&gt; + attr: name (g/c), loops (g/l), sign (e/n)</span></span>
-<span><span class="co">#&gt; + edges from 6cffac2:</span></span>
+<span><span class="co">#&gt; + edges from 446ac8c:</span></span>
 <span><span class="co">#&gt;  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5</span></span></code></pre></div>
 <p>All methods (should) throw an error if the sign attribute is missing
 or contains other values than -1 and 1.</p>
