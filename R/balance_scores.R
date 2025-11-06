@@ -18,7 +18,7 @@
 #' Samin Aref, Mark C Wilson (2018). Measuring partial balance in signed networks. *Journal of Complex Networks*, 6(4): 566–595, https://doi.org/10.1093/comnet/cnx044
 #' @examples
 #' library(igraph)
-#' g <- graph.full(4)
+#' g <- make_full_graph(4)
 #' E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 #'
 #' balance_score(g, method = "triangles")

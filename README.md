@@ -62,11 +62,11 @@ library(signnet)
 data("tribes")
 
 balance_score(tribes, method = "triangles")
-#> [1] 0.867647
+#> [1] 0.8676471
 balance_score(tribes, method = "walk")
-#> [1] 0.357576
+#> [1] 0.3575761
 balance_score(tribes, method = "frustration")
-#> [1] 0.758621
+#> [1] 0.7586207
 ```
 
 For directed signed networks, `triad_census_signed()` can be used to
@@ -86,7 +86,7 @@ are negative.
 clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 clu
 #> $membership
-#>  [1] 1 1 3 3 2 3 3 3 2 2 3 3 2 2 1 1
+#>  [1] 3 3 2 2 1 2 2 2 1 1 2 2 1 1 3 3
 #> 
 #> $criterion
 #> [1] 2
@@ -118,7 +118,7 @@ differing inter/intra group edge patterns.
 
 ``` r
 # create a signed network with three groups and different inter/intra group ties
-g1 <- g2 <- g3 <- graph.full(5)
+g1 <- g2 <- g3 <- make_full_graph(5)
 
 V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)
@@ -128,6 +128,11 @@ g <- Reduce("%u%", list(g1, g2, g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
 g <- add.edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
+#> Warning: `add.edges()` was deprecated in igraph 2.0.0.
+#> ℹ Please use `add_edges()` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this
+#> warning was generated.
 g <- add.edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
 g <- add.edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
 

@@ -28,7 +28,7 @@ signed adjacency matrix and \eqn{\mu_i} of the unsigned adjacency matrix. Maxima
 }
 \examples{
 library(igraph)
-g <- graph.full(4)
+g <- make_full_graph(4)
 E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
 
 balance_score(g, method = "triangles")

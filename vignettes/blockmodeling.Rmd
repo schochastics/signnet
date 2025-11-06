@@ -68,7 +68,7 @@ off-diagonal blocks are negative. The function `signed_blockmodel_general()` can
 In the below example, we construct a network that contains three blocks. Two have positive and one has negative intra-group ties.
 The inter-group edges are negative between group one and two, and one and three. Between group two and three, all edges are positive.
 ```{r general_example}
-g1 <- g2 <- g3 <- graph.full(5)
+g1 <- g2 <- g3 <- make_full_graph(5)
 
 V(g1)$name <- as.character(1:5)
 V(g2)$name <- as.character(6:10)

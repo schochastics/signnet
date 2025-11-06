@@ -47,7 +47,7 @@ sample_bipartite_signed <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  g <- igraph::sample_bipartite(
+  g <- igraph::sample_bipartite_gnp(
     n1 = n1,
     n2 = n2,
     p = p,

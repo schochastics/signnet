@@ -16,7 +16,7 @@ BugReports: https://github.com/schochastics/signnet/issues
 Depends: 
     R (>= 3.2.0)
 Imports: 
-    igraph,
+    igraph (>= 2.2.0),
     Matrix,
     Rcpp
 Suggests: 

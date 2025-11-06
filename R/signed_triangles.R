@@ -1829,7 +1829,7 @@ triad_census_signed <- function(g) {
 
   A <- as_adj_signed(g, sparse = TRUE)
   n <- nrow(A)
-  adj <- igraph::as_adj_list(igraph::as.undirected(g), "all")
+  adj <- igraph::as_adj_list(igraph::as_undirected(g), "all")
   adj <- lapply(adj, function(x) x - 1)
   triads <- triadCensusSign1(A, adj, n)
   names(triads) <- paste0(tcode, "-", signsign)
