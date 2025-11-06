@@ -1,6 +1,10 @@
+# signnet 1.0.6
+
+* fixed a bug in eigenvector centrality calculation
+
 # signnet 1.0.5
 
-* fix all deprecated igrapg calls
+* fix all deprecated igraph calls
 
 # signnet 1.0.4
 

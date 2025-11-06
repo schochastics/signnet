@@ -151,10 +151,12 @@ eigen_centrality_signed <- function(g, scale = TRUE) {
   if (length(max_evals) != 1) {
     stop("no dominant eigenvalue exists")
   } else {
-    evcent <- abs(sA$vectors[, max_evals])
+    evcent <- sA$vectors[, max_evals]
   }
 
-  if (scale) evcent <- evcent / max(evcent)
+  if (scale) {
+    evcent <- evcent / max(evcent)
+  }
 
   return(evcent)
 }
