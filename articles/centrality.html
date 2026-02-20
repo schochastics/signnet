@@ -63,7 +63,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Centrality</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/schochastics/signnet/blob/main/vignettes/centrality.Rmd" class="external-link"><code>vignettes/centrality.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/schochastics/signnet/blob/v1.0.6/vignettes/centrality.Rmd" class="external-link"><code>vignettes/centrality.Rmd</code></a></small>
       <div class="d-none name"><code>centrality.Rmd</code></div>
     </div>
 
@@ -118,8 +118,8 @@ degree can not distinguish vertices.</p>
 <span><span class="fu"><a href="../reference/degree_signed.html">degree_signed</a></span><span class="op">(</span><span class="va">g</span>,type<span class="op">=</span><span class="st">"ratio"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</span></span>
 <span><span class="fu"><a href="../reference/eigen_centrality_signed.html">eigen_centrality_signed</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1]  0.62214960 -1.00000000  0.74518850 -1.00000000  0.89990041 -0.64289592</span></span>
-<span><span class="co">#&gt;  [7] -0.35828159  0.37471921  0.28087411  0.07834568</span></span>
+<span><span class="co">#&gt;  [1] -0.62214960  1.00000000 -0.74518850  1.00000000 -0.89990041  0.64289592</span></span>
+<span><span class="co">#&gt;  [7]  0.35828159 -0.37471921 -0.28087411 -0.07834568</span></span>
 <span><span class="fu"><a href="../reference/pn_index.html">pn_index</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] 0.9009747 0.8613482 0.9076997 0.8613482 0.8410658 0.8496558 0.8617321</span></span>
 <span><span class="co">#&gt;  [8] 0.9015909 0.8509848 0.9072930</span></span></code></pre></div>
@@ -127,7 +127,7 @@ degree can not distinguish vertices.</p>
 significantly for this network.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="../reference/eigen_centrality_signed.html">eigen_centrality_signed</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>,<span class="fu"><a href="../reference/pn_index.html">pn_index</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>,method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.2</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.1555556</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-note-on-eigenvector-centrality">A note on eigenvector centrality<a class="anchor" aria-label="anchor" href="#a-note-on-eigenvector-centrality"></a>
@@ -152,7 +152,8 @@ is the case.</p>
 <span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_adjacency_matrix.html" class="external-link">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">A</span>,<span class="st">"undirected"</span>,weighted <span class="op">=</span> <span class="st">"sign"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/eigen_centrality_signed.html">eigen_centrality_signed</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eigen_centrality_signed(g): no dominant eigenvalue exists</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `eigen_centrality_signed()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> no dominant eigenvalue exists</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -173,7 +174,7 @@ Negative Relations.” Social Networks 26 (4): 331–38.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
