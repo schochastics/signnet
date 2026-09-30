@@ -60,6 +60,16 @@
 <code><a href="../reference/as_signed_proj.html">as_signed_proj()</a></code> handles vertex names containing <code>"-"</code>, <code>"pos"</code> or <code>"neg"</code>.</li>
 <li>
 <code><a href="../reference/complex_walks.html">complex_walks()</a></code> validates <code>k</code>.</li>
+<li>
+<code><a href="../reference/signed_blockmodel_general.html">signed_blockmodel_general()</a></code> returned a membership that did not match the reported criterion, and a wrong (even negative) criterion for <code>alpha != 0.5</code>. The meaning of <code>alpha</code> now matches <code><a href="../reference/signed_blockmodel.html">signed_blockmodel()</a></code>.</li>
+<li>
+<code>signed_blockmodel(annealing = FALSE)</code> no longer returns the random initial partition for networks with large blocks, and it always takes the best improving move.</li>
+<li>
+<code><a href="../reference/signed_blockmodel.html">signed_blockmodel()</a></code> and <code><a href="../reference/signed_blockmodel_general.html">signed_blockmodel_general()</a></code> validate <code>k</code>, <code>alpha</code> and <code>blockmat</code> (square, symmetric for undirected networks).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="performance-development-version">Performance<a class="anchor" aria-label="anchor" href="#performance-development-version"></a></h3>
+<ul><li>Both blockmodeling functions share a new C++ implementation (greedy local search and simulated annealing) that no longer copies the adjacency matrix for every move. <code>signed_blockmodel(annealing = TRUE)</code> no longer uses <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code> and is about 25x faster.</li>
 </ul></div>
 </div>
     <div class="section level2">

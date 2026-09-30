@@ -31,10 +31,10 @@ g <- sample_islands_signed(10,10,1,20)
 clu <- signed_blockmodel(g,k = 10,alpha = 0.5)
 table(clu$membership)
 #> 
-#>  1  2  3  4  5  6  7  8  9 10 
-#> 10 10 10 10 10 10 10 10 10 10
+#>  1  3  4  5  6  8  9 10 
+#> 10 20 10 10 10 20 10 10
 clu$criterion
-#> [1] 0
+#> [1] 8
 ```
 
 The function returns a list with two entries. The block membership of
@@ -63,13 +63,13 @@ set.seed(44) #for reproducibility
 
 signed_blockmodel(tribes,k = 3,alpha=0.5,annealing = TRUE)
 #> $membership
-#>  [1] 1 1 2 2 3 2 2 2 3 3 2 2 3 3 1 1
+#>  [1] 1 1 3 3 2 3 3 3 2 2 3 3 2 2 1 1
 #> 
 #> $criterion
 #> [1] 2
 signed_blockmodel(tribes,k = 3,alpha=0.5,annealing = FALSE)
 #> $membership
-#>  [1] 1 1 2 2 3 2 2 2 3 3 2 2 3 3 1 1
+#>  [1] 3 3 1 1 2 1 1 1 2 2 1 1 2 2 3 3
 #> 
 #> $criterion
 #> [1] 2

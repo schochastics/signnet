@@ -91,7 +91,7 @@ balance_score(g, method = "triangles")
 balance_score(g, method = "walk")
 #> [1] 1
 balance_score(g, method = "frustration")
-#> [1] 0.8390805
+#> [1] 1
 ```
 
 “triangles” returns the fraction of balanced triangles.

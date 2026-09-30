@@ -48,9 +48,9 @@ an edge attribute “sign” with values 1 (positive) or -1 (negative).
 g <- make_full_graph(5,directed = FALSE,loops = FALSE)
 E(g)$sign <- 1
 g
-#> IGRAPH d6d6a5b U--- 5 10 -- Full graph
+#> IGRAPH ce49ef8 U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l), sign (e/n)
-#> + edges from d6d6a5b:
+#> + edges from ce49ef8:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 ```
 

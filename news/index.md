@@ -34,6 +34,27 @@
   handles vertex names containing `"-"`, `"pos"` or `"neg"`.
 - [`complex_walks()`](https://schochastics.github.io/signnet/reference/complex_walks.md)
   validates `k`.
+- [`signed_blockmodel_general()`](https://schochastics.github.io/signnet/reference/signed_blockmodel_general.md)
+  returned a membership that did not match the reported criterion, and a
+  wrong (even negative) criterion for `alpha != 0.5`. The meaning of
+  `alpha` now matches
+  [`signed_blockmodel()`](https://schochastics.github.io/signnet/reference/signed_blockmodel.md).
+- `signed_blockmodel(annealing = FALSE)` no longer returns the random
+  initial partition for networks with large blocks, and it always takes
+  the best improving move.
+- [`signed_blockmodel()`](https://schochastics.github.io/signnet/reference/signed_blockmodel.md)
+  and
+  [`signed_blockmodel_general()`](https://schochastics.github.io/signnet/reference/signed_blockmodel_general.md)
+  validate `k`, `alpha` and `blockmat` (square, symmetric for undirected
+  networks).
+
+### Performance
+
+- Both blockmodeling functions share a new C++ implementation (greedy
+  local search and simulated annealing) that no longer copies the
+  adjacency matrix for every move. `signed_blockmodel(annealing = TRUE)`
+  no longer uses [`stats::optim()`](https://rdrr.io/r/stats/optim.html)
+  and is about 25x faster.
 
 ## signnet 1.0.6
 

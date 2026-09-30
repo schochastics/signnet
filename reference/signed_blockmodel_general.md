@@ -16,7 +16,9 @@ signed_blockmodel_general(g, blockmat, alpha = 0.5)
 
 - blockmat:
 
-  Integer Matrix. Specifies the inter/intra group patterns of ties
+  Integer Matrix. Specifies the inter/intra group patterns of ties. Must
+  be square, contain only -1 and 1 and be symmetric for undirected
+  networks.
 
 - alpha:
 
@@ -24,15 +26,21 @@ signed_blockmodel_general(g, blockmat, alpha = 0.5)
 
 ## Value
 
-numeric vector of block assignments and the associated criterion value
+list with the block assignments (`membership`) and the associated
+criterion value (`criterion`)
 
 ## Details
 
 The function minimizes P(C)=\\\alpha\\N+(1-\\\alpha\\)P, where N is the
-total number of negative ties within plus-sets and P be the total number
-of positive ties between plus-sets. This function implements the
-generalized model. For the structural balance version see
+total number of negative ties within positive blocks and P be the total
+number of positive ties within negative blocks. This function implements
+the generalized model. For the structural balance version see
 [signed_blockmodel](https://schochastics.github.io/signnet/reference/signed_blockmodel.md).
+Ties are counted per entry of the adjacency matrix, so each undirected
+tie counts twice. The optimization uses simulated annealing followed by
+a greedy local search and starts from a random partition. Use
+[`set.seed()`](https://rdrr.io/r/base/Random.html) for reproducible
+results.
 
 ## References
 
