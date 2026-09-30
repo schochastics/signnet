@@ -1,6 +1,13 @@
 # Changelog
 
-## signnet (development version)
+## signnet 1.1.0
+
+This release fixes a number of bugs, rewrites the blockmodeling
+algorithms and speeds up several functions considerably. Results of
+[`signed_blockmodel()`](https://schochastics.github.io/signnet/reference/signed_blockmodel.md)
+and
+[`signed_blockmodel_general()`](https://schochastics.github.io/signnet/reference/signed_blockmodel_general.md)
+differ from earlier versions (see below).
 
 ### Bug fixes
 

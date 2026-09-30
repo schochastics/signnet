@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">signnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +39,10 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="signnet-development-version">signnet (development version)<a class="anchor" aria-label="anchor" href="#signnet-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.1.0" id="signnet-110">signnet 1.1.0<a class="anchor" aria-label="anchor" href="#signnet-110"></a></h2>
+<p>This release fixes a number of bugs, rewrites the blockmodeling algorithms and speeds up several functions considerably. Results of <code><a href="../reference/signed_blockmodel.html">signed_blockmodel()</a></code> and <code><a href="../reference/signed_blockmodel_general.html">signed_blockmodel_general()</a></code> differ from earlier versions (see below).</p>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-1-1-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-0"></a></h3>
 <ul><li>
 <code><a href="../reference/as_adj_complex.html">as_adj_complex()</a></code> now respects the <code>attr</code> argument and works with named vertices. This also fixes <code><a href="../reference/laplacian_matrix_complex.html">laplacian_matrix_complex()</a></code>, <code><a href="../reference/as_incidence_complex.html">as_incidence_complex()</a></code> and <code><a href="../reference/complex_walks.html">complex_walks()</a></code> for attributes other than <code>"type"</code>.</li>
 <li>
@@ -68,7 +69,7 @@
 <code><a href="../reference/signed_blockmodel.html">signed_blockmodel()</a></code> and <code><a href="../reference/signed_blockmodel_general.html">signed_blockmodel_general()</a></code> validate <code>k</code>, <code>alpha</code> and <code>blockmat</code> (square, symmetric for undirected networks).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="maintenance-development-version">Maintenance<a class="anchor" aria-label="anchor" href="#maintenance-development-version"></a></h3>
+<h3 id="maintenance-1-1-0">Maintenance<a class="anchor" aria-label="anchor" href="#maintenance-1-1-0"></a></h3>
 <ul><li>Signed adjacency and incidence matrices are built internally instead of using the deprecated <code>attr</code> argument of igraph. Values of multiple edges are still summed.</li>
 <li>Shared input validation. Errors no longer include the internal call.</li>
 <li>Triad census lookup tables moved from the R source to internal data (<code>data-raw/triad_tables.R</code>).</li>
@@ -79,7 +80,7 @@
 <li>Requires R &gt;= 3.5.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="performance-development-version">Performance<a class="anchor" aria-label="anchor" href="#performance-development-version"></a></h3>
+<h3 id="performance-1-1-0">Performance<a class="anchor" aria-label="anchor" href="#performance-1-1-0"></a></h3>
 <ul><li>
 <code><a href="../reference/count_signed_triangles.html">count_signed_triangles()</a></code>, <code><a href="../reference/signed_triangles.html">signed_triangles()</a></code> and <code><a href="../reference/count_complex_triangles.html">count_complex_triangles()</a></code> are vectorized (several hundred times faster on networks with many triangles).</li>
 <li>

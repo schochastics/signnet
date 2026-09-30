@@ -76,7 +76,7 @@ are negative.
 clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 clu
 #> $membership
-#>  [1] 3 3 2 2 1 2 2 2 1 1 2 2 1 1 3 3
+#>  [1] 3 3 1 1 2 1 1 1 2 2 1 1 2 2 3 3
 #> 
 #> $criterion
 #> [1] 2
@@ -101,7 +101,7 @@ ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
 ![](reference/figures/README-block_example-1.png)
 
 The second blockmodeling technique is known as *generalized
-blockmodeling*. This method removes the restriction of positve
+blockmodeling*. This method removes the restriction of positive
 (negative) inter (intra) group edges. Instead, a blockmatrix is passed
 to the function with the desired block structure. The example below
 illustrates the technique with a network composed of three groups with
@@ -119,14 +119,9 @@ V(g3)$name <- as.character(11:15)
 g <- Reduce("%u%", list(g1, g2, g3))
 E(g)$sign <- 1
 E(g)$sign[1:10] <- -1
-g <- add.edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
-#> Warning: `add.edges()` was deprecated in igraph 2.0.0.
-#> ℹ Please use `add_edges()` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this
-#> warning was generated.
-g <- add.edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
-g <- add.edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
+g <- add_edges(g, c(rbind(1:5, 6:10)), attr = list(sign = -1))
+g <- add_edges(g, c(rbind(1:5, 11:15)), attr = list(sign = -1))
+g <- add_edges(g, c(rbind(11:15, 6:10)), attr = list(sign = 1))
 
 # specify the link patterns between groups
 blockmat <- matrix(c(1, -1, -1, -1, 1, 1, -1, 1, -1), 3, 3, byrow = TRUE)

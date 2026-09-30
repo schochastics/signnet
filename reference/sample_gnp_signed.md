@@ -43,9 +43,9 @@ Erdos, P. and Renyi, A., On random graphs, *Publicationes Mathematicae
 
 ``` r
 sample_gnp_signed(10, 0.4, 0.5)
-#> IGRAPH 92eaa8c U--- 10 15 -- Erdos-Renyi (gnp) graph
+#> IGRAPH ae6c26c U--- 10 15 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n), sign (e/n)
-#> + edges from 92eaa8c:
+#> + edges from ae6c26c:
 #>  [1] 1-- 2 1-- 3 3-- 4 3-- 5 2-- 6 4-- 6 5-- 6 2-- 7 5-- 7 1-- 8 3-- 8 1-- 9
 #> [13] 5-- 9 6-- 9 6--10
 ```
