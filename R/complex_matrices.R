@@ -56,6 +56,9 @@ as_adj_complex <- function(g, attr) {
   if (missing(attr)) {
     stop('argument "attr" is missing, with no default')
   }
+  if (!attr %in% igraph::edge_attr_names(g)) {
+    stop(paste0("There is no edge attribute ", '"', attr, '"'))
+  }
 
   eattr <- igraph::edge_attr(g, attr)
   if (!all(eattr %in% c("P", "N", "A"))) {
