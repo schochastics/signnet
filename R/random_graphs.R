@@ -96,33 +96,26 @@ sample_islands_signed <- function(
   if (n.inter <= 0) {
     stop("n.inter should be greater than zero")
   }
-  el <- matrix(0, 0, 2)
-  for (i in 1:islands.n) {
-    tmp <- t(utils::combn(((i - 1) * islands.size + 1):(i * islands.size), 2))
-    tmp <- tmp[
-      sample(
-        c(FALSE, TRUE),
-        nrow(tmp),
-        replace = TRUE,
-        prob = c(1 - islands.pin, islands.pin)
-      ),
-    ]
-    el <- rbind(el, tmp)
-  }
-  el <- cbind(el, 1)
-  for (i in 1:islands.n) {
-    outside <- setdiff(
-      1:(islands.size * islands.n),
-      ((i - 1) * islands.size + 1):(i * islands.size)
-    )
+  n <- islands.n * islands.size
+  pos_el <- lapply(seq_len(islands.n), function(i) {
     inside <- ((i - 1) * islands.size + 1):(i * islands.size)
-    to <- sample(outside, n.inter, replace = TRUE)
-    from <- sample(inside, n.inter, replace = TRUE)
-    tmp <- cbind(from, to, -1)
-    el <- rbind(el, tmp)
-  }
-  g <- igraph::graph_from_edgelist(el[, 1:2], directed = FALSE)
-  igraph::E(g)$sign <- el[, 3]
+    pairs <- t(utils::combn(inside, 2))
+    pairs[stats::runif(nrow(pairs)) < islands.pin, , drop = FALSE]
+  })
+  neg_el <- lapply(seq_len(islands.n), function(i) {
+    inside <- ((i - 1) * islands.size + 1):(i * islands.size)
+    outside <- setdiff(seq_len(n), inside)
+    cbind(
+      sample(inside, n.inter, replace = TRUE),
+      outside[sample.int(length(outside), n.inter, replace = TRUE)]
+    )
+  })
+  pos_el <- do.call(rbind, pos_el)
+  neg_el <- do.call(rbind, neg_el)
+  el <- rbind(pos_el, neg_el)
+  signs <- c(rep(1, nrow(pos_el)), rep(-1, nrow(neg_el)))
+  g <- igraph::make_empty_graph(n, directed = FALSE)
+  g <- igraph::add_edges(g, t(el), sign = signs)
   igraph::V(g)$grp <- as.character(rep(1:islands.n, each = islands.size))
   g <- igraph::delete_edges(g, which(igraph::which_multiple(g)))
   g

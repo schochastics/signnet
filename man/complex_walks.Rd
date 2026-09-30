@@ -14,7 +14,7 @@ complex_walks(g, attr, k)
 \item{k}{integer. length of walks}
 }
 \value{
-igraph object
+complex matrix
 }
 \description{
 Count Walks in complex signed network

@@ -10,7 +10,7 @@ triad_census_signed(g)
 \item{g}{igraph object with a sign edge attribute.}
 }
 \value{
-counts for all 139 signed directed triangle types
+counts for all 138 signed directed triangle types
 }
 \description{
 triad census for signed graphs

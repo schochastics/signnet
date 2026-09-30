@@ -204,7 +204,7 @@ count_complex_triangles <- function(g, attr) {
 #' @description triad census for signed graphs
 #'
 #' @param g igraph object with a sign edge attribute.
-#' @return counts for all 139 signed directed triangle types
+#' @return counts for all 138 signed directed triangle types
 #' @author David Schoch
 #' @examples
 #' library(igraph)
@@ -1840,7 +1840,7 @@ triad_census_signed <- function(g) {
   )
   census <- df[["count"]]
   names(census) <- df[["type"]]
-  census <- census[match(names(census), triple_order)]
-  census[1] <- choose(n, 3) - sum(census)
+  census <- census[triple_order]
+  census["003-000000"] <- choose(n, 3) - sum(census[-1])
   census
 }

@@ -313,3 +313,40 @@ test_that("complex walks works", {
     )
     expect_equal(W, W_true)
 })
+
+test_that("complex adj respects attr and vertex names", {
+    g <- igraph::make_full_graph(3, directed = FALSE)
+    igraph::V(g)$name <- c("c", "a", "b")
+    igraph::E(g)$foo <- c("P", "N", "A")
+    A <- as_adj_complex(g, "foo")
+    expect_equal(A[1, 2], 1 + 0i)
+    expect_equal(A[1, 3], 0 + 1i)
+    expect_equal(A[3, 1], 0 - 1i)
+    expect_equal(A[2, 3], 0.5 + 0.5i)
+    expect_equal(A[3, 2], 0.5 - 0.5i)
+    expect_equal(diag(A), rep(0 + 0i, 3))
+})
+
+test_that("complex walks respects attr and validates k", {
+    g <- igraph::make_full_graph(3, directed = FALSE)
+    igraph::E(g)$foo <- "P"
+    expect_equal(Re(complex_walks(g, "foo", 2)), matrix(c(2, 1, 1, 1, 2, 1, 1, 1, 2), 3))
+    expect_error(complex_walks(g, "foo", -1))
+    expect_error(complex_walks(g, "foo", 1.5))
+})
+
+test_that("as_signed_proj handles hyphens and pos/neg in names", {
+    el <- matrix(
+        c("anna-lena", "a", "anna-lena", "b", "posneg", "a", "posneg", "b"),
+        ncol = 2,
+        byrow = TRUE
+    )
+    g <- igraph::graph_from_edgelist(el, directed = FALSE)
+    igraph::E(g)$sign <- c(1, -1, 1, -1)
+    igraph::V(g)$type <- igraph::V(g)$name %in% c("anna-lena", "posneg")
+    l <- as_unsigned_2mode(g, primary = TRUE)
+    p <- igraph::bipartite_projection(l, which = "true")
+    res <- igraph::as_data_frame(as_signed_proj(p))
+    expect_setequal(c(res$from, res$to), c("anna-lena", "posneg"))
+    expect_equal(res$type, "P")
+})

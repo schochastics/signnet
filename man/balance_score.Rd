@@ -12,7 +12,7 @@ balance_score(g, method = "triangles")
 \item{method}{string indicating the method to be used. See details for options}
 }
 \value{
-numeric balancedness score between 0 and 1
+numeric balancedness score between 0 and 1. For \code{method = "triangles"}, \code{NA} if the network has no triangles.
 }
 \description{
 Implements several indices to assess the balancedness of a network.

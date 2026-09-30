@@ -35,7 +35,7 @@ pn_index <- function(g, mode = c("all", "in", "out")) {
     mode <- "all"
   }
   if (igraph::is_directed(g) && mode == "all") {
-    stop('"all" only works with undirected networks.')
+    stop('"all" only works with undirected networks. Use mode = "in" or mode = "out".')
   }
 
   A <- as_adj_signed(g, sparse = TRUE)
@@ -82,7 +82,7 @@ degree_signed <- function(
     mode <- "all"
   }
   if (igraph::is_directed(g) && mode == "all") {
-    stop('"all" only works with undirected networks.')
+    stop('"all" only works with undirected networks. Use mode = "in" or mode = "out".')
   }
   type <- match.arg(type, c("pos", "neg", "ratio", "net"))
 
@@ -124,6 +124,7 @@ degree_signed <- function(
 #' @description returns the eigenvector associated with the dominant eigenvalue from the adjacency matrix.
 #' @details Note that, with negative values, the adjacency matrix may not have a dominant eigenvalue.
 #' This means it is not clear which eigenvector should be used. In addition it is possible for the adjacency matrix to have repeated eigenvalues and hence multiple linearly independent eigenvectors. In this case certain centralities can be arbitrarily assigned. The function returns an error if this is the case.
+#' For directed networks, the function also returns an error if the dominant eigenvalue is complex.
 #' @param g igraph object with a sign edge attribute.
 #' @param scale Logical scalar, whether to scale the result to have a maximum score of one. If no scaling is used then the result vector is the same as returned by `eigen()`.
 #' @return centrality scores as numeric vector.
@@ -144,15 +145,17 @@ eigen_centrality_signed <- function(g, scale = TRUE) {
     stop("network is not a signed graph")
   }
 
-  sA <- eigen(as_adj_signed(g))
+  sA <- eigen(as_adj_signed(g), symmetric = !igraph::is_directed(g))
   evals <- round(sA$values, 8)
   max_evals <- which(abs(evals) == max(abs(evals)))
 
   if (length(max_evals) != 1) {
     stop("no dominant eigenvalue exists")
-  } else {
-    evcent <- sA$vectors[, max_evals]
   }
+  if (Im(evals[max_evals]) != 0) {
+    stop("the dominant eigenvalue is not real")
+  }
+  evcent <- Re(sA$vectors[, max_evals])
 
   if (scale) {
     evcent <- evcent / max(abs(evcent))

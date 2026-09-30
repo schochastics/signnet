@@ -33,3 +33,12 @@ test_that("sample signed b1partite works", {
   g <- sample_bipartite_signed(10, 10, 1, 1)
   expect_equal(igraph::ecount(g), 100)
 })
+
+test_that("signed islands keep all vertices with sparse islands", {
+  set.seed(4)
+  for (i in 1:20) {
+    g <- sample_islands_signed(3, 10, 0, 1)
+    expect_equal(igraph::vcount(g), 30)
+    expect_equal(length(igraph::V(g)$grp), 30)
+  }
+})

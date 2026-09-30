@@ -20,6 +20,7 @@ returns the eigenvector associated with the dominant eigenvalue from the adjacen
 \details{
 Note that, with negative values, the adjacency matrix may not have a dominant eigenvalue.
 This means it is not clear which eigenvector should be used. In addition it is possible for the adjacency matrix to have repeated eigenvalues and hence multiple linearly independent eigenvectors. In this case certain centralities can be arbitrarily assigned. The function returns an error if this is the case.
+For directed networks, the function also returns an error if the dominant eigenvalue is complex.
 }
 \examples{
 library(igraph)
