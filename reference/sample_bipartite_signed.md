@@ -55,9 +55,9 @@ A signed bipartite igraph graph.
 
 ``` r
 sample_bipartite_signed(10, 10, 0.5, 0.5)
-#> IGRAPH 9a80a0a U--B 20 52 -- Bipartite Gnp random graph
+#> IGRAPH b7d86b2 U--B 20 52 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l), sign (e/n)
-#> + edges from 9a80a0a:
+#> + edges from b7d86b2:
 #>  [1]  1--11  6--11  7--11  8--11  9--11  2--12  3--12  8--12 10--12  1--13
 #> [11]  3--13  6--13  8--13 10--13  2--14  3--14  4--14  5--14  6--14  7--14
 #> [21] 10--14  1--15  3--15  7--15  8--15  2--16  3--16  4--16  6--16  9--16

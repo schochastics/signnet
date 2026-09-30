@@ -69,7 +69,13 @@
 </ul></div>
 <div class="section level3">
 <h3 id="performance-development-version">Performance<a class="anchor" aria-label="anchor" href="#performance-development-version"></a></h3>
-<ul><li>Both blockmodeling functions share a new C++ implementation (greedy local search and simulated annealing) that no longer copies the adjacency matrix for every move. <code>signed_blockmodel(annealing = TRUE)</code> no longer uses <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code> and is about 25x faster.</li>
+<ul><li>
+<code><a href="../reference/count_signed_triangles.html">count_signed_triangles()</a></code>, <code><a href="../reference/signed_triangles.html">signed_triangles()</a></code> and <code><a href="../reference/count_complex_triangles.html">count_complex_triangles()</a></code> are vectorized (several hundred times faster on networks with many triangles).</li>
+<li>
+<code><a href="../reference/as_incidence_complex.html">as_incidence_complex()</a></code> and <code><a href="../reference/degree_signed.html">degree_signed()</a></code> are vectorized and use sparse matrices. <code><a href="../reference/complex_walks.html">complex_walks()</a></code> is about twice as fast.</li>
+<li>
+<code><a href="../reference/graph_circular_signed.html">graph_circular_signed()</a></code> computes arc lengths directly from the sampled angles, which also avoids <code>NaN</code>s from rounding errors.</li>
+<li>Both blockmodeling functions share a new C++ implementation (greedy local search and simulated annealing) that no longer copies the adjacency matrix for every move. <code>signed_blockmodel(annealing = TRUE)</code> no longer uses <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">stats::optim()</a></code> and is about 25x faster.</li>
 </ul></div>
 </div>
     <div class="section level2">

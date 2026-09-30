@@ -32,8 +32,8 @@ a signed network as igraph object
 el <- matrix(c("foo", "bar", "bar", "foobar"), ncol = 2, byrow = TRUE)
 signs <- c(-1, 1)
 graph_from_edgelist_signed(el, signs)
-#> IGRAPH 9d6d81a UN-- 3 2 -- 
+#> IGRAPH 676bfa7 UN-- 3 2 -- 
 #> + attr: name (v/c), sign (e/n)
-#> + edges from 9d6d81a (vertex names):
+#> + edges from 676bfa7 (vertex names):
 #> [1] foo--bar    bar--foobar
 ```

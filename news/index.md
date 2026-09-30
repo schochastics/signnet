@@ -50,6 +50,21 @@
 
 ### Performance
 
+- [`count_signed_triangles()`](https://schochastics.github.io/signnet/reference/count_signed_triangles.md),
+  [`signed_triangles()`](https://schochastics.github.io/signnet/reference/signed_triangles.md)
+  and
+  [`count_complex_triangles()`](https://schochastics.github.io/signnet/reference/count_complex_triangles.md)
+  are vectorized (several hundred times faster on networks with many
+  triangles).
+- [`as_incidence_complex()`](https://schochastics.github.io/signnet/reference/as_incidence_complex.md)
+  and
+  [`degree_signed()`](https://schochastics.github.io/signnet/reference/degree_signed.md)
+  are vectorized and use sparse matrices.
+  [`complex_walks()`](https://schochastics.github.io/signnet/reference/complex_walks.md)
+  is about twice as fast.
+- [`graph_circular_signed()`](https://schochastics.github.io/signnet/reference/graph_circular_signed.md)
+  computes arc lengths directly from the sampled angles, which also
+  avoids `NaN`s from rounding errors.
 - Both blockmodeling functions share a new C++ implementation (greedy
   local search and simulated annealing) that no longer copies the
   adjacency matrix for every move. `signed_blockmodel(annealing = TRUE)`
