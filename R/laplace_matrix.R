@@ -15,9 +15,7 @@
 #' @export
 
 laplacian_matrix_signed <- function(g, norm = FALSE, sparse = FALSE) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
+  check_signed(g)
 
   A <- as_adj_signed(g, sparse = sparse)
   deg <- Matrix::rowSums(abs(A))

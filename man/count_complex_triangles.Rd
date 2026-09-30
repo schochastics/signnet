@@ -15,7 +15,7 @@ count_complex_triangles(g, attr)
 counts for all complex triangle types
 }
 \description{
-Counts the number of all possible signed triangles (+++),(++-), (+--) and (---)
+Counts the number of all possible complex triangles, i.e. triangles with positive ("P"), negative ("N") and ambivalent ("A") ties
 }
 \examples{
 library(igraph)

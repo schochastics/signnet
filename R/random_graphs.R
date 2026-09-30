@@ -12,10 +12,8 @@
 #' @examples
 #' sample_gnp_signed(10, 0.4, 0.5)
 sample_gnp_signed <- function(n, p, p_neg, directed = FALSE, loops = FALSE) {
+  check_p_neg(p_neg)
   g <- igraph::sample_gnp(n = n, p = p, directed = directed, loops = loops)
-  if (missing(p_neg)) {
-    stop("p_neg missing with no default")
-  }
   igraph::E(g)$sign <- sample(
     c(-1, 1),
     igraph::ecount(g),
@@ -47,6 +45,8 @@ sample_bipartite_signed <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
+  check_p_neg(p_neg)
+  mode <- match.arg(mode)
   g <- igraph::sample_bipartite_gnp(
     n1 = n1,
     n2 = n2,
@@ -54,9 +54,6 @@ sample_bipartite_signed <- function(
     directed = directed,
     mode = mode
   )
-  if (missing(p_neg)) {
-    stop("p_neg missing with no default")
-  }
   igraph::E(g)$sign <- sample(
     c(-1, 1),
     igraph::ecount(g),
@@ -171,4 +168,13 @@ circleFun <- function(center = c(0, 0), r = 1, npoints = 20) {
   xx <- center[1] + r * cos(pts_samp)
   yy <- center[2] + r * sin(pts_samp)
   data.frame(x = xx, y = yy, angle = pts_samp)
+}
+
+check_p_neg <- function(p_neg) {
+  if (missing(p_neg)) {
+    stop("p_neg missing with no default", call. = FALSE)
+  }
+  if (!is.numeric(p_neg) || length(p_neg) != 1 || p_neg < 0 || p_neg > 1) {
+    stop("p_neg should be between zero and one", call. = FALSE)
+  }
 }

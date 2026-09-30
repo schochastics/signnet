@@ -26,12 +26,7 @@
 #' @export
 balance_score <- function(g, method = "triangles") {
   method <- match.arg(method, c("triangles", "walk", "frustration"))
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
-  if (igraph::is_directed(g)) {
-    stop("g must be undirected")
-  }
+  check_signed(g, directed = FALSE)
 
   if (method == "triangles") {
     tria_count <- count_signed_triangles(g)
@@ -67,27 +62,23 @@ balance_score <- function(g, method = "triangles") {
 #' Optimization problems in graph theory. Springer, Cham, 2018. 65-84.
 #'
 #' Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "A modeling and computational study of the frustration index in signed networks." Networks 75.1 (2020): 95-110.
+#' @examplesIf all(vapply(c("ompr", "ompr.roi", "ROI", "ROI.plugin.glpk"), requireNamespace, logical(1), quietly = TRUE))
+#' data("tribes")
+#' frustration_exact(tribes)
 #' @export
 
 frustration_exact <- function(g, ...) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
-  if (igraph::is_directed(g)) {
-    stop("g must be undirected")
-  }
+  check_signed(g, directed = FALSE)
 
-  if (!requireNamespace("ompr", quietly = TRUE)) {
-    stop("the package 'ompr' is needed for this function to work")
-  }
-  if (!requireNamespace("ompr.roi", quietly = TRUE)) {
-    stop("the package 'ompr.roi' is needed for this function to work")
-  }
-  if (!requireNamespace("ROI", quietly = TRUE)) {
-    stop("the package 'ROI' is needed for this function to work")
-  }
-  if (!requireNamespace("ROI.plugin.glpk", quietly = TRUE)) {
-    stop("the package 'ROI.plugin.glpk' is needed for this function to work")
+  for (pkg in c("ompr", "ompr.roi", "ROI", "ROI.plugin.glpk")) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(
+        "the package '",
+        pkg,
+        "' is needed for this function to work",
+        call. = FALSE
+      )
+    }
   }
 
   A <- as_adj_signed(g)

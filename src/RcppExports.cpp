@@ -70,18 +70,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// triadCensusSign
-IntegerVector triadCensusSign(NumericMatrix A, int n);
-RcppExport SEXP _signnet_triadCensusSign(SEXP ASEXP, SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type A(ASEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(triadCensusSign(A, n));
-    return rcpp_result_gen;
-END_RCPP
-}
 // triadCensusSign1
 DoubleVector triadCensusSign1(const arma::sp_mat& A, List adj, int n);
 RcppExport SEXP _signnet_triadCensusSign1(SEXP ASEXP, SEXP adjSEXP, SEXP nSEXP) {
@@ -101,7 +89,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_signnet_blockGreedy", (DL_FUNC) &_signnet_blockGreedy, 5},
     {"_signnet_blockAnneal", (DL_FUNC) &_signnet_blockAnneal, 8},
     {"_signnet_cxmatmul", (DL_FUNC) &_signnet_cxmatmul, 2},
-    {"_signnet_triadCensusSign", (DL_FUNC) &_signnet_triadCensusSign, 2},
     {"_signnet_triadCensusSign1", (DL_FUNC) &_signnet_triadCensusSign1, 3},
     {NULL, NULL, 0}
 };

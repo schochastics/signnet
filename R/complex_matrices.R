@@ -9,18 +9,8 @@
 #' @export
 
 as_adj_signed <- function(g, sparse = FALSE) {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
-  if (!"sign" %in% igraph::edge_attr_names(g)) {
-    stop("network does not have a sign edge attribute")
-  }
-  A <- igraph::as_adjacency_matrix(
-    g,
-    type = "both",
-    attr = "sign",
-    sparse = TRUE
-  )
+  check_sign_attr(g)
+  A <- signed_adjacency(g)
   if (!sparse) {
     A <- as.matrix(A)
   }
@@ -37,16 +27,15 @@ as_adj_signed <- function(g, sparse = FALSE) {
 #' @export
 
 as_incidence_signed <- function(g, sparse = FALSE) {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
-  if (!"sign" %in% igraph::edge_attr_names(g)) {
-    stop("network does not have a sign edge attribute")
-  }
+  check_sign_attr(g)
   if (!"type" %in% igraph::vertex_attr_names(g)) {
     stop("network must have a type vertex attribute")
   }
-  igraph::as_biadjacency_matrix(g, attr = "sign", sparse = sparse)
+  A <- signed_biadjacency(g)
+  if (!sparse) {
+    A <- as.matrix(A)
+  }
+  A
 }
 
 #' Convert a signed graph to a complex adjacency matrix
@@ -60,9 +49,7 @@ as_incidence_signed <- function(g, sparse = FALSE) {
 #' @export
 
 as_adj_complex <- function(g, attr) {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
+  check_graph(g)
   if (igraph::is_directed(g)) {
     stop("directed graphs are not supported")
   }
@@ -97,9 +84,7 @@ as_adj_complex <- function(g, attr) {
 #' @export
 
 laplacian_matrix_complex <- function(g, attr, norm = FALSE) {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
+  check_graph(g)
   if (igraph::is_directed(g)) {
     stop("directed graphs are not supported")
   }
@@ -162,12 +147,7 @@ as_incidence_complex <- function(g, attr) {
 #' as_complex_edges(g)
 #' @export
 as_complex_edges <- function(g, attr = "type") {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
-  if (!"sign" %in% igraph::edge_attr_names(g)) {
-    stop("network does not have a sign edge attribute")
-  }
+  check_sign_attr(g)
   esign <- igraph::edge_attr(g, "sign")
 
   if (!all(esign %in% c(-1, 1))) {
@@ -191,9 +171,7 @@ as_complex_edges <- function(g, attr = "type") {
 #' complex_walks(g, attr = "type", k = 3)
 #' @export
 complex_walks <- function(g, attr, k) {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
+  check_graph(g)
   if (missing(attr)) {
     stop('argument "attr" is missing, with no default')
   }
@@ -242,12 +220,7 @@ complex_walks <- function(g, attr, k) {
 #' @export
 
 as_unsigned_2mode <- function(g, primary = TRUE) {
-  if (!igraph::is_igraph(g)) {
-    stop("Not a graph object")
-  }
-  if (!"sign" %in% igraph::edge_attr_names(g)) {
-    stop("network does not have a sign edge attribute")
-  }
+  check_sign_attr(g)
 
   if (!"type" %in% igraph::vertex_attr_names(g)) {
     stop("not a two-mode network.")

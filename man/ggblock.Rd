@@ -30,12 +30,12 @@ ggplot2 object
 Plot Blockmodel matrix
 }
 \examples{
-\dontrun{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(igraph)
 data("tribes")
 clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
-}
+\dontshow{\}) # examplesIf}
 }
 \author{
 David Schoch

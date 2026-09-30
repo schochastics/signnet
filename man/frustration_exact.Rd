@@ -22,6 +22,12 @@ The frustration index indicates the minimum number of edges whose removal result
 network. The function needs the following packages to be installed: \code{ompr}, \code{ompr.roi},\code{ROI}, and \code{ROI.plugin.glpk}.
 The function Implements the AND model in Aref et al., 2020
 }
+\examples{
+\dontshow{if (all(vapply(c("ompr", "ompr.roi", "ROI", "ROI.plugin.glpk"), requireNamespace, logical(1), quietly = TRUE))) withAutoprint(\{ # examplesIf}
+data("tribes")
+frustration_exact(tribes)
+\dontshow{\}) # examplesIf}
+}
 \references{
 Aref, Samin, Andrew J. Mason, and Mark C. Wilson. "Computing the line index of balance using linear programming optimisation."
 Optimization problems in graph theory. Springer, Cham, 2018. 65-84.

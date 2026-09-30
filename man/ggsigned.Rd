@@ -26,6 +26,12 @@ Plot a signed or complex network
 \details{
 This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function is thus mostly meant to give a quick overview of the network.
 }
+\examples{
+\dontshow{if (requireNamespace("ggraph", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+g <- sample_islands_signed(3, 10, 0.5, 2)
+ggsigned(g)
+\dontshow{\}) # examplesIf}
+}
 \author{
 David Schoch
 }
