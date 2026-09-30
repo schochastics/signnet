@@ -17,10 +17,6 @@ cxmatmul <- function(A, B) {
     .Call(`_signnet_cxmatmul`, A, B)
 }
 
-triadCensusSign <- function(A, n) {
-    .Call(`_signnet_triadCensusSign`, A, n)
-}
-
 triadCensusSign1 <- function(A, adj, n) {
     .Call(`_signnet_triadCensusSign1`, A, adj, n)
 }

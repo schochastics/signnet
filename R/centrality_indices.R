@@ -26,9 +26,7 @@
 #' @export
 
 pn_index <- function(g, mode = c("all", "in", "out")) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
+  check_signed(g)
 
   mode <- match.arg(mode, c("all", "in", "out"))
   if (!igraph::is_directed(g)) {
@@ -74,9 +72,7 @@ degree_signed <- function(
   mode = c("all", "in", "out"),
   type = c("pos", "neg", "ratio", "net")
 ) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
+  check_signed(g)
   mode <- match.arg(mode, c("all", "in", "out"))
   if (!igraph::is_directed(g)) {
     mode <- "all"
@@ -120,9 +116,7 @@ degree_signed <- function(
 #' @export
 
 eigen_centrality_signed <- function(g, scale = TRUE) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
+  check_signed(g)
 
   sA <- eigen(as_adj_signed(g), symmetric = !igraph::is_directed(g))
   evals <- round(sA$values, 8)

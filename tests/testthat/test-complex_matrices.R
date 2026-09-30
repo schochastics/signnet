@@ -350,3 +350,8 @@ test_that("as_signed_proj handles hyphens and pos/neg in names", {
     expect_setequal(c(res$from, res$to), c("anna-lena", "posneg"))
     expect_equal(res$type, "P")
 })
+
+test_that("complex adj errors on unknown attribute", {
+    g <- igraph::make_full_graph(3, directed = FALSE)
+    expect_error(as_adj_complex(g, "foo"), "no edge attribute")
+})

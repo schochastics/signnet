@@ -15,6 +15,16 @@
 * `signed_blockmodel(annealing = FALSE)` no longer returns the random initial partition for networks with large blocks, and it always takes the best improving move.
 * `signed_blockmodel()` and `signed_blockmodel_general()` validate `k`, `alpha` and `blockmat` (square, symmetric for undirected networks).
 
+## Maintenance
+
+* Signed adjacency and incidence matrices are built internally instead of using the deprecated `attr` argument of igraph. Values of multiple edges are still summed.
+* Shared input validation. Errors no longer include the internal call.
+* Triad census lookup tables moved from the R source to internal data (`data-raw/triad_tables.R`).
+* Removed unused C++ code and added `src/Makevars`.
+* `sample_gnp_signed()` and `sample_bipartite_signed()` validate `p_neg`.
+* Added examples for `ggblock()`, `ggsigned()` and `frustration_exact()`.
+* Requires R >= 3.5.
+
 ## Performance
 
 * `count_signed_triangles()`, `signed_triangles()` and `count_complex_triangles()` are vectorized (several hundred times faster on networks with many triangles).

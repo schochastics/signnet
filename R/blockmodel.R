@@ -31,9 +31,7 @@
 #' clu$criterion
 #' @export
 signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
+  check_signed(g)
   if (missing(k)) {
     stop('argument "k" is missing, with no default')
   }
@@ -86,9 +84,7 @@ signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
 #'
 
 signed_blockmodel_general <- function(g, blockmat, alpha = 0.5) {
-  if (!is_signed(g)) {
-    stop("network is not a signed graph")
-  }
+  check_signed(g)
   if (missing(blockmat)) {
     stop('argument "blockmat" is missing, with no default')
   }

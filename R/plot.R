@@ -6,13 +6,11 @@
 #' @param show_labels logical. Should node labels be displayed? (Default: FALSE)
 #' @return ggplot2 object
 #' @author David Schoch
-#' @examples
-#' \dontrun{
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' library(igraph)
 #' data("tribes")
 #' clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 #' ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
-#' }
 #' @export
 #'
 ggblock <- function(
@@ -44,10 +42,15 @@ ggblock <- function(
     rsizes <- igraph::vcount(g) - bsizes[-length(bsizes)] + 1
     csizes <- bsizes[-length(bsizes)]
   }
+  check_signed(g)
   if (!"name" %in% igraph::vertex_attr_names(g)) {
-    g <- igraph::set_vertex_attr(g, "name", value = 1:igraph::vcount(g))
+    g <- igraph::set_vertex_attr(
+      g,
+      "name",
+      value = as.character(seq_len(igraph::vcount(g)))
+    )
   }
-  A <- as.matrix(igraph::as_adjacency_matrix(g, type = "both", attr = "sign"))
+  A <- as_adj_signed(g)
   df <- data.frame(
     from = rep(rownames(A), ncol(A)),
     to = rep(colnames(A), each = nrow(A)),
@@ -91,6 +94,9 @@ ggblock <- function(
 #' @details This is a very rudimentary visualization of a signed network. If you are fluent in 'ggraph', you can probably cook up something more sophisticated. The function is thus mostly meant to give a quick overview of the network.
 #' @return ggplot2 object
 #' @author David Schoch
+#' @examplesIf requireNamespace("ggraph", quietly = TRUE)
+#' g <- sample_islands_signed(3, 10, 0.5, 2)
+#' ggsigned(g)
 #' @export
 ggsigned <- function(
   g,

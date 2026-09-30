@@ -44,3 +44,4 @@ CRAN-SUBMISSION
 pkgdown/
 paper.pdf
 docs
+.quarto/
