@@ -63,10 +63,10 @@ g <- sample_islands_signed(10, 10, 1, 20)
 clu <- signed_blockmodel(g, k = 10, alpha = 0.5)
 table(clu$membership)
 #> 
-#>  1  3  4  5  6  7  9 
-#> 20 10 30 10 10 10 10 
+#>  1  2  3  4  5  6  7  8  9 
+#> 10 10 10 10 10 10 20 10 10 
 clu$criterion
-#> [1] 11
+#> [1] 4
 
 # Using simulated annealing (less change of getting trapped in local optima)
 data("tribes")

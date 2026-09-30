@@ -44,3 +44,16 @@ Networks 75.1 (2020): 95-110.
 ## Author
 
 David Schoch
+
+## Examples
+
+``` r
+data("tribes")
+frustration_exact(tribes)
+#> $frustration
+#> [1] 7
+#> 
+#> $partition
+#>  [1] 0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+#> 
+```

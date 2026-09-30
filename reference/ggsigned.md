@@ -48,3 +48,10 @@ overview of the network.
 ## Author
 
 David Schoch
+
+## Examples
+
+``` r
+g <- sample_islands_signed(3, 10, 0.5, 2)
+ggsigned(g)
+```

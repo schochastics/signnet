@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">signnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,6 +66,17 @@
 <code>signed_blockmodel(annealing = FALSE)</code> no longer returns the random initial partition for networks with large blocks, and it always takes the best improving move.</li>
 <li>
 <code><a href="../reference/signed_blockmodel.html">signed_blockmodel()</a></code> and <code><a href="../reference/signed_blockmodel_general.html">signed_blockmodel_general()</a></code> validate <code>k</code>, <code>alpha</code> and <code>blockmat</code> (square, symmetric for undirected networks).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="maintenance-development-version">Maintenance<a class="anchor" aria-label="anchor" href="#maintenance-development-version"></a></h3>
+<ul><li>Signed adjacency and incidence matrices are built internally instead of using the deprecated <code>attr</code> argument of igraph. Values of multiple edges are still summed.</li>
+<li>Shared input validation. Errors no longer include the internal call.</li>
+<li>Triad census lookup tables moved from the R source to internal data (<code>data-raw/triad_tables.R</code>).</li>
+<li>Removed unused C++ code and added <code>src/Makevars</code>.</li>
+<li>
+<code><a href="../reference/sample_gnp_signed.html">sample_gnp_signed()</a></code> and <code><a href="../reference/sample_bipartite_signed.html">sample_bipartite_signed()</a></code> validate <code>p_neg</code>.</li>
+<li>Added examples for <code><a href="../reference/ggblock.html">ggblock()</a></code>, <code><a href="../reference/ggsigned.html">ggsigned()</a></code> and <code><a href="../reference/frustration_exact.html">frustration_exact()</a></code>.</li>
+<li>Requires R &gt;= 3.5.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="performance-development-version">Performance<a class="anchor" aria-label="anchor" href="#performance-development-version"></a></h3>

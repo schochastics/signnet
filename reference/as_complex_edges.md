@@ -32,9 +32,9 @@ David Schoch
 ``` r
 g <- sample_islands_signed(2, 10, 1, 10)
 as_complex_edges(g)
-#> IGRAPH 8b1a877 U--- 20 110 -- 
+#> IGRAPH d12f1e1 U--- 20 110 -- 
 #> + attr: grp (v/c), sign (e/n), type (e/c)
-#> + edges from 8b1a877:
+#> + edges from d12f1e1:
 #>  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--10  2-- 3
 #> [11]  2-- 4  2-- 5  2-- 6  2-- 7  2-- 8  2-- 9  2--10  3-- 4  3-- 5  3-- 6
 #> [21]  3-- 7  3-- 8  3-- 9  3--10  4-- 5  4-- 6  4-- 7  4-- 8  4-- 9  4--10

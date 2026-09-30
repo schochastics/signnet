@@ -48,10 +48,8 @@ David Schoch
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 library(igraph)
 data("tribes")
 clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
-} # }
 ```

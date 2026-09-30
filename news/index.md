@@ -48,6 +48,26 @@
   validate `k`, `alpha` and `blockmat` (square, symmetric for undirected
   networks).
 
+### Maintenance
+
+- Signed adjacency and incidence matrices are built internally instead
+  of using the deprecated `attr` argument of igraph. Values of multiple
+  edges are still summed.
+- Shared input validation. Errors no longer include the internal call.
+- Triad census lookup tables moved from the R source to internal data
+  (`data-raw/triad_tables.R`).
+- Removed unused C++ code and added `src/Makevars`.
+- [`sample_gnp_signed()`](https://schochastics.github.io/signnet/reference/sample_gnp_signed.md)
+  and
+  [`sample_bipartite_signed()`](https://schochastics.github.io/signnet/reference/sample_bipartite_signed.md)
+  validate `p_neg`.
+- Added examples for
+  [`ggblock()`](https://schochastics.github.io/signnet/reference/ggblock.md),
+  [`ggsigned()`](https://schochastics.github.io/signnet/reference/ggsigned.md)
+  and
+  [`frustration_exact()`](https://schochastics.github.io/signnet/reference/frustration_exact.md).
+- Requires R \>= 3.5.
+
 ### Performance
 
 - [`count_signed_triangles()`](https://schochastics.github.io/signnet/reference/count_signed_triangles.md),
