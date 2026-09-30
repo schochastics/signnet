@@ -13,10 +13,11 @@ signed_blockmodel(g, k, alpha = 0.5, annealing = FALSE)
 
 \item{alpha}{see details}
 
-\item{annealing}{logical. if TRUE, use simulated annealing (Default: FALSE)}
+\item{annealing}{logical. if TRUE, use simulated annealing followed by a greedy local search.
+If FALSE, only use the greedy local search (Default: FALSE)}
 }
 \value{
-numeric vector of block assignments and the associated criterion value
+list with the block assignments (\code{membership}) and the associated criterion value (\code{criterion})
 }
 \description{
 Finds blocks of nodes with intra-positive and inter-negative edges
@@ -26,6 +27,8 @@ The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
 where N is the total number of negative ties within plus-sets and P be the total number of
 positive ties between plus-sets. This function implements the structural balance model. That is,
 all diagonal blocks are positive and off-diagonal blocks negative.
+Ties are counted per entry of the adjacency matrix, so each undirected tie counts twice.
+Both algorithms start from a random partition, so results can differ between runs. Use \code{\link[=set.seed]{set.seed()}} for reproducible results.
 For the generalized version see \link{signed_blockmodel_general}.
 }
 \examples{
