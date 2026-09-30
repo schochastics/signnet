@@ -8,12 +8,14 @@ with both positive and negative ties).
 You can install the released version of signnet from CRAN with:
 
 ``` r
+
 install.packages("signnet")
 ```
 
 The development version from is available with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("schochastics/signnet")
 ```
@@ -42,6 +44,7 @@ paper](https://doi.org/10.1093/comnet/cnx044) by Samin Aref (and his
 other work) for more details.
 
 ``` r
+
 library(igraph)
 library(signnet)
 data("tribes")
@@ -69,6 +72,7 @@ groups such that intra group edges are positive and inter group edges
 are negative.
 
 ``` r
+
 clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 clu
 #> $membership
@@ -90,6 +94,7 @@ The result of the blockmodel can be visualized with `ggblock` (requires
 `ggplot2`)
 
 ``` r
+
 ggblock(tribes, clu$membership, show_blocks = TRUE, show_labels = TRUE)
 ```
 
@@ -103,6 +108,7 @@ illustrates the technique with a network composed of three groups with
 differing inter/intra group edge patterns.
 
 ``` r
+
 # create a signed network with three groups and different inter/intra group ties
 g1 <- g2 <- g3 <- make_full_graph(5)
 

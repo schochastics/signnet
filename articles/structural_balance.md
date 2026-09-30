@@ -4,6 +4,7 @@ This vignette describes structural balance theory and implemented
 functions in `signnet` associated with it.
 
 ``` r
+
 library(igraph)
 library(signnet)
 ```
@@ -31,6 +32,7 @@ which is pretty much the same as
 from the `igraph` package.
 
 ``` r
+
 g <- sample_islands_signed(islands.n = 2,islands.size = 10,
                            islands.pin = 0.8,n.inter = 5)
 ```
@@ -46,6 +48,7 @@ verified with
 [`count_signed_triangles()`](https://schochastics.github.io/signnet/reference/count_signed_triangles.md).
 
 ``` r
+
 count_signed_triangles(g)
 #> +++ ++- +-- --- 
 #> 160   0   7   0
@@ -57,14 +60,15 @@ To list all triangles use
 [`signed_triangles()`](https://schochastics.github.io/signnet/reference/signed_triangles.md).
 
 ``` r
+
 head(signed_triangles(g))
 #>      V1 V2 V3 P
-#> [1,] 11  2  3 1
-#> [2,] 11  2  5 1
-#> [3,] 11  5  3 1
-#> [4,] 11 10  2 1
-#> [5,] 11 10  3 1
-#> [6,] 11 10  5 1
+#> [1,]  1  2  9 3
+#> [2,]  1  2  6 3
+#> [3,]  1  5 10 3
+#> [4,]  1  5  2 3
+#> [5,]  1  5  6 3
+#> [6,]  1  5  9 3
 ```
 
 The column P indicated the number of positive ties in the triangle. A
@@ -81,12 +85,13 @@ results may vary significantly. Check the paper by Samin Aref (and his
 other work) for more details.
 
 ``` r
+
 balance_score(g, method = "triangles")
 #> [1] 1
 balance_score(g, method = "walk")
 #> [1] 1
 balance_score(g, method = "frustration")
-#> [1] 0.816092
+#> [1] 0.8390805
 ```
 
 “triangles” returns the fraction of balanced triangles.
@@ -108,6 +113,7 @@ There disagreement for non-balanced networks can be seen with the
 included “tribes” dataset.
 
 ``` r
+
 data("tribes")
 balance_score(tribes, method = "triangles")
 #> [1] 0.8676471

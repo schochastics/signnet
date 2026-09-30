@@ -33,8 +33,8 @@ a signed network as igraph object
 ``` r
 A <- matrix(c(0, 1, -1, 1, 0, 1, -1, 1, 0), 3, 3)
 graph_from_adjacency_matrix_signed(A)
-#> IGRAPH 204bccd U--- 3 3 -- 
+#> IGRAPH 2741b09 U--- 3 3 -- 
 #> + attr: sign (e/n)
-#> + edges from 204bccd:
+#> + edges from 2741b09:
 #> [1] 1--2 1--3 2--3
 ```

@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/schochastics/signnet/blob/v1.0.6/inst/CITATION)
+[`inst/CITATION`](https://github.com/schochastics/signnet/blob/main/inst/CITATION)
 
 Schoch, D., (2023). signnet: An R package for analyzing signed networks.
 Journal of Open Source Software, 8(81), 4987,

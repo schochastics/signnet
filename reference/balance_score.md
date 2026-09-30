@@ -20,7 +20,8 @@ balance_score(g, method = "triangles")
 
 ## Value
 
-numeric balancedness score between 0 and 1
+numeric balancedness score between 0 and 1. For `method = "triangles"`,
+`NA` if the network has no triangles.
 
 ## Details
 

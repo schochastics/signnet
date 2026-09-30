@@ -68,7 +68,7 @@ clu <- signed_blockmodel(tribes, k = 3, alpha = 0.5, annealing = TRUE)
 table(clu$membership)
 #> 
 #> 1 2 3 
-#> 5 7 4 
+#> 7 5 4 
 clu$criterion
 #> [1] 2
 ```

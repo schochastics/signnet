@@ -1,5 +1,40 @@
 # Changelog
 
+## signnet (development version)
+
+### Bug fixes
+
+- [`as_adj_complex()`](https://schochastics.github.io/signnet/reference/as_adj_complex.md)
+  now respects the `attr` argument and works with named vertices. This
+  also fixes
+  [`laplacian_matrix_complex()`](https://schochastics.github.io/signnet/reference/laplacian_matrix_complex.md),
+  [`as_incidence_complex()`](https://schochastics.github.io/signnet/reference/as_incidence_complex.md)
+  and
+  [`complex_walks()`](https://schochastics.github.io/signnet/reference/complex_walks.md)
+  for attributes other than `"type"`.
+- `laplacian_matrix_signed(sparse = TRUE)` no longer errors. Normalized
+  Laplacians (signed and complex) no longer return `NaN` for isolated
+  vertices.
+- [`sample_islands_signed()`](https://schochastics.github.io/signnet/reference/sample_islands_signed.md)
+  always returns `islands.n * islands.size` vertices (previously failed
+  when the highest-numbered vertices had no edges).
+- `balance_score(method = "walk")` no longer overflows to `NaN` on dense
+  networks. `balance_score(method = "triangles")` returns `NA` for
+  networks without triangles.
+- [`triad_census_signed()`](https://schochastics.github.io/signnet/reference/triad_census_signed.md)
+  returns the census in canonical order.
+- [`eigen_centrality_signed()`](https://schochastics.github.io/signnet/reference/eigen_centrality_signed.md)
+  returns a real vector for directed networks (or errors if the dominant
+  eigenvalue is complex).
+- [`ggblock()`](https://schochastics.github.io/signnet/reference/ggblock.md)
+  colors ties correctly if only one sign is present.
+  `ggsigned(type = "complex")` now uses `attr` for edge colors and no
+  longer overwrites the `type` attribute.
+- [`as_signed_proj()`](https://schochastics.github.io/signnet/reference/as_signed_proj.md)
+  handles vertex names containing `"-"`, `"pos"` or `"neg"`.
+- [`complex_walks()`](https://schochastics.github.io/signnet/reference/complex_walks.md)
+  validates `k`.
+
 ## signnet 1.0.6
 
 CRAN release: 2025-11-06

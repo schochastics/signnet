@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Signed Two-Mode Networks • signnet</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Signed Two-Mode Networks</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/schochastics/signnet/blob/v1.0.6/vignettes/signed_2mode.Rmd" class="external-link"><code>vignettes/signed_2mode.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/schochastics/signnet/blob/main/vignettes/signed_2mode.Rmd" class="external-link"><code>vignettes/signed_2mode.Rmd</code></a></small>
       <div class="d-none name"><code>signed_2mode.Rmd</code></div>
     </div>
 
@@ -130,9 +130,9 @@ TRUE or FALSE).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_unsigned_2mode.html">as_unsigned_2mode</a></span><span class="op">(</span><span class="va">g</span>,primary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">gu</span></span>
-<span><span class="co">#&gt; IGRAPH 07189ec UN-B 8 5 -- </span></span>
+<span><span class="co">#&gt; IGRAPH ca4813f UN-B 8 5 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), type (v/l)</span></span>
-<span><span class="co">#&gt; + edges from 07189ec (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from ca4813f (vertex names):</span></span>
 <span><span class="co">#&gt; [1] a-pos--1 b-pos--1 c-neg--1 a-pos--2 b-neg--2</span></span></code></pre></div>
 <p>Now, any binarization toll (e.g. from the <code>backbone</code>
 package) can be applied since the network is an unsigned two-mode
@@ -143,9 +143,9 @@ one (the “universal” approach) since it can be done without the
 <code class="sourceCode R"><span><span class="va">pu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/bipartite_projection.html" class="external-link">bipartite_projection</a></span><span class="op">(</span><span class="va">gu</span>,which <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span></span>
 <span><span class="va">pu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/delete_edge_attr.html" class="external-link">delete_edge_attr</a></span><span class="op">(</span><span class="va">pu</span>,<span class="st">"weight"</span><span class="op">)</span></span>
 <span><span class="va">pu</span></span>
-<span><span class="co">#&gt; IGRAPH 2990682 UN-- 6 4 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 12768b5 UN-- 6 4 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 2990682 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 12768b5 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] a-pos--b-pos a-pos--c-neg a-pos--b-neg b-pos--c-neg</span></span></code></pre></div>
 <p>After binarization, the network is turned back to an unsigned network
 using a <em>contraction rule</em>. The contraction rule works as
@@ -202,7 +202,7 @@ Science 15 (6).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

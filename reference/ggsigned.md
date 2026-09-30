@@ -26,7 +26,8 @@ ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL, weights = FALSE)
 
 - edge_cols:
 
-  colors used for negative and positive (and ambivalent) ties
+  colors used for negative and positive (and ambivalent) ties. Unnamed
+  vectors are matched in that order.
 
 - weights:
 

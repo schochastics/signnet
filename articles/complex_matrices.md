@@ -4,6 +4,7 @@ This vignette describes the use of complex matrices for signed networks
 with ambivalent ties.
 
 ``` r
+
 library(igraph)
 library(signnet)
 ```
@@ -15,6 +16,7 @@ network](https://schochastics.github.io/signnet/articles/signed_2mode.md)
 introduces a third type of tie for signed networks, the ambivalent tie.
 
 ``` r
+
 # construct network
 el <- matrix(c(1, "a", 1, "b", 1, "c", 2, "a", 2, "b"), ncol = 2, byrow = TRUE)
 g <- graph_from_edgelist(el, directed = FALSE)
@@ -47,18 +49,18 @@ but we can’t really work with characters analytically.
 
 This is where complex matrices come in. Instead of thinking about edge
 values being only in one dimension, we can add a second one for negative
-ties. That is, a positive tie would be coded as $(1,0)$ and a negative
-one as $(0,1)$. It is much easier in this case to include ambivalent
-ties by assigning $(0.5,0.5)$ to them.
+ties. That is, a positive tie would be coded as $`(1,0)`$ and a negative
+one as $`(0,1)`$. It is much easier in this case to include ambivalent
+ties by assigning $`(0.5,0.5)`$ to them.
 
-Tuples like these can also be written as a complex number, i.e. $(1,0)$
-turns into $1 + 0i$, $(0,1)$ into $0 + 1i$, and $(0.5,0.5)$ into
-$0.5 + 0.5i$. Complex numbers may be scary to some, but they have a kind
-of intuitive interpretation here. The real part is the positive value of
-an edge and the imaginary part is the negative part. So we could
-actually also have something like $0.3 + 0.7i$ which is an edge that is
-30% positive and 70% negative. For now, though, the three values from
-above suffice.
+Tuples like these can also be written as a complex number,
+i.e. $`(1,0)`$ turns into $`1+0i`$, $`(0,1)`$ into $`0+1i`$, and
+$`(0.5,0.5)`$ into $`0.5+0.5i`$. Complex numbers may be scary to some,
+but they have a kind of intuitive interpretation here. The real part is
+the positive value of an edge and the imaginary part is the negative
+part. So we could actually also have something like $`0.3+0.7i`$ which
+is an edge that is 30% positive and 70% negative. For now, though, the
+three values from above suffice.
 
 The function
 [`as_adj_complex()`](https://schochastics.github.io/signnet/reference/as_adj_complex.md)
@@ -66,6 +68,7 @@ can be used to return the complex adjacency matrix of a signed network
 with ambivalent ties.
 
 ``` r
+
 as_adj_complex(ps, attr = "type")
 ```
 
@@ -79,6 +82,7 @@ Laplacian matrix. This matrix can be obtained with
 [`laplacian_matrix_complex()`](https://schochastics.github.io/signnet/reference/laplacian_matrix_complex.md).
 
 ``` r
+
 laplacian_matrix_complex(ps, attr = "type")
 ```
 
@@ -93,6 +97,7 @@ So far, only the triangle routines support networks with ambivalent
 ties.
 
 ``` r
+
 g <- make_full_graph(5)
 E(g)$type <- c(rep("P", 3), rep("N", 3), rep("A", 4))
 

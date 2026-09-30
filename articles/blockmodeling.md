@@ -4,6 +4,7 @@ This vignette describes the two implemented methods for blockmodeling in
 signed networks.
 
 ``` r
+
 library(igraph)
 library(signnet)
 ```
@@ -20,11 +21,12 @@ block has a density of 1 (of positive edges). The function
 [`signed_blockmodel()`](https://schochastics.github.io/signnet/reference/signed_blockmodel.md)
 is used to construct the blockmodel. The parameter `k` is the number of
 desired blocks. `alpha` is a trade-off parameter. The function minimizes
-$P(C) = \alpha N + (1 - \alpha)P$, where $N$ is the total number of
-negative ties within blocks and $P$ be the total number of positive ties
-between blocks.
+$`P(C)=\alpha N+(1-\alpha)P`$, where $`N`$ is the total number of
+negative ties within blocks and $`P`$ be the total number of positive
+ties between blocks.
 
 ``` r
+
 g <- sample_islands_signed(10,10,1,20)
 clu <- signed_blockmodel(g,k = 10,alpha = 0.5)
 table(clu$membership)
@@ -36,7 +38,7 @@ clu$criterion
 ```
 
 The function returns a list with two entries. The block membership of
-nodes and the value of $P(C)$.
+nodes and the value of $`P(C)`$.
 
 The function
 [`ggblock()`](https://schochastics.github.io/signnet/reference/ggblock.md)
@@ -44,6 +46,7 @@ can be used to plot the outcome of the blockmodel (`ggplot2` is
 required).
 
 ``` r
+
 ggblock(g,clu$membership,show_blocks = TRUE)
 ```
 
@@ -54,6 +57,7 @@ in the optimization step. This generally leads to better results but
 longer runtimes.
 
 ``` r
+
 data("tribes")
 set.seed(44) #for reproducibility
 
@@ -85,6 +89,7 @@ between group one and two, and one and three. Between group two and
 three, all edges are positive.
 
 ``` r
+
 g1 <- g2 <- g3 <- make_full_graph(5)
 
 V(g1)$name <- as.character(1:5)
@@ -102,6 +107,7 @@ g <- add.edges(g,c(rbind(11:15,6:10)),attr = list(sign=1))
 The parameter `blockmat` is used to specify the desired block structure.
 
 ``` r
+
 set.seed(424) #for reproducibility
 blockmat <- matrix(c(1,-1,-1,-1,1,1,-1,1,-1),3,3,byrow = TRUE)
 blockmat

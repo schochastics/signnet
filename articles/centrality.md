@@ -3,6 +3,7 @@
 This vignette describes the use of centrality in signed networks.
 
 ``` r
+
 library(igraph)
 library(signnet)
 ```
@@ -35,6 +36,7 @@ The below example illustrates all indices with a network where signed
 degree can not distinguish vertices.
 
 ``` r
+
 A <- matrix(c(0,  1,  0,  1,  0,  0,  0, -1, -1,  0,  
                1,  0,  1, -1,  1, -1, -1,  0,  0,  0,  
                0,  1,  0,  1, -1,  0,  0,  0, -1,  0,  
@@ -51,8 +53,8 @@ g <- graph_from_adjacency_matrix(A,"undirected",weighted = "sign")
 degree_signed(g,type="ratio")
 #>  [1] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
 eigen_centrality_signed(g)
-#>  [1] -0.62214960  1.00000000 -0.74518850  1.00000000 -0.89990041  0.64289592
-#>  [7]  0.35828159 -0.37471921 -0.28087411 -0.07834568
+#>  [1]  0.62214960 -1.00000000  0.74518850 -1.00000000  0.89990041 -0.64289592
+#>  [7] -0.35828159  0.37471921  0.28087411  0.07834568
 pn_index(g)
 #>  [1] 0.9009747 0.8613482 0.9076997 0.8613482 0.8410658 0.8496558 0.8617321
 #>  [8] 0.9015909 0.8509848 0.9072930
@@ -62,8 +64,9 @@ Note that PN centrality and eigenvector centrality differ significantly
 for this network.
 
 ``` r
+
 cor(eigen_centrality_signed(g),pn_index(g),method = "kendall")
-#> [1] -0.1555556
+#> [1] 0.2
 ```
 
 ## A note on eigenvector centrality
@@ -77,6 +80,7 @@ this case certain centralities can be arbitrarily assigned. The
 function returns an error if this is the case.
 
 ``` r
+
 A <- matrix(c( 0,  1,  1, -1,  0,  0, -1,  0,  0, 
                1,  0,  1,  0, -1,  0,  0, -1,  0, 
                1,  1,  0,  0,  0, -1,  0,  0, -1, 
