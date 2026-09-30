@@ -58,39 +58,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// arcDist
-double arcDist(NumericVector x, NumericVector y, double r);
-RcppExport SEXP _signnet_arcDist(SEXP xSEXP, SEXP ySEXP, SEXP rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< double >::type r(rSEXP);
-    rcpp_result_gen = Rcpp::wrap(arcDist(x, y, r));
-    return rcpp_result_gen;
-END_RCPP
-}
-// arcDistMat
-NumericMatrix arcDistMat(NumericMatrix X, double r);
-RcppExport SEXP _signnet_arcDistMat(SEXP XSEXP, SEXP rSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< double >::type r(rSEXP);
-    rcpp_result_gen = Rcpp::wrap(arcDistMat(X, r));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cxmatmul
-arma::cx_mat cxmatmul(arma::cx_mat A, arma::cx_mat B);
+arma::cx_mat cxmatmul(const arma::cx_mat& A, const arma::cx_mat& B);
 RcppExport SEXP _signnet_cxmatmul(SEXP ASEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::cx_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< arma::cx_mat >::type B(BSEXP);
+    Rcpp::traits::input_parameter< const arma::cx_mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::cx_mat& >::type B(BSEXP);
     rcpp_result_gen = Rcpp::wrap(cxmatmul(A, B));
     return rcpp_result_gen;
 END_RCPP
@@ -125,8 +100,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_signnet_blockCriterion", (DL_FUNC) &_signnet_blockCriterion, 4},
     {"_signnet_blockGreedy", (DL_FUNC) &_signnet_blockGreedy, 5},
     {"_signnet_blockAnneal", (DL_FUNC) &_signnet_blockAnneal, 8},
-    {"_signnet_arcDist", (DL_FUNC) &_signnet_arcDist, 3},
-    {"_signnet_arcDistMat", (DL_FUNC) &_signnet_arcDistMat, 2},
     {"_signnet_cxmatmul", (DL_FUNC) &_signnet_cxmatmul, 2},
     {"_signnet_triadCensusSign", (DL_FUNC) &_signnet_triadCensusSign, 2},
     {"_signnet_triadCensusSign1", (DL_FUNC) &_signnet_triadCensusSign1, 3},

@@ -17,6 +17,9 @@
 
 ## Performance
 
+* `count_signed_triangles()`, `signed_triangles()` and `count_complex_triangles()` are vectorized (several hundred times faster on networks with many triangles).
+* `as_incidence_complex()` and `degree_signed()` are vectorized and use sparse matrices. `complex_walks()` is about twice as fast.
+* `graph_circular_signed()` computes arc lengths directly from the sampled angles, which also avoids `NaN`s from rounding errors.
 * Both blockmodeling functions share a new C++ implementation (greedy local search and simulated annealing) that no longer copies the adjacency matrix for every move. `signed_blockmodel(annealing = TRUE)` no longer uses `stats::optim()` and is about 25x faster.
 
 # signnet 1.0.6

@@ -18,47 +18,13 @@ count_signed_triangles <- function(g) {
   if (igraph::is_directed(g)) {
     stop("g must be undirected")
   }
-  eattrV <- igraph::edge_attr(g, "sign")
-
-  tmat <- t(matrix(igraph::triangles(g), nrow = 3))
-  if (nrow(tmat) == 0) {
-    warning("g does not contain any triangles")
-    return(c("+++" = 0, "++-" = 0, "+--" = 0, "---" = 0))
-  }
-  emat <- t(
-    apply(tmat, 1, function(x) {
-      c(
-        igraph::get_edge_ids(g, x[1:2]),
-        igraph::get_edge_ids(g, x[2:3]),
-        igraph::get_edge_ids(g, x[c(3, 1)])
-      )
-    })
-  )
-
-  emat[, 1] <- eattrV[emat[, 1]]
-  emat[, 2] <- eattrV[emat[, 2]]
-  emat[, 3] <- eattrV[emat[, 3]]
-  emat <- t(apply(emat, 1, sort))
-  emat_df <- as.data.frame(emat)
-  res <- stats::aggregate(list(count = rep(1, nrow(emat_df))), emat_df, length)
-
   tri_counts <- c("+++" = 0, "++-" = 0, "+--" = 0, "---" = 0)
-
-  tmp_counts <- res[, 4]
-  if (nrow(res) == 1) {
-    names(tmp_counts) <- paste0(
-      c("+", "-")[(rev(res[1:3]) == -1) + 1],
-      collapse = ""
-    )
-  } else {
-    names(tmp_counts) <- apply(
-      res[, 1:3],
-      1,
-      function(x) paste0(c("+", "-")[(rev(x) == -1) + 1], collapse = "")
-    )
+  tri <- triangle_signs(g, "sign")
+  if (is.null(tri)) {
+    warning("g does not contain any triangles")
+    return(tri_counts)
   }
-
-  tri_counts[match(names(tmp_counts), names(tri_counts))] <- tmp_counts
+  tri_counts[] <- tabulate(rowSums(tri$signs == -1) + 1, nbins = 4)
   tri_counts
 }
 
@@ -82,29 +48,12 @@ signed_triangles <- function(g) {
   if (igraph::is_directed(g)) {
     stop("g must be undirected")
   }
-  eattrV <- igraph::edge_attr(g, "sign")
-
-  tmat <- t(matrix(igraph::triangles(g), nrow = 3))
-  if (nrow(tmat) == 0) {
+  tri <- triangle_signs(g, "sign")
+  if (is.null(tri)) {
     warning("g does not contain any triangles")
     return(NULL)
   }
-  emat <- t(
-    apply(tmat, 1, function(x) {
-      c(
-        igraph::get_edge_ids(g, x[1:2]),
-        igraph::get_edge_ids(g, x[2:3]),
-        igraph::get_edge_ids(g, x[c(3, 1)])
-      )
-    })
-  )
-
-  semat <- matrix(0, nrow(emat), 3)
-  semat[, 1] <- eattrV[emat[, 1]]
-  semat[, 2] <- eattrV[emat[, 2]]
-  semat[, 3] <- eattrV[emat[, 3]]
-  cls <- apply(semat, 1, function(v) length(which(v == 1)))
-  tmat <- cbind(tmat, unname(cls))
+  tmat <- cbind(tri$vertices, rowSums(tri$signs == 1))
   colnames(tmat) <- c("V1", "V2", "V3", "P")
   tmat
 }
@@ -130,57 +79,12 @@ count_complex_triangles <- function(g, attr) {
   if (igraph::is_directed(g)) {
     stop("g must be undirected")
   }
+  if (!attr %in% igraph::edge_attr_names(g)) {
+    stop(paste0("There is no edge attribute ", '"', attr, '"'))
+  }
   eattrV <- igraph::edge_attr(g, attr)
   if (!all(eattrV %in% c("P", "N", "A"))) {
     stop('attr may only contain "P","N" and "A" ')
-  }
-
-  tmat <- t(matrix(igraph::triangles(g), nrow = 3))
-  if (nrow(tmat) == 0) {
-    warning("g does not contain any triangles")
-    return(
-      c(
-        "PPP" = 0,
-        "PPN" = 0,
-        "PNN" = 0,
-        "NNN" = 0,
-        "PPA" = 0,
-        "PNA" = 0,
-        "NNA" = 0,
-        "PAA" = 0,
-        "NAA" = 0,
-        "AAA" = 0
-      )
-    )
-  }
-  emat <- t(
-    apply(tmat, 1, function(x) {
-      c(
-        igraph::get_edge_ids(g, x[1:2]),
-        igraph::get_edge_ids(g, x[2:3]),
-        igraph::get_edge_ids(g, x[c(3, 1)])
-      )
-    })
-  )
-
-  semat <- matrix(0, nrow(emat), 3)
-  semat[, 1] <- eattrV[emat[, 1]]
-  semat[, 2] <- eattrV[emat[, 2]]
-  semat[, 3] <- eattrV[emat[, 3]]
-  semat <- t(apply(semat, 1, sort, decreasing = T))
-
-  emat_df <- as.data.frame(semat)
-  res <- stats::aggregate(list(count = rep(1, nrow(emat_df))), emat_df, length)
-  tmp_counts <- res[, 4]
-
-  if (nrow(res) == 1) {
-    names(tmp_counts) <- paste0(res[1:3], collapse = "")
-  } else {
-    names(tmp_counts) <- apply(
-      res[, 1:3],
-      1,
-      function(x) paste0(x, collapse = "")
-    )
   }
 
   tri_counts <- c(
@@ -195,9 +99,31 @@ count_complex_triangles <- function(g, attr) {
     "NAA" = 0,
     "AAA" = 0
   )
-
-  tri_counts[match(names(tmp_counts), names(tri_counts))] <- tmp_counts
+  tri <- triangle_signs(g, attr)
+  if (is.null(tri)) {
+    warning("g does not contain any triangles")
+    return(tri_counts)
+  }
+  # P > N > A, so sorting each row decreasingly gives the canonical name
+  nP <- rowSums(tri$signs == "P")
+  nN <- rowSums(tri$signs == "N")
+  nA <- 3 - nP - nN
+  types <- paste0(strrep("P", nP), strrep("N", nN), strrep("A", nA))
+  counts <- table(types)
+  tri_counts[names(counts)] <- as.vector(counts)
   tri_counts
+}
+
+# vertices of all triangles and the attribute values of their three edges
+triangle_signs <- function(g, attr) {
+  tmat <- matrix(igraph::triangles(g), ncol = 3, byrow = TRUE)
+  if (nrow(tmat) == 0) {
+    return(NULL)
+  }
+  pairs <- rbind(tmat[, 1:2], tmat[, 2:3], tmat[, c(3, 1)])
+  eids <- igraph::get_edge_ids(g, pairs)
+  vals <- igraph::edge_attr(g, attr)[eids]
+  list(vertices = tmat, signs = matrix(vals, ncol = 3))
 }
 
 #' @title signed triad census

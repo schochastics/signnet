@@ -141,10 +141,12 @@ graph_circular_signed <- function(n, r = 1, pos = 0.1, neg = 0.1) {
   }
   pts <- circleFun(r = r, npoints = n)
 
-  D <- arcDistMat(as.matrix(pts), r)
+  # arc length between points on the circle
+  angle_diff <- abs(outer(pts$angle, pts$angle, "-"))
+  D <- r * pmin(angle_diff, 2 * pi - angle_diff)
 
   thr <- (2 * pi * r) * pos
-  anti <- arc_dist(c(0, r), c(0, -r), r) * (1 - neg)
+  anti <- pi * r * (1 - neg)
   P <- (D <= thr & D != 0) + 0
   N <- (D >= anti & D != 0) + 0
 
@@ -168,12 +170,5 @@ circleFun <- function(center = c(0, 0), r = 1, npoints = 20) {
 
   xx <- center[1] + r * cos(pts_samp)
   yy <- center[2] + r * sin(pts_samp)
-  return(data.frame(x = xx, y = yy))
-}
-
-# distance between two points x and y on a circle with radius r
-arc_dist <- function(x, y, r) {
-  c <- sqrt((x[1] - y[1])^2 + (x[2] - y[2])^2)
-  theta <- acos((2 * r^2 - c^2) / (2 * r^2))
-  2 * pi * r * theta / (2 * pi)
+  data.frame(x = xx, y = yy, angle = pts_samp)
 }

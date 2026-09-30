@@ -133,25 +133,22 @@ as_incidence_complex <- function(g, attr) {
   A <- as_adj_complex(g, attr)
   N <- igraph::vcount(g)
   M <- igraph::ecount(g)
-  S <- matrix(0, N, M)
-  e <- 0
-  for (i in 1:N) {
-    for (j in i:N) {
-      if (A[i, j] != 0) {
-        e <- e + 1
-        if (A[i, j] == complex(1, 1, 0)) {
-          S[i, e] <- sqrt(A[i, j])
-          S[j, e] <- -A[j, i] * sqrt(A[i, j])
-        } else if (A[i, j] == complex(1, 0, 1)) {
-          S[i, e] <- sqrt(A[i, j])
-          S[j, e] <- -A[j, i] * sqrt(A[i, j])
-        } else {
-          S[i, e] <- sqrt(A[i, j])
-          S[j, e] <- -sqrt(A[j, i])
-        }
-      }
-    }
+  S <- matrix(0 + 0i, N, M)
+  # edges (i, j) with i <= j, ordered by i then j
+  idx <- which(upper.tri(A, diag = TRUE) & A != 0, arr.ind = TRUE)
+  idx <- idx[order(idx[, 1], idx[, 2]), , drop = FALSE]
+  if (nrow(idx) == 0) {
+    return(S)
   }
+  e <- seq_len(nrow(idx))
+  a_ij <- A[idx]
+  a_ji <- A[idx[, 2:1, drop = FALSE]]
+  S[cbind(idx[, 1], e)] <- sqrt(a_ij)
+  S[cbind(idx[, 2], e)] <- ifelse(
+    a_ij == 0.5 + 0.5i,
+    -sqrt(a_ji),
+    -a_ji * sqrt(a_ij)
+  )
   S
 }
 
