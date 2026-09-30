@@ -144,3 +144,15 @@ test_that("signed triad census works", {
   census <- triad_census_signed(g)
   expect_equal(census[["300-NNNNNN"]], 10)
 })
+
+test_that("signed triad census is returned in canonical order", {
+  set.seed(1)
+  g <- sample_gnp_signed(15, 0.3, 0.5, directed = TRUE)
+  census <- triad_census_signed(g)
+  expect_equal(
+    names(census)[1:6],
+    c("003-000000", "012-0000P0", "012-0000N0", "102-0000PP", "102-0000NP", "102-0000NN")
+  )
+  expect_equal(sum(census), choose(15, 3))
+  expect_false(anyNA(census))
+})

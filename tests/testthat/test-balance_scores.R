@@ -42,3 +42,19 @@ test_that("frustration exact error handling", {
     igraph::E(g)$sign <- 1
     expect_error(frustration_exact(g))
 })
+
+test_that("walk balance does not overflow on dense graphs", {
+    g <- igraph::make_full_graph(800)
+    igraph::E(g)$sign <- 1
+    expect_equal(balance_score(g, method = "walk"), 1)
+    igraph::E(g)$sign[1:1000] <- -1
+    b <- balance_score(g, method = "walk")
+    expect_true(is.finite(b) && b > 0 && b <= 1)
+})
+
+test_that("triangle balance is NA without triangles", {
+    g <- igraph::make_ring(4)
+    igraph::E(g)$sign <- 1
+    expect_warning(res <- balance_score(g, method = "triangles"))
+    expect_true(is.na(res))
+})

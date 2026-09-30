@@ -13,7 +13,7 @@ ggsigned(g, type = "signed", attr = NULL, edge_cols = NULL, weights = FALSE)
 
 \item{attr}{character string. edge attribute that containing "P", "N", "A" if type="complex"}
 
-\item{edge_cols}{colors used for negative and positive (and ambivalent) ties}
+\item{edge_cols}{colors used for negative and positive (and ambivalent) ties. Unnamed vectors are matched in that order.}
 
 \item{weights}{logical. If TRUE, weights are computed based on sign. Defaults to FALSE}
 }

@@ -1,3 +1,17 @@
+# signnet (development version)
+
+## Bug fixes
+
+* `as_adj_complex()` now respects the `attr` argument and works with named vertices. This also fixes `laplacian_matrix_complex()`, `as_incidence_complex()` and `complex_walks()` for attributes other than `"type"`.
+* `laplacian_matrix_signed(sparse = TRUE)` no longer errors. Normalized Laplacians (signed and complex) no longer return `NaN` for isolated vertices.
+* `sample_islands_signed()` always returns `islands.n * islands.size` vertices (previously failed when the highest-numbered vertices had no edges).
+* `balance_score(method = "walk")` no longer overflows to `NaN` on dense networks. `balance_score(method = "triangles")` returns `NA` for networks without triangles.
+* `triad_census_signed()` returns the census in canonical order.
+* `eigen_centrality_signed()` returns a real vector for directed networks (or errors if the dominant eigenvalue is complex).
+* `ggblock()` colors ties correctly if only one sign is present. `ggsigned(type = "complex")` now uses `attr` for edge colors and no longer overwrites the `type` attribute.
+* `as_signed_proj()` handles vertex names containing `"-"`, `"pos"` or `"neg"`.
+* `complex_walks()` validates `k`.
+
 # signnet 1.0.6
 
 * fixed a bug in eigenvector centrality calculation

@@ -75,18 +75,11 @@ as_adj_complex <- function(g, attr) {
     stop('attr may only contain "P","N" and "A" ')
   }
   n <- igraph::vcount(g)
-  A <- matrix(0, nrow = n, ncol = n)
-  class(A) <- "complex"
-  for (e in igraph::E(g)) {
-    val_char <- igraph::E(g)[e]$type
-    val_com <- ifelse(
-      val_char == "P",
-      complex(1, 1, 0),
-      ifelse(val_char == "N", complex(1, 0, 1), complex(1, 0.5, 0.5))
-    )
-    A[igraph::ends(g, e)[1], igraph::ends(g, e)[2]] <- val_com
-    A[igraph::ends(g, e)[2], igraph::ends(g, e)[1]] <- val_com
-  }
+  A <- matrix(0 + 0i, nrow = n, ncol = n)
+  el <- igraph::as_edgelist(g, names = FALSE)
+  val_com <- c(P = 1 + 0i, N = 0 + 1i, A = 0.5 + 0.5i)[eattr]
+  A[el] <- val_com
+  A[el[, 2:1, drop = FALSE]] <- val_com
   A[lower.tri(A)] <- Conj(A[lower.tri(A)])
   A
 }
@@ -114,7 +107,7 @@ laplacian_matrix_complex <- function(g, attr, norm = FALSE) {
   I <- diag(1, nrow(A))
   D <- diag(rowSums(abs(A)))
   if (norm) {
-    diag(D) <- diag(D)^(-1 / 2)
+    diag(D) <- ifelse(diag(D) > 0, diag(D)^(-1 / 2), 0)
     L <- I - D %*% A %*% D
   } else {
     L <- D - A
@@ -193,7 +186,7 @@ as_complex_edges <- function(g, attr = "type") {
 #' @param g igraph object.
 #' @param attr edge attribute that encodes positive ("P"), negative ("N") and ambivalent ("A") ties.
 #' @param k integer. length of walks
-#' @return igraph object
+#' @return complex matrix
 #' @author David Schoch
 #' @examples
 #' g <- sample_islands_signed(2, 10, 1, 10)
@@ -209,6 +202,9 @@ complex_walks <- function(g, attr, k) {
   }
   if (!attr %in% igraph::edge_attr_names(g)) {
     stop(paste0("There is no edge attribute ", '"', attr, '"'))
+  }
+  if (!is.numeric(k) || length(k) != 1 || k < 0 || k != round(k)) {
+    stop('"k" must be a non-negative integer')
   }
   if (k == 0) {
     return(diag(1 + 0i, igraph::vcount(g)))
@@ -329,14 +325,15 @@ as_unsigned_2mode <- function(g, primary = TRUE) {
 #' @export
 as_signed_proj <- function(g) {
   el <- igraph::as_data_frame(g, "edges")
-  m1 <- regexpr("pos|neg", el[["from"]])
-  m2 <- regexpr("pos|neg", el[["to"]])
-  el[["type1"]] <- regmatches(el[["from"]], m1)
-  el[["type2"]] <- regmatches(el[["to"]], m2)
-  el[["type"]] <- "N"
-  el[["type"]][el[["type1"]] == el[["type2"]]] <- "P"
-  el[["from"]] <- gsub("\\-.*", "", el[["from"]])
-  el[["to"]] <- gsub("\\-.*", "", el[["to"]])
+  suffix <- "-(pos|neg)$"
+  if (!all(grepl(suffix, el[["from"]]) & grepl(suffix, el[["to"]]))) {
+    stop('vertex names must end in "-pos" or "-neg" (see as_unsigned_2mode())')
+  }
+  type1 <- sub(paste0(".*", suffix), "\\1", el[["from"]])
+  type2 <- sub(paste0(".*", suffix), "\\1", el[["to"]])
+  el[["type"]] <- ifelse(type1 == type2, "P", "N")
+  el[["from"]] <- sub(suffix, "", el[["from"]])
+  el[["to"]] <- sub(suffix, "", el[["to"]])
 
   el <- el[, c("from", "to", "type")]
 

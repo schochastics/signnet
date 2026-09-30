@@ -10,7 +10,7 @@
 #'   signed adjacency matrix and \eqn{\mu_i} of the unsigned adjacency matrix. Maximal (=1) if all walks are balanced.
 #'   \item{*frustration*}{The frustration index assumes that the network can be partitioned into two groups, where intra group edges are positive and inter group edges are negative. The index is defined as the sum of intra group negative and inter group positive edges. Note that the problem is NP complete and only an upper bound is returned (based on simulated annealing). Exact methods can be found in the work of Aref. The index is normalized such that it is maximal (=1) if the network is balanced.}
 #' }
-#' @return numeric balancedness score between 0 and 1
+#' @return numeric balancedness score between 0 and 1. For `method = "triangles"`, `NA` if the network has no triangles.
 #' @author David Schoch
 #' @references
 #' Estrada, E. (2019). Rethinking structural balance in signed social networks. *Discrete Applied Mathematics*.
@@ -35,12 +35,16 @@ balance_score <- function(g, method = "triangles") {
 
   if (method == "triangles") {
     tria_count <- count_signed_triangles(g)
+    if (sum(tria_count) == 0) {
+      return(NA_real_)
+    }
     return(unname((tria_count["+++"] + tria_count["+--"]) / sum(tria_count)))
   } else if (method == "walk") {
-    A <- as_adj_signed(g, sparse = TRUE)
-    EigenS <- eigen(A)$values
-    EigenU <- eigen(abs(A))$values
-    return(sum(exp(EigenS)) / sum(exp(EigenU)))
+    A <- as_adj_signed(g)
+    EigenS <- eigen(A, symmetric = TRUE, only.values = TRUE)$values
+    EigenU <- eigen(abs(A), symmetric = TRUE, only.values = TRUE)$values
+    # log-sum-exp to avoid overflow for large eigenvalues
+    return(exp(log_sum_exp(EigenS) - log_sum_exp(EigenU)))
   } else if (method == "frustration") {
     clu <- signed_blockmodel(g, k = 2, alpha = 0.5, annealing = TRUE)
     return(1 - clu$criterion / (igraph::ecount(g) / 2))
@@ -147,4 +151,9 @@ frustration_exact <- function(g, ...) {
   frustration <- result$objective_value
 
   list(frustration = frustration, partition = partition)
+}
+
+log_sum_exp <- function(x) {
+  m <- max(x)
+  m + log(sum(exp(x - m)))
 }

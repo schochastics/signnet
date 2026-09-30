@@ -182,3 +182,11 @@ test_that("evcent no scale works", {
   ev_true <- c(0.34560347, 0.34560347, 0.50369186, 0.50369186, 0.50369186)
   expect_equal(stats::cor(ev, ev_true), 1)
 })
+
+test_that("signed eigenvector centrality is real for directed graphs", {
+    g <- igraph::make_full_graph(4, directed = TRUE)
+    igraph::E(g)$sign <- 1
+    ev <- eigen_centrality_signed(g)
+    expect_type(ev, "double")
+    expect_equal(abs(ev), rep(1, 4))
+})
