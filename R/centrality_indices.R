@@ -86,38 +86,17 @@ degree_signed <- function(
   }
   type <- match.arg(type, c("pos", "neg", "ratio", "net"))
 
-  A <- as_adj_signed(g)
-  P <- (A > 0) + 0
-  N <- (A < 0) + 0
-
-  if (mode == "all") {
-    res <- switch(
-      type,
-      pos = Matrix::rowSums(P),
-      neg = Matrix::rowSums(N),
-      ratio = Matrix::rowSums(P) / (Matrix::rowSums(P) + Matrix::rowSums(N)),
-      net = Matrix::rowSums(P) - Matrix::rowSums(N)
-    )
-    res
-  } else if (mode == "out") {
-    res <- switch(
-      type,
-      pos = Matrix::rowSums(P),
-      neg = Matrix::rowSums(N),
-      ratio = Matrix::rowSums(P) / (Matrix::rowSums(P) + Matrix::rowSums(N)),
-      net = Matrix::rowSums(P) - Matrix::rowSums(N)
-    )
-    res
-  } else if (mode == "in") {
-    res <- switch(
-      type,
-      pos = Matrix::colSums(P),
-      neg = Matrix::colSums(N),
-      ratio = Matrix::colSums(P) / (Matrix::colSums(P) + Matrix::colSums(N)),
-      net = Matrix::colSums(P) - Matrix::colSums(N)
-    )
-    return(res)
-  }
+  A <- as_adj_signed(g, sparse = TRUE)
+  margin <- if (mode == "in") Matrix::colSums else Matrix::rowSums
+  pos <- margin(A > 0)
+  neg <- margin(A < 0)
+  switch(
+    type,
+    pos = pos,
+    neg = neg,
+    ratio = pos / (pos + neg),
+    net = pos - neg
+  )
 }
 
 #' @title Signed Eigenvector centrality

@@ -13,14 +13,6 @@ blockAnneal <- function(A, clu, sgrp, alpha, temp0, cooling, temp_min, iter_per_
     .Call(`_signnet_blockAnneal`, A, clu, sgrp, alpha, temp0, cooling, temp_min, iter_per_temp)
 }
 
-arcDist <- function(x, y, r) {
-    .Call(`_signnet_arcDist`, x, y, r)
-}
-
-arcDistMat <- function(X, r) {
-    .Call(`_signnet_arcDistMat`, X, r)
-}
-
 cxmatmul <- function(A, B) {
     .Call(`_signnet_cxmatmul`, A, B)
 }
