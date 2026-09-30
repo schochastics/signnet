@@ -11,6 +11,13 @@
 * `ggblock()` colors ties correctly if only one sign is present. `ggsigned(type = "complex")` now uses `attr` for edge colors and no longer overwrites the `type` attribute.
 * `as_signed_proj()` handles vertex names containing `"-"`, `"pos"` or `"neg"`.
 * `complex_walks()` validates `k`.
+* `signed_blockmodel_general()` returned a membership that did not match the reported criterion, and a wrong (even negative) criterion for `alpha != 0.5`. The meaning of `alpha` now matches `signed_blockmodel()`.
+* `signed_blockmodel(annealing = FALSE)` no longer returns the random initial partition for networks with large blocks, and it always takes the best improving move.
+* `signed_blockmodel()` and `signed_blockmodel_general()` validate `k`, `alpha` and `blockmat` (square, symmetric for undirected networks).
+
+## Performance
+
+* Both blockmodeling functions share a new C++ implementation (greedy local search and simulated annealing) that no longer copies the adjacency matrix for every move. `signed_blockmodel(annealing = TRUE)` no longer uses `stats::optim()` and is about 25x faster.
 
 # signnet 1.0.6
 

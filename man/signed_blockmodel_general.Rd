@@ -9,21 +9,25 @@ signed_blockmodel_general(g, blockmat, alpha = 0.5)
 \arguments{
 \item{g}{igraph object with a sign edge attribute.}
 
-\item{blockmat}{Integer Matrix. Specifies the inter/intra group patterns of ties}
+\item{blockmat}{Integer Matrix. Specifies the inter/intra group patterns of ties. Must be square,
+contain only -1 and 1 and be symmetric for undirected networks.}
 
 \item{alpha}{see details}
 }
 \value{
-numeric vector of block assignments and the associated criterion value
+list with the block assignments (\code{membership}) and the associated criterion value (\code{criterion})
 }
 \description{
 Finds blocks of nodes with specified inter/intra group ties
 }
 \details{
 The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
-where N is the total number of negative ties within plus-sets and P be the total number of
-positive ties between plus-sets. This function implements the generalized model. For the structural balance
+where N is the total number of negative ties within positive blocks and P be the total number of
+positive ties within negative blocks. This function implements the generalized model. For the structural balance
 version see \link{signed_blockmodel}.
+Ties are counted per entry of the adjacency matrix, so each undirected tie counts twice.
+The optimization uses simulated annealing followed by a greedy local search and starts from a random partition.
+Use \code{\link[=set.seed]{set.seed()}} for reproducible results.
 }
 \examples{
 library(igraph)

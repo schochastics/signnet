@@ -11,6 +11,53 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// blockCriterion
+double blockCriterion(const arma::sp_mat& A, IntegerVector clu, IntegerMatrix sgrp, double alpha);
+RcppExport SEXP _signnet_blockCriterion(SEXP ASEXP, SEXP cluSEXP, SEXP sgrpSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(blockCriterion(A, clu, sgrp, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// blockGreedy
+List blockGreedy(const arma::sp_mat& A, IntegerVector clu, IntegerMatrix sgrp, double alpha, int maxiter);
+RcppExport SEXP _signnet_blockGreedy(SEXP ASEXP, SEXP cluSEXP, SEXP sgrpSEXP, SEXP alphaSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(blockGreedy(A, clu, sgrp, alpha, maxiter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// blockAnneal
+List blockAnneal(const arma::sp_mat& A, IntegerVector clu, IntegerMatrix sgrp, double alpha, double temp0, double cooling, double temp_min, int iter_per_temp);
+RcppExport SEXP _signnet_blockAnneal(SEXP ASEXP, SEXP cluSEXP, SEXP sgrpSEXP, SEXP alphaSEXP, SEXP temp0SEXP, SEXP coolingSEXP, SEXP temp_minSEXP, SEXP iter_per_tempSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type temp0(temp0SEXP);
+    Rcpp::traits::input_parameter< double >::type cooling(coolingSEXP);
+    Rcpp::traits::input_parameter< double >::type temp_min(temp_minSEXP);
+    Rcpp::traits::input_parameter< int >::type iter_per_temp(iter_per_tempSEXP);
+    rcpp_result_gen = Rcpp::wrap(blockAnneal(A, clu, sgrp, alpha, temp0, cooling, temp_min, iter_per_temp));
+    return rcpp_result_gen;
+END_RCPP
+}
 // arcDist
 double arcDist(NumericVector x, NumericVector y, double r);
 RcppExport SEXP _signnet_arcDist(SEXP xSEXP, SEXP ySEXP, SEXP rSEXP) {
@@ -48,108 +95,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// blockCriterion
-double blockCriterion(arma::sp_mat A, IntegerVector clu, double alpha);
-RcppExport SEXP _signnet_blockCriterion(SEXP ASEXP, SEXP cluSEXP, SEXP alphaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(blockCriterion(A, clu, alpha));
-    return rcpp_result_gen;
-END_RCPP
-}
-// critUpdate
-double critUpdate(arma::sp_mat A, int v, int from, int to, IntegerVector clu, double alpha);
-RcppExport SEXP _signnet_critUpdate(SEXP ASEXP, SEXP vSEXP, SEXP fromSEXP, SEXP toSEXP, SEXP cluSEXP, SEXP alphaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< int >::type v(vSEXP);
-    Rcpp::traits::input_parameter< int >::type from(fromSEXP);
-    Rcpp::traits::input_parameter< int >::type to(toSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(critUpdate(A, v, from, to, clu, alpha));
-    return rcpp_result_gen;
-END_RCPP
-}
-// optimBlocks1
-List optimBlocks1(arma::sp_mat A, IntegerVector clu, int k, double alpha);
-RcppExport SEXP _signnet_optimBlocks1(SEXP ASEXP, SEXP cluSEXP, SEXP kSEXP, SEXP alphaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(optimBlocks1(A, clu, k, alpha));
-    return rcpp_result_gen;
-END_RCPP
-}
-// blockCriterion1
-double blockCriterion1(IntegerVector clu, arma::sp_mat A, double alpha, int k);
-RcppExport SEXP _signnet_blockCriterion1(SEXP cluSEXP, SEXP ASEXP, SEXP alphaSEXP, SEXP kSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< int >::type k(kSEXP);
-    rcpp_result_gen = Rcpp::wrap(blockCriterion1(clu, A, alpha, k));
-    return rcpp_result_gen;
-END_RCPP
-}
-// blockCriterionS
-double blockCriterionS(arma::sp_mat A, IntegerVector clu, double alpha, IntegerMatrix sgrp);
-RcppExport SEXP _signnet_blockCriterionS(SEXP ASEXP, SEXP cluSEXP, SEXP alphaSEXP, SEXP sgrpSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
-    rcpp_result_gen = Rcpp::wrap(blockCriterionS(A, clu, alpha, sgrp));
-    return rcpp_result_gen;
-END_RCPP
-}
-// critUpdateS
-double critUpdateS(arma::sp_mat A, int v, int from, int to, IntegerVector clu, double alpha, IntegerMatrix sgrp);
-RcppExport SEXP _signnet_critUpdateS(SEXP ASEXP, SEXP vSEXP, SEXP fromSEXP, SEXP toSEXP, SEXP cluSEXP, SEXP alphaSEXP, SEXP sgrpSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< int >::type v(vSEXP);
-    Rcpp::traits::input_parameter< int >::type from(fromSEXP);
-    Rcpp::traits::input_parameter< int >::type to(toSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
-    rcpp_result_gen = Rcpp::wrap(critUpdateS(A, v, from, to, clu, alpha, sgrp));
-    return rcpp_result_gen;
-END_RCPP
-}
-// optimBlocksSimS
-List optimBlocksSimS(arma::sp_mat A, IntegerVector clu, IntegerMatrix sgrp, double alpha);
-RcppExport SEXP _signnet_optimBlocksSimS(SEXP ASEXP, SEXP cluSEXP, SEXP sgrpSEXP, SEXP alphaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type clu(cluSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type sgrp(sgrpSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(optimBlocksSimS(A, clu, sgrp, alpha));
-    return rcpp_result_gen;
-END_RCPP
-}
 // triadCensusSign
 IntegerVector triadCensusSign(NumericMatrix A, int n);
 RcppExport SEXP _signnet_triadCensusSign(SEXP ASEXP, SEXP nSEXP) {
@@ -177,16 +122,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_signnet_blockCriterion", (DL_FUNC) &_signnet_blockCriterion, 4},
+    {"_signnet_blockGreedy", (DL_FUNC) &_signnet_blockGreedy, 5},
+    {"_signnet_blockAnneal", (DL_FUNC) &_signnet_blockAnneal, 8},
     {"_signnet_arcDist", (DL_FUNC) &_signnet_arcDist, 3},
     {"_signnet_arcDistMat", (DL_FUNC) &_signnet_arcDistMat, 2},
     {"_signnet_cxmatmul", (DL_FUNC) &_signnet_cxmatmul, 2},
-    {"_signnet_blockCriterion", (DL_FUNC) &_signnet_blockCriterion, 3},
-    {"_signnet_critUpdate", (DL_FUNC) &_signnet_critUpdate, 6},
-    {"_signnet_optimBlocks1", (DL_FUNC) &_signnet_optimBlocks1, 4},
-    {"_signnet_blockCriterion1", (DL_FUNC) &_signnet_blockCriterion1, 4},
-    {"_signnet_blockCriterionS", (DL_FUNC) &_signnet_blockCriterionS, 4},
-    {"_signnet_critUpdateS", (DL_FUNC) &_signnet_critUpdateS, 7},
-    {"_signnet_optimBlocksSimS", (DL_FUNC) &_signnet_optimBlocksSimS, 4},
     {"_signnet_triadCensusSign", (DL_FUNC) &_signnet_triadCensusSign, 2},
     {"_signnet_triadCensusSign1", (DL_FUNC) &_signnet_triadCensusSign1, 3},
     {NULL, NULL, 0}

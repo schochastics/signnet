@@ -3,12 +3,15 @@
 #' @param g igraph object with a sign edge attribute.
 #' @param k number of blocks
 #' @param alpha see details
-#' @param annealing logical. if TRUE, use simulated annealing (Default: FALSE)
-#' @return numeric vector of block assignments and the associated criterion value
+#' @param annealing logical. if TRUE, use simulated annealing followed by a greedy local search.
+#' If FALSE, only use the greedy local search (Default: FALSE)
+#' @return list with the block assignments (`membership`) and the associated criterion value (`criterion`)
 #' @details The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
 #' where N is the total number of negative ties within plus-sets and P be the total number of
 #' positive ties between plus-sets. This function implements the structural balance model. That is,
 #' all diagonal blocks are positive and off-diagonal blocks negative.
+#' Ties are counted per entry of the adjacency matrix, so each undirected tie counts twice.
+#' Both algorithms start from a random partition, so results can differ between runs. Use [set.seed()] for reproducible results.
 #' For the generalized version see [signed_blockmodel_general].
 #' @author David Schoch
 #' @references
@@ -34,66 +37,29 @@ signed_blockmodel <- function(g, k, alpha = 0.5, annealing = FALSE) {
   if (missing(k)) {
     stop('argument "k" is missing, with no default')
   }
-  A <- igraph::as_adjacency_matrix(
-    g,
-    type = "both",
-    attr = "sign",
-    sparse = TRUE
-  )
-  if (!annealing) {
-    init_cluster <- sample(0:(k - 1), nrow(A), replace = TRUE)
-    res <- optimBlocks1(A, init_cluster, k, alpha)
-    res$membership <- res$membership + 1
-  } else {
-    init_cluster <- sample(1:k, nrow(A), replace = TRUE)
-    tmp <- stats::optim(
-      par = init_cluster,
-      fn = blockCriterion1,
-      A = A,
-      alpha = alpha,
-      k = k,
-      gr = genclu,
-      method = "SANN",
-      control = list(
-        maxit = 50000,
-        temp = 100,
-        tmax = 500,
-        trace = FALSE,
-        REPORT = 5
-      )
-    )
-    tmp <- stats::optim(
-      par = tmp$par,
-      fn = blockCriterion1,
-      A = A,
-      alpha = alpha,
-      k = k,
-      gr = genclu,
-      method = "SANN",
-      control = list(
-        maxit = 5000,
-        temp = 5,
-        tmax = 500,
-        trace = FALSE,
-        REPORT = 5
-      )
-    )
-
-    res <- list(membership = tmp$par, criterion = tmp$value)
+  n <- igraph::vcount(g)
+  if (!is.numeric(k) || length(k) != 1 || k < 1 || k != round(k) || k > n) {
+    stop('"k" must be an integer between 1 and the number of vertices')
   }
-  res
+  check_alpha(alpha)
+  blockmat <- 2 * diag(k) - 1
+  run_blockmodel(g, blockmat, alpha, annealing)
 }
 
 #' @title Generalized blockmodeling for signed networks
 #' @description Finds blocks of nodes with specified inter/intra group ties
 #' @param g igraph object with a sign edge attribute.
-#' @param blockmat Integer Matrix. Specifies the inter/intra group patterns of ties
+#' @param blockmat Integer Matrix. Specifies the inter/intra group patterns of ties. Must be square,
+#' contain only -1 and 1 and be symmetric for undirected networks.
 #' @param alpha see details
-#' @return numeric vector of block assignments and the associated criterion value
+#' @return list with the block assignments (`membership`) and the associated criterion value (`criterion`)
 #' @details The function minimizes P(C)=\eqn{\alpha}N+(1-\eqn{\alpha})P,
-#' where N is the total number of negative ties within plus-sets and P be the total number of
-#' positive ties between plus-sets. This function implements the generalized model. For the structural balance
+#' where N is the total number of negative ties within positive blocks and P be the total number of
+#' positive ties within negative blocks. This function implements the generalized model. For the structural balance
 #' version see [signed_blockmodel].
+#' Ties are counted per entry of the adjacency matrix, so each undirected tie counts twice.
+#' The optimization uses simulated annealing followed by a greedy local search and starts from a random partition.
+#' Use [set.seed()] for reproducible results.
 #' @author David Schoch
 #' @references
 #' Doreian, Patrick and Andrej Mrvar (2009). Partitioning signed social networks. *Social Networks* 31(1) 1-11
@@ -126,27 +92,48 @@ signed_blockmodel_general <- function(g, blockmat, alpha = 0.5) {
   if (missing(blockmat)) {
     stop('argument "blockmat" is missing, with no default')
   }
+  if (!is.matrix(blockmat) || nrow(blockmat) != ncol(blockmat)) {
+    stop('"blockmat" must be a square matrix')
+  }
   if (!all(blockmat %in% c(-1, 1))) {
     stop('"blockmat" may only contain -1 and 1')
   }
-  A <- igraph::as_adjacency_matrix(
-    g,
-    type = "both",
-    attr = "sign",
-    sparse = TRUE
-  )
-  init_cluster <- sample(0:(nrow(blockmat) - 1), nrow(A), replace = TRUE)
-  res <- optimBlocksSimS(A, init_cluster, blockmat, alpha)
-  res$membership <- res$membership + 1
-  res
+  if (!igraph::is_directed(g) && !isSymmetric(unname(blockmat))) {
+    stop('"blockmat" must be symmetric for undirected networks')
+  }
+  if (nrow(blockmat) > igraph::vcount(g)) {
+    stop('"blockmat" cannot have more blocks than the network has vertices')
+  }
+  check_alpha(alpha)
+  run_blockmodel(g, blockmat, alpha, annealing = TRUE)
 }
 
-# helper function to create a new solution during simulated annealing
-genclu <- function(blocks, A, alpha, k) {
-  v <- sample(seq_along(blocks), 1)
-  clu <- 1:k
-  clu <- clu[-blocks[v]]
-  new <- sample(clu, 1)
-  blocks[v] <- new
-  blocks
+check_alpha <- function(alpha) {
+  if (!is.numeric(alpha) || length(alpha) != 1 || alpha < 0 || alpha > 1) {
+    stop('"alpha" must be a number between 0 and 1')
+  }
+}
+
+run_blockmodel <- function(g, blockmat, alpha, annealing) {
+  A <- as_adj_signed(g, sparse = TRUE)
+  n <- nrow(A)
+  k <- nrow(blockmat)
+  storage.mode(blockmat) <- "integer"
+  init_cluster <- sample.int(k, n, replace = TRUE) - 1L
+  if (annealing) {
+    res <- blockAnneal(
+      A,
+      init_cluster,
+      blockmat,
+      alpha,
+      temp0 = 10,
+      cooling = 0.99,
+      temp_min = 0.01,
+      iter_per_temp = max(n * k, 100L)
+    )
+  } else {
+    res <- blockGreedy(A, init_cluster, blockmat, alpha, maxiter = 100L * n)
+  }
+  res$membership <- res$membership + 1L
+  res
 }
