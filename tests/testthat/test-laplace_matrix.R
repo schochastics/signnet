@@ -37,7 +37,7 @@ test_that("laplacian matrix norm correct", {
       0.25,
       1
     ),
-    .Dim = c(5L, 5L)
+    dim = c(5L, 5L)
   )
   expect_equal(L, L_true)
 })

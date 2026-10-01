@@ -99,7 +99,7 @@ test_that("complex: complex adj works", {
             0 + 1i,
             0 + 0i
         ),
-        .Dim = c(3L, 3L)
+        dim = c(3L, 3L)
     )
     A <- as_adj_complex(g, "type")
     expect_equal(A, A_true)
@@ -141,7 +141,7 @@ test_that("complex laplacian: complex laplacian works", {
             -1 + 0i,
             2 + 0i
         ),
-        .Dim = c(3L, 3L)
+        dim = c(3L, 3L)
     )
     expect_equal(L, L_true)
 })
@@ -163,7 +163,7 @@ test_that("complex laplacian: complex laplacian norm works", {
             -0.5 + 0i,
             1 + 0i
         ),
-        .Dim = c(3L, 3L)
+        dim = c(3L, 3L)
     )
     expect_equal(L, L_true)
 })
@@ -185,7 +185,7 @@ test_that("complex incidence: incidence works", {
             0.7769 + 0.3218i,
             -0.7769 + 0.3218i
         ),
-        .Dim = c(3L, 3L)
+        dim = c(3L, 3L)
     )
     expect_equal(S, S_true)
 })
@@ -309,7 +309,7 @@ test_that("complex walks works", {
             0 + 3i,
             0 + 2i
         ),
-        .Dim = c(3L, 3L)
+        dim = c(3L, 3L)
     )
     expect_equal(W, W_true)
 })
