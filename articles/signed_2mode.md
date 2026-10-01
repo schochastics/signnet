@@ -74,9 +74,9 @@ by specifying the primary mode (either TRUE or FALSE).
 
 gu <- as_unsigned_2mode(g,primary = TRUE)
 gu
-#> IGRAPH d61e283 UN-B 8 5 -- 
+#> IGRAPH f64b976 UN-B 8 5 -- 
 #> + attr: name (v/c), type (v/l)
-#> + edges from d61e283 (vertex names):
+#> + edges from f64b976 (vertex names):
 #> [1] a-pos--1 b-pos--1 c-neg--1 a-pos--2 b-neg--2
 ```
 
@@ -91,9 +91,9 @@ package.
 pu <- bipartite_projection(gu,which = "true")
 pu <- delete_edge_attr(pu,"weight")
 pu
-#> IGRAPH e70d9eb UN-- 6 4 -- 
+#> IGRAPH 7335a9d UN-- 6 4 -- 
 #> + attr: name (v/c)
-#> + edges from e70d9eb (vertex names):
+#> + edges from 7335a9d (vertex names):
 #> [1] a-pos--b-pos a-pos--c-neg a-pos--b-neg b-pos--c-neg
 ```
 

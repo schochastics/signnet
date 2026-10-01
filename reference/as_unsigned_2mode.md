@@ -47,8 +47,8 @@ p <- bipartite_projection(l, which = "true")
 
 # turn the unsigned projection back to a signed network
 as_signed_proj(p)
-#> IGRAPH 391cf87 UN-- 3 3 -- 
+#> IGRAPH b766c55 UN-- 3 3 -- 
 #> + attr: name (v/c), type (e/c)
-#> + edges from 391cf87 (vertex names):
+#> + edges from b766c55 (vertex names):
 #> [1] a--b a--c b--c
 ```
